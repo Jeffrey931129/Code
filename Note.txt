@@ -1,0 +1,22 @@
+**資料型別
+{
+    一個位元組(byte)= 8個位元(bit);
+    sizeof(char)= 1 bytes;
+    sizeof(short)= 2 bytes;
+    sizeof(float)= 4 bytes;
+    sizeof(double)= 8 bytes;
+    檔案名稱組成為數字、字母及底線，開頭不可為數字;
+    -2147483648 <= int <= 2147483647;
+    float有效數字= 23 bits(約為6位)、指數= 8 bits;
+    double有效數字= 52 bits(約為15位)、指數= 11 bits;
+    unsigned使用 %u scan及print;
+    (int)+(float)=(float)+(float)=(float)，隱形轉型成較大的型別;
+    'A'=65,'a'=97;
+}
+**實作經驗
+{
+    變數、陣列在main之外宣告會自動初始化(如此型態又稱全域變數);
+    print %s 不需要空集合;
+    -29 / 10 = -2,-29 % 10 = -9;
+    每執行完一個operation，系統會自動確認型式符不符合，ex.2111111111*2/1000000000，因前面int已經爆掉，故error，*總結:需考慮任一時刻的溢位問題;
+}
