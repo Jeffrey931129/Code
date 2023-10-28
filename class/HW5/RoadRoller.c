@@ -13,10 +13,10 @@ int main()
             scanf("%d",&arr[i][j]);
         }
     }
-    int x=1,y=1,sum=arr[1][1],check=1;
+    int x=1,y=1,sum=arr[1][1],check=1; arr[1][1]=0;
     while(arr[x-1][y]!=0||arr[x][y+1]!=0||arr[x][y-1]!=0||arr[x+1][y]!=0)
     {
-        
+        arr[x][y]=0;
         int max=fmax(arr[x-1][y],fmax(arr[x][y+1],fmax(arr[x][y-1],arr[x+1][y])));
         if(max==arr[x-1][y])  // up
         {
@@ -80,4 +80,5 @@ int main()
     {
         printf("%d\n",sum);
     }
+    return 0;
 }
