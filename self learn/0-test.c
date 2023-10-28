@@ -1,15 +1,9 @@
 #include <stdio.h>
-#include <math.h>
 
-int tes(int);
-int main()
-{
-    int b=10;
-    
-    printf("%d\n1234567890123456789",tes(5));
+int main(void) {
+    int a, b, ret;
+    a  = -1;
+    ret = scanf("%d%d", &a, &b);
+    printf("%d %d %d", ret, a, b);
     return 0;
-}
-int tes(int n)
-{
-    return n;
 }
