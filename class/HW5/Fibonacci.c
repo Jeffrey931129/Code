@@ -20,7 +20,7 @@ int fib(int n)
     if(fc[n]!=0) return f[n];
     if(n%3==0) 
     {
-        f[n]=fib(n-1)+gib(fib(n/3));
+        f[n]=fib(n-1)+gib(fib(n/3)%n);
         fc[n]++;
         return f[n];
     }
@@ -41,7 +41,7 @@ int gib(int n)
     if(gc[n]!=0) return g[n];
     if(n%5==0) 
     {
-        g[n]=gib(n-1)+fib(gib(n/5));
+        g[n]=gib(n-1)+fib(gib(n/5)%n);
         gc[n]++;
         return g[n];
     }
