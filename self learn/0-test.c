@@ -1,23 +1,8 @@
 #include <stdio.h>
 
 int main(void) {
-    char cl[3][3];
-    for(int x=0;x<3;x++)
-    {
-        for(int y=0;y<3;y++)
-        {
-            scanf("%c",&cl[x][y]);
-            
-        }
-    }
-    for(int x=0;x<3;x++)
-    {
-        for(int y=0;y<3;y++)
-        {
-            printf("%c",cl[x][y]);
-        }
-        printf("\n");
-    }
+    int a[2]={1,2},b[2]={1,2};
+    printf("%d",a==b);
     return 0;
 }
 // test
