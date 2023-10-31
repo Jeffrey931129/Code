@@ -1,16 +1,18 @@
 #include <stdio.h>
+#include <math.h>
 
-int temx,temy,meat_position[100][2],step_num[100],prev_step[250000][2],answer=0,step(int,int,int,int);
+int temx,temy,rec=0,meat_position[250000][2],step_num[250000],prev_step[250000][2],answer=0,direction[4][2]={{-1,0},{0,-1},{0,1},{1,0}};
+void step(int,int,int);
 char maze[500][500+1];
 int main()
 {
-    int x,y,rec=0;
+    int x,y;
     scanf("%d%d",&x,&y);
     
     for(int i=0;i<x;i++)
     {
         scanf("%s",maze[i]);
-        for(int j=0;i<y;j++)
+        for(int j=0;j<y;j++)
         {
             if(maze[i][j]=='S')
             {
@@ -23,23 +25,62 @@ int main()
             }
         }
     }
+    step(0,temx,temy);
     for(int i=0;i<rec;i++)
     {
-        answer+=step_num[i];
+        answer+=step_num[i]*2;
     }
     printf("%d\n",answer);
 }
 
-int step(int i,int step_num,int x,int y)  // i為第幾片肉
+void step(int step_now,int x,int y)  
 {
-    prev_step[step_num][0]=x; prev_step[step_num][1]=y;
-    if(maze[prev_step[step_num][0]][prev_step[step_num][1]]=='#'||maze[prev_step[step_num][0]][prev_step[step_num][1]]==maze[prev_step[step_num-2][0]][prev_step[step_num-2][1]])
+    prev_step[step_now][0]=x; prev_step[step_now][1]=y;
+    
+    if(maze[x][y]=='M')
     {
-        return;
+        for(int i=0;i<rec;i++)
+        {
+            if(x==meat_position[i][0]&&y==meat_position[i][1])
+            {
+                if(step_num[i])
+                {
+                    step_num[i]=fmin(step_num[i],step_now); return;
+                }
+                else
+                {
+                    step_num[i]=step_now; return;
+                }
+            }
+            
+        }
     }
-    if()
+    for(int i=0;i<4;i++)
     {
-
+        if(step_now==0)
+        {
+            if(maze[x+direction[i][0]][y+direction[i][1]]=='#')
+            {
+                continue;
+            }
+            else
+            {
+                step(step_now+1,x+direction[i][0],y+direction[i][1]);
+            }
+        }
+        else
+        {
+            if(maze[x+direction[i][0]][y+direction[i][1]]=='#'||(x+direction[i][0]==prev_step[step_now-1][0]&&y+direction[i][1]==prev_step[step_now-1][1])||maze[x+direction[i][0]][y+direction[i][1]]=='S')
+            {
+                continue;
+            }
+            else
+            {
+                step(step_now+1,x+direction[i][0],y+direction[i][1]);
+            }
+        }
+        
     }
+    return;
 
 }
