@@ -9,7 +9,7 @@ int main()
     for(int x=0;x<r;x++)
     {
         scanf("%s",cl[x]);
-        for(int y=0;y<c+1;y++)
+        for(int y=0;y<c;y++)
         {
             
             if(cl[x][y]=='F')
@@ -59,7 +59,7 @@ int main()
     }
     for(int x=0;x<r;x++)
     {
-        for(int y=0;y<c+1;y++)
+        for(int y=0;y<c;y++)
         {
             printf("%c",cl[x][y]);
         }
