@@ -31,7 +31,7 @@ void jumping(int x,int s,int t,int energy,int jump)  // 記得防止跳過界
             maxenergy=energy;
             maxjump=jump;
         }
-        if(energy==maxenergy)
+        else if(energy==maxenergy)
         {
             maxjump=fmax(maxjump,jump);
         }
@@ -50,7 +50,7 @@ void jumping(int x,int s,int t,int energy,int jump)  // 記得防止跳過界
     }
     for(int i=0;i<n;i++)
     {
-        if(color[i]==color[x]&&is_used[i]!=1)
+        if(color[i]==color[x]&&is_used[i]!=1&&i!=x+1&&i!=x-1&&i!=x)
         {
             jumping(i,s,t,energy+abs(rock[x]-rock[i])*abs(x-i),jump+1);
         }
