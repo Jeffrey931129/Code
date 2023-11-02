@@ -6,7 +6,7 @@ int main()
 {
     int n;
     scanf("%d",&n);
-    
+    //printf("%d",sizeof(long long));
     printf("%lld\n",squ(n));
     return 0;
 }
