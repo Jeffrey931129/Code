@@ -1,17 +1,16 @@
 #include <stdio.h>
 #include <math.h>
 
-long long squ(int);
+int squ(int);
 int main()
 {
-    int n;
+    int n,answer;
     scanf("%d",&n);
-    //printf("%d",sizeof(long long));
-    printf("%lld\n",squ(n));
-    return 0;
+    
+    printf("%d\n",squ(n));
 }
 
-long long squ(int n)
+int squ(int n)
 {
     if(n==1)
     {
