@@ -11,10 +11,10 @@ int main()
     
     for(int i=0;i<x;i++)
     {
-        
+        scanf("%s",&maze[i]);
         for(int j=0;j<y;j++)
         {
-            scanf(" %c",&maze[i][j]);
+            
             if(maze[i][j]=='S')
             {
                 temx=i; temy=j;
@@ -46,11 +46,11 @@ void step(int step_now,int x,int y)
             {
                 if(step_num[i])
                 {
-                    step_num[i]=fmin(step_num[i],step_now); return;
+                    step_num[i]=fmin(step_num[i],step_now); 
                 }
                 else
                 {
-                    step_num[i]=step_now; return;
+                    step_num[i]=step_now; 
                 }
             }
             

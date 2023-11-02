@@ -1,18 +1,19 @@
 #include <stdio.h>
 
-int f[81],g[81],n,fc[81]={1,1},gc[81]={1,1};
-int fib(int);
-int gib(int);
+int n,fc[81]={1,1},gc[81]={1,1};
+long long f[81],g[81];  // long long 下去就對了
+long long fib(int);
+long long gib(int);
 int main()
 {
     scanf("%d%d%d%d%d",&f[0],&f[1],&g[0],&g[1],&n);
     
-    printf("%d %d\n",fib(n),gib(n));
+    printf("%lld %lld\n",fib(n),gib(n));
     
     return 0;
 }
 
-int fib(int n)
+long long fib(int n)
 {
     
     if(n==1) return f[1];
@@ -33,7 +34,7 @@ int fib(int n)
     
 }
 
-int gib(int n)
+long long gib(int n)
 {
     
     if(n==1) return g[1];
