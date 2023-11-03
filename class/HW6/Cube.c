@@ -23,12 +23,13 @@ int main()
         {
             printf("No\n");
         }
+        
     }
 }
 
 int cube(int n,char cube1,char cube2,char cube3,char cube4,char cube5,char cube6,char cube7,char cube8,char cube9,char cube10,char cube11,char cube12,char cube13,char cube14,char cube15,char cube16,char cube17,char cube18,char cube19,char cube20,char cube21,char cube22,char cube23,char cube24)
 {
-    if(n==0)
+    if(n==-1)
     {
         return 0;
     }
