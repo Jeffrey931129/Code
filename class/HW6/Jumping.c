@@ -45,14 +45,14 @@ void jumping(int x,int s,int t,int energy,int jump)  // 記得防止跳過界
     }
     if(x!=n-1&&is_used[x+1]!=1)
     {
-        jumping(x+1,s,t,energy+abs(rock[x]-rock[x-1]),jump+1);
+        jumping(x+1,s,t,energy+abs(rock[x]-rock[x+1]),jump+1);
         
     }
     for(int i=0;i<n;i++)
     {
-        if(color[i]==color[x]&&is_used[i]!=1&&i!=x+1&&i!=x-1&&i!=x)
+        if(color[i]==color[x]&&is_used[i]!=1&&i!=x+1&&i!=x-1)
         {
-            jumping(i,s,t,energy+abs(rock[x]-rock[i])*abs(x-i),jump+1);
+            jumping(i,s,t,energy+(abs(rock[x]-rock[i])*abs(x-i)),jump+1);
         }
     }
     is_used[x]=0;
