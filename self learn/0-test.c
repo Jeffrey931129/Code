@@ -1,28 +1,15 @@
 #include <stdio.h>
-#include <math.h>
 
-long long squ(int);
-int main()
-{
-    int n;
-    long long answer=0;
-    scanf("%d",&n);
-    for(int i=0;i<n;i++)
-    {
-        answer+=pow(8,i);
-    }
-    printf("%lld\n",answer);
+int main(void) {
+    float f;
+    f = 878722e-4;
+    printf("%f\n", f);
+    printf("%.2f\n", 0.555);
+    printf("%.2f\n", 1.555);
+    printf("%.2f\n", 2.555);
+    printf("%.2f\n", 3.555);
+    printf("%.2f\n", 4.555);
+    printf("%.2f\n", 4.555);
     return 0;
 }
 
-long long squ(int n)
-{
-    if(n==1)
-    {
-        return pow(8,0);
-    }
-    else
-    {
-        return pow(8,n-1)+squ(n-1);
-    }
-}
