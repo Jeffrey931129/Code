@@ -12,9 +12,9 @@ int main()
 
 int squ(int n)
 {
-    if(n==1)
+    if(n==0)
     {
-        return pow(8,0);
+        return 0;
     }
     else
     {
