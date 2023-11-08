@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
 
-int t,n,m,k,find(int,int,int),answer[5],seq[10],check();
+int t,n,m,k,find(int,int,int),answer[5],seq[10];
 int main()
 {
     
@@ -9,7 +9,7 @@ int main()
     while(t--)
     {
         scanf("%d%d%d",&n,&m,&k);
-        //int ;
+        
         for(int i=0;i<n;i++)
         {
             scanf("%d",&seq[i]);
@@ -27,10 +27,7 @@ int main()
                 }
             }
         }
-        /*for(int i=0;i<n;i++)
-        {
-            printf("%d ",seq[i]);
-        }*/
+        
         find(0,0,0);
     }
 }
@@ -43,35 +40,32 @@ int find(int step,int sum,int x)
     {
         if(sum==k)
         {
-            if(check())
+            
+            for(int i=0;i<m;i++)
             {
-                for(int i=0;i<m;i++)
+                printf("%d ",answer[i]);
+                if(i==m-1)
                 {
-                    printf("%d",answer[i]);
-                    if(i==m-1)
-                    {
-                        printf("\n");
-                    }
-                    else
-                    {
-                        printf(" ");
-                    }
-                } 
-            }
+                    printf("\n");                    
+                }
+                    
+            }         
+            
             
         }
         return 0;
     }
+    int temp=-1;
     for(int i=x;i<n;i++)
     {
+        if(temp==seq[i])
+        {
+            continue;
+        }
         answer[step]=seq[i];
-        
+        temp=seq[i];
         find(step+1,sum+seq[i],i+1);
     }
     return 0;
 }
 
-int check()  // ½T«O¤£­«½Æ
-{
-
-}
