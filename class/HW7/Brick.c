@@ -7,20 +7,41 @@ char input[1000010];
 
 int solver(int **ptr, int *sum, char *s)
 {
-    int temp=0,rec=1;
+    int temp=0,rec=0,hi=0,zero=0;
     for(int i=0;i<1000010;i++)
     {
-        if(input[i]>='0'&&input[i]<='9')
+        if(s[i]=='-')
         {
-            temp=temp*10+input[i]-'0';
-        }
-        else
-        {
-            if(temp!=0)
+            if(hi)
+            {
+                temp*=-1;
+                hi=0;
+            }
+            if(zero)
             {
                 *ptr[rec]=temp; rec++;
                 *sum+=temp;
-                temp=0;
+                temp=0; zero=0;
+            }
+            hi++;
+        }
+        else if(s[i]>='0'&&s[i]<='9')
+        {
+            temp=temp*10+s[i]-'0';
+            zero++;
+        }
+        else
+        {
+            if(hi)
+            {
+                temp*=-1;
+                hi=0;
+            }
+            if(zero)
+            {
+                *ptr[rec]=temp; rec++;
+                *sum+=temp;
+                temp=0; zero=0;
             }
         }
     }
