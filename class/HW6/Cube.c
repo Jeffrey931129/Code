@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int success=0,color_num[6],OK();
+int success=0,color_num[6];
 int cube(int,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char),color[6]={'W','O','B','G','Y','R'};
 char ch[25];
 int main()
@@ -48,75 +48,32 @@ int cube(int n,char cube1,char cube2,char cube3,char cube4,char cube5,char cube6
     {
         return 0;
     }
-    if(cube(n-1,cube2,cube4,cube1,cube3,cube17,cube18,cube7,cube8,cube5,cube6,cube11,cube12,cube9,cube10,cube15,cube16,cube13,cube14,cube19,cube20,cube21,cube22,cube23,cube24))  
+    /*if(cube(n-1,cube2,cube4,cube1,cube3,cube17,cube18,cube7,cube8,cube5,cube6,cube11,cube12,cube9,cube10,cube15,cube16,cube13,cube14,cube19,cube20,cube21,cube22,cube23,cube24))  
     {  // 上面一層往右轉
         return 1;  
-    }
+    }*/
     if(cube(n-1,cube3,cube1,cube4,cube2,cube9,cube10,cube7,cube8,cube13,cube14,cube11,cube12,cube17,cube18,cube15,cube16,cube5,cube6,cube19,cube20,cube21,cube22,cube23,cube24))  
     {  // 上面一層往左轉
         return 1;
     }
-    /*if(cube(n-1,cube1,cube2,cube3,cube4,cube5,cube6,cube19,cube20,cube9,cube10,cube7,cube8,cube13,cube14,cube11,cube12,cube17,cube18,cube15,cube16,cube23,cube21,cube24,cube22)) 
-    {  // 下面一層往右轉
-        return 1;
-    }
-    if(cube(n-1,cube1,cube2,cube3,cube4,cube5,cube6,cube11,cube12,cube9,cube10,cube15,cube16,cube13,cube14,cube19,cube20,cube17,cube18,cube7,cube8,cube22,cube24,cube21,cube23))
-    {  // 下面一層往左轉
-        return 1;
-    }*/
-    if(cube(n-1,cube9,cube2,cube11,cube4,cube6,cube8,cube5,cube7,cube21,cube10,cube23,cube12,cube13,cube14,cube15,cube16,cube17,cube3,cube19,cube1,cube20,cube22,cube18,cube24))
+    
+    /*if(cube(n-1,cube9,cube2,cube11,cube4,cube6,cube8,cube5,cube7,cube21,cube10,cube23,cube12,cube13,cube14,cube15,cube16,cube17,cube3,cube19,cube1,cube20,cube22,cube18,cube24))
     {  // 左邊一層往上
         return 1;
-    }
+    }*/
     if(cube(n-1,cube20,cube2,cube18,cube4,cube7,cube5,cube8,cube6,cube1,cube10,cube3,cube12,cube13,cube14,cube15,cube16,cube17,cube23,cube19,cube21,cube9,cube22,cube11,cube24))
     {  // 左邊一層往下
         return 1;
     }
-    /*if(cube(n-1,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube))
-    {  // 右邊一層往上
-        return 1;
-    }
-    if(cube(n-1,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube))
-    {  // 右邊一層往下
-        return 1;
-    }*/
-    if(cube(n-1,cube1,cube2,cube13,cube15,cube5,cube4,cube7,cube3,cube10,cube12,cube9,cube11,cube22,cube14,cube21,cube16,cube17,cube18,cube19,cube20,cube6,cube8,cube23,cube24))
+    
+    /*if(cube(n-1,cube1,cube2,cube13,cube15,cube5,cube4,cube7,cube3,cube10,cube12,cube9,cube11,cube22,cube14,cube21,cube16,cube17,cube18,cube19,cube20,cube6,cube8,cube23,cube24))
     {  // 前面一層往左
         return 1;
-    }
+    }*/
     if(cube(n-1,cube1,cube2,cube8,cube6,cube5,cube21,cube7,cube22,cube11,cube9,cube12,cube10,cube3,cube14,cube4,cube16,cube17,cube18,cube19,cube20,cube15,cube13,cube23,cube24))
     {  // 前面一層往右
         return 1;
     }
-    /*if(cube(n-1,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube))
-    {  // 後面一層往左
-        return 1;
-    }
-    if(cube(n-1,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube,cube))
-    {  // 後面一層往右
-        return 1;
-    }*/
+    
     return 0;
-}
-
-int OK()
-{
-    for(int i=0;i<24;i++)
-    {
-        for(int j=0;j<6;j++)
-        {
-            if(ch[i]==color[j])
-            {
-                color_num[j]++; break;
-            }
-        }
-    }
-    for(int i=0;i<6;i++)
-    {
-        if(color_num[i]!=4)
-        {
-            return 0;
-        }
-    }
-    return 1;
 }
