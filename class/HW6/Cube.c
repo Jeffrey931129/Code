@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-int success=0,color_num[6];
+int success=0;
 int cube(int,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char),color[6]={'W','O','B','G','Y','R'};
 char ch[25];
 int main()
@@ -14,16 +14,12 @@ int main()
         scanf("%d",&n);
         scanf("%s",ch);
         //printf("%s\n",ch);
-        for(int i=0;i<6;i++)
-        {
-            color_num[i]=0;
-        }
+        
         success=0;
-        if(OK())
-        {
+        
             
-            cube(n,ch[0],ch[1],ch[2],ch[3],ch[4],ch[5],ch[6],ch[7],ch[8],ch[9],ch[10],ch[11],ch[12],ch[13],ch[14],ch[15],ch[16],ch[17],ch[18],ch[19],ch[20],ch[21],ch[22],ch[23]);
-        }
+        cube(n,ch[0],ch[1],ch[2],ch[3],ch[4],ch[5],ch[6],ch[7],ch[8],ch[9],ch[10],ch[11],ch[12],ch[13],ch[14],ch[15],ch[16],ch[17],ch[18],ch[19],ch[20],ch[21],ch[22],ch[23]);
+        
         if(success)
         {
             printf("Yes\n");
