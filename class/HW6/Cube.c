@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int success=0;
-int cube(int,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char),color[6]={'W','O','B','G','Y','R'};
+int cube(int,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char,char);
 char ch[25];
 int main()
 {
