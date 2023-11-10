@@ -1,15 +1,16 @@
 #include <stdio.h>
 
-int main(void) {
-    float f;
-    f = 878722e-4;
-    printf("%f\n", f);
-    printf("%.2f\n", 0.555);
-    printf("%.2f\n", 1.555);
-    printf("%.2f\n", 2.555);
-    printf("%.2f\n", 3.555);
-    printf("%.2f\n", 4.555);
-    printf("%.2f\n", 4.555);
+void function(int*);
+int main() {
+    int n=0;
+    printf("before funtion : %d\n",n);
+    function(&n);
+    printf("after funtion : %d",n);
     return 0;
 }
 
+void function(int *p)
+{
+    *p=1;
+    return;
+}
