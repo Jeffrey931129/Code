@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 
-int a[4],valid(),count(int f,int g,int h,int j,int opp1,int opp2,int opp3);
+int a[4],valid(),count(double f,double g,double h,double j,int opp1,int opp2,int opp3);
 int main()
 {
     int t;
@@ -62,9 +62,9 @@ int valid()
     return 0;
 }
 
-int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
+int count(double f,double g,double h,double j,int opp1,int opp2,int opp3)
 {
-    int temp1=0,temp2=0;
+    double temp1=0,temp2=0; int error=0;
     switch(opp1)
     {
         case 1:
@@ -74,11 +74,27 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1=f*g; break;
         case 4:
-        temp1=f/g; break;
+        if(g!=0) 
+        {
+            temp1=f/g;
+        }
+        else
+        {
+            error++;
+        }  
+        break;
         case 5:
         temp1=g-f; break;
         case 6:
-        temp1=g/f; break;
+        if(f!=0) 
+        {
+            temp1=g/f;
+        }
+        else
+        {
+            error++;
+        }  
+        break;
     }
     switch(opp2)
     {
@@ -89,11 +105,27 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1*=h; break;
         case 4:
-        temp1/=h; break;
+        if(h!=0)
+        {
+            temp1/=h;
+        }
+        else
+        {
+            error++;
+        }
+        break;
         case 5:
         temp1=h-temp1; break;
         case 6:
-        temp1=h/temp1; break;
+        if(temp1!=0)
+        {
+            temp1=h/temp1;
+        }
+        else
+        {
+            error++;
+        }
+        break;
     }
     switch(opp3)
     {
@@ -104,16 +136,33 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1*=j; break;
         case 4:
-        temp1/=j; break;
+        if(j!=0)
+        {
+            temp1/=j;
+        }
+        else
+        {
+            error++;
+        } 
+        break;
         case 5:
         temp1=j-temp1; break;
         case 6:
-        temp1=j/temp1; break;
+        if(temp1!=0)
+        {
+            temp1=j/temp1;
+        }
+        else
+        {
+            error++;
+        } 
+        break;
     }
-    if(temp1==24)
+    if(temp1==24&&!error)
     {
         return 1;
     }
+    error=0;
     
     switch(opp1)
     {
@@ -124,11 +173,27 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1=f*g; break;
         case 4:
-        temp1=f/g; break;
+        if(g!=0) 
+        {
+            temp1=f/g;
+        }
+        else
+        {
+            error++;
+        }  
+        break;
         case 5:
         temp1=g-f; break;
         case 6:
-        temp1=g/f; break;
+        if(f!=0) 
+        {
+            temp1=g/f;
+        }
+        else
+        {
+            error++;
+        }  
+        break;
     }
     switch(opp2)
     {
@@ -139,11 +204,27 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1*=j; break;
         case 4:
-        temp1/=j; break;
+        if(j!=0)
+        {
+            temp1/=j;
+        }
+        else
+        {
+            error++;
+        } 
+        break;
         case 5:
         temp1=j-temp1; break;
         case 6:
-        temp1=j/temp1; break;
+        if(temp1!=0)
+        {
+            temp1=j/temp1;
+        }
+        else
+        {
+            error++;
+        } 
+        break;
     }
     switch(opp3)
     {
@@ -154,16 +235,33 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1*=h; break;
         case 4:
-        temp1/=h; break;
+        if(h!=0)
+        {
+            temp1/=h;
+        }
+        else
+        {
+            error++;
+        }
+        break;
         case 5:
         temp1=h-temp1; break;
         case 6:
-        temp1=h/temp1; break;
+        if(temp1!=0)
+        {
+            temp1=h/temp1;
+        }
+        else
+        {
+            error++;
+        }
+        break;
     }
-    if(temp1==24)
+    if(temp1==24&&!error)
     {
         return 1;
     }
+    error=0;
 
     switch(opp1)
     {
@@ -174,11 +272,27 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1=f*g; break;
         case 4:
-        temp1=f/g; break;
+        if(g!=0) 
+        {
+            temp1=f/g;
+        }
+        else
+        {
+            error++;
+        }  
+        break;
         case 5:
         temp1=g-f; break;
         case 6:
-        temp1=g/f; break;
+        if(f!=0) 
+        {
+            temp1=g/f;
+        }
+        else
+        {
+            error++;
+        }  
+        break;
     }
     switch(opp2)
     {
@@ -189,11 +303,27 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp2=h*j; break;
         case 4:
-        temp2=h/j; break;
+        if(j!=0)
+        {
+            temp2=h/j;
+        }
+        else
+        {
+            error++;
+        } 
+        break;
         case 5:
         temp2=j-h; break;
         case 6:
-        temp2=j/h; break;
+        if(h!=0)
+        {
+           temp2=j/h;  
+        }
+        else
+        {
+            error++;
+        }
+        break;
     }
     switch(opp3)
     {
@@ -204,13 +334,29 @@ int count(int f,int g,int h,int j,int opp1,int opp2,int opp3)
         case 3:
         temp1*=temp2; break;
         case 4:
-        temp1/=temp2; break;
+        if(temp2!=0)
+        {
+            temp1/=temp2; 
+        }
+        else
+        {
+            error++;
+        }
+        break;
         case 5:
         temp1=temp2-temp1; break;
         case 6:
-        temp1=temp2/temp1; break;
+        if(temp1!=0)
+        {
+            temp1=temp2/temp1;
+        }
+        else
+        {
+            error++;
+        }
+        break;
     }
-    if(temp1==24)
+    if(temp1==24&&!error)
     {
         return 1;
     }
