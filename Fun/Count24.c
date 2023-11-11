@@ -8,7 +8,6 @@ int main()
     scanf("%d",&t);
     while(t--)
     {
-        
         scanf("%d%d%d%d",&a[0],&a[1],&a[2],&a[3]);
         if(valid())
         {
@@ -19,6 +18,7 @@ int main()
             printf("Disqualified\n");
         }
     }
+    return 0;
 }
 
 int valid()
