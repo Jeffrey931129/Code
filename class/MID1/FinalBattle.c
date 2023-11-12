@@ -13,45 +13,38 @@ int main()
             scanf("%lld",&arr[i][j]);
         }
     }
-    for(int i=1;i<=n;i++)
-    {
-        for(int j=1;j<=m;j++)
-        {
-            tem[i][j]=tem[i][j-1]+arr[i][j];  // 加總
-        }
-    }
-    for(int i=1;i<=n;i++)
-    {
-        for(int j=1;j<=m;j++)
-        {
-            tem1[i][j]=tem[i][j]-tem[i-1][j];  // 差值
-        }
-    }
-
+    
     while(k--)
     {
         int x1,y1,x2,y2,z;
         scanf("%d%d%d%d%d",&x1,&y1,&x2,&y2,&z);
-        for(int y=0;y1+y<=y2;y++)
+        tem[x1][y1]+=z,tem[x2+1][y1]-=z,tem[x1][y2+1]-=z,tem[x2+1][y2+1]+=z;
+    }
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)
         {
-            tem1[x1][y1+y]+=z*(y+1);
-            tem1[x2+1][y1+y]-=z*(y+1);
+            tem1[i][j]=tem[i][j]+tem[i][j-1];  // 加總
         }
     }
     for(int i=1;i<=n;i++)
     {
         for(int j=1;j<=m;j++)
         {
-            tem[i][j]=tem1[i][j]+tem[i-1][j];  // 差值
-        }
-    }
-    for(int i=1;i<=n;i++)
-    {
-        for(int j=1;j<=m;j++)
-        {
-            printf("%lld",tem[i][j]-tem[i][j-1]);  // 加總
-            if(j=m) printf("\n");
+            for(int k=1;k<=i;k++)
+            {
+                arr[i][j]+=tem1[k][j];  // 加總
+            }
+            printf("%lld",arr[i][j]);  
+            if(j==m) printf("\n");
             else printf(" ");
+        }
+    }
+    for(int i=1;i<=n;i++)
+    {
+        for(int j=1;j<=m;j++)
+        {
+            tem1[i][j]=arr[i][j-1]+arr[i][j];
         }
     }
     while(q--)
@@ -60,7 +53,7 @@ int main()
         scanf("%d%d%d%d",&x1,&y1,&x2,&y2);
         for(int x=x1;x<=x2;x++)
         {
-            answer+=(tem[y2]-tem[y1-1]);
+            answer+=(tem1[y2]-tem1[y1-1]);
         }
         printf("%lld\n",answer);
     }
