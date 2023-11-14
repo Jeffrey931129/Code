@@ -12,8 +12,8 @@ int main()
         for(int j=0;j<m;j++)
         {
             scanf("%d",&road[i][j]);
-            rank[i*n+j][0]=i,rank[i*n+j][1]=j;
-            for(int k=i*n+j;k>0;k--)
+            rank[i*m+j][0]=i,rank[i*m+j][1]=j;
+            for(int k=i*m+j;k>0;k--)
             {
                 if(road[rank[k][0]][rank[k][1]]<road[rank[k-1][0]][rank[k-1][1]])
                 {
@@ -150,7 +150,7 @@ int main()
         }
         else  // teleport
         {
-            int k=0,big=1000000000,small=-1000000000,l,o;
+            int k=0,big=-1,small=-1,l,o;
             for(;;k++)
             {
                 if(rank[k][0]==rx&&rank[k][1]==ry)
@@ -172,7 +172,11 @@ int main()
                     small=road[rank[o][0]][rank[o][1]]; break;
                 }
             }
-            if(big-road[rx][ry]<road[rx][ry]-small)
+            if(big==-1)
+            {
+                rx=rank[o][0],ry=rank[o][1];
+            }
+            else if(big-road[rx][ry]<road[rx][ry]-small||small==-1)
             {
                 rx=rank[l][0],ry=rank[l][1];
             }
