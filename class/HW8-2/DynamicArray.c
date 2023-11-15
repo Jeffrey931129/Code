@@ -35,6 +35,7 @@ int main(){
 
 unsigned*** new_3d_array(unsigned n,unsigned m,unsigned k)
 {
+	
 	unsigned*** array=(unsigned***)malloc(n*sizeof(unsigned**));
 	/*if(array==NULL)
 	{
