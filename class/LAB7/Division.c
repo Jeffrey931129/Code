@@ -27,7 +27,7 @@ int main()
 int find(int x,long long num1,long long num2)
 {
     
-    answer=fmin(answer,abs(num1-num2));
+    answer=fmin(answer,labs(num1-num2));
     if(x==n)
     {
         return 0;
