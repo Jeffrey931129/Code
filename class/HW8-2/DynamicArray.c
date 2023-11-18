@@ -1,13 +1,13 @@
 #include<stdio.h>
-#include <stdlib.h>
+#include<stdlib.h>
 #include"function.h"
 unsigned random_seed=7122;
 unsigned Random(){
 	return random_seed=random_seed*0xdefaced+1;
 }
-int n,m,k,_;
+
 int main(){
-	
+	int n,m,k,_;
 	scanf("%d%d%d%d%u",&_,&n,&m,&k,&random_seed);
 	while(_--){
 		unsigned ***arr=new_3d_array(n,m,k);
@@ -35,46 +35,24 @@ int main(){
 
 unsigned*** new_3d_array(unsigned n,unsigned m,unsigned k)
 {
-	
-	unsigned*** array=(unsigned***)malloc(n*sizeof(unsigned**));
-	/*if(array==NULL)
+	unsigned* arr1=malloc(n*m*k*sizeof(unsigned));
+	unsigned** arr2=malloc(n*m*sizeof(unsigned*));
+	unsigned*** arr3=malloc(n*sizeof(unsigned**));
+	for(int i=0;i<n*m;i++)
 	{
-		return 1;
-	}*/
-	for(int i=0;i<n;i++)
-	{
-		array[i]=(unsigned**)malloc(m*sizeof(unsigned*));
-		/*if(array[i]==NULL)
-		{
-			return 1;
-		}*/
+		arr2[i]=&arr1[i*k];
 	}
 	for(int i=0;i<n;i++)
 	{
-		for(int j=0;j<m;j++)
-		{
-			array[i][j]=(unsigned*)malloc(k*sizeof(unsigned));
-			/*if(array[i][j]==NULL)
-			{
-				return 1;
-			}*/
-		}
+		arr3[i]=&arr2[i*m];
 	}
-	return array;
+	return arr3;
 }
 
 void delete_3d_array(unsigned ***arr)
 {
-	for(int i=0;i<n;i++)
-	{
-		for(int j=0;j<m;j++)
-		{
-			free(arr[i][j]);
-		}
-	}
-	for(int i=0;i<n;i++)
-	{
-		free(arr[i]);
-	}
+	free(arr[0][0]);
+	free(arr[0]);
 	free(arr);
 }
+	

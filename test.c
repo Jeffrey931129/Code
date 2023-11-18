@@ -2,7 +2,8 @@
 
 int main()
 {
-    char a[10];
-    scanf("%c",a);
-    printf("%s",a);
+    int num;
+    scanf("%x",&num);
+    printf("%x",num);
+    return 0;
 }
