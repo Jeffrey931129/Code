@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-int n,k,error,find(int step,int num,int x),is_used[1005];
+int n,k,error,find(int step,int num,int x),check[1005][1005];
 char str[1005];
 int main()
 {
@@ -37,13 +37,21 @@ int find(int x,int y,int pick)
     }
     for(int temp=pick,temy=y;temp<=k&&temy>=x;temy--,temp++)  // ¥ªÃä¯d
     {
-        if(str[x]==str[y])
+        if(str[x]==str[temy])
         {
-            
+            if(check[x][temy]<=temp&&check[x][temy]!=0)
+            {
+                return 0;
+            }
             if(find(x+1,temy-1,temp))
             {
                 return 1;
             }
+            else
+            {
+                check[x][temy]=temp;
+            }
+            break;
         }
         
     }
