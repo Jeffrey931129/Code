@@ -2,7 +2,7 @@
 #include <string.h>
 
 char s[1000001];
-int change[26],result[26][26],rec[26],q;  // changeªº0¥NªíÅÜ¦¨a
+int change[26],result[26][26],rec[26],q;  // changeçš„0ä»£è¡¨è®Šæˆa
 int main()
 {
     scanf("%s",s);

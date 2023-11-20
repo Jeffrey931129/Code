@@ -36,7 +36,7 @@ int find(int x,int y,int pick)
         }
         return 1;
     }
-    for(int temp=pick,temy=y;temp<=k&&temy>=x;temy--,temp++)  // ¥ªÃä¯d
+    for(int temp=pick,temy=y;temp<=k&&temy>=x;temy--,temp++)  // å·¦é‚Šç•™
     {
         if(str[x]==str[temy])
         {
@@ -56,7 +56,7 @@ int find(int x,int y,int pick)
         }
         
     }
-    if(find(x+1,y,pick+1))  // ¥ªÃä±Ë
+    if(find(x+1,y,pick+1))  // å·¦é‚Šæ¨
     {
         return 1;
     }

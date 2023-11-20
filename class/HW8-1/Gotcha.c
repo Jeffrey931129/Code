@@ -1,12 +1,12 @@
 #include <stdio.h>
 
 void snakemove();
-int dir,n,m,s,sx,sy,rx,ry,check();  // 0¬O¦V¥k
+int dir,n,m,s,sx,sy,rx,ry,check();  // 0æ˜¯å‘å³
 int main()
 {
     
     scanf("%d%d%d",&n,&m,&s);
-    int road[n][m],rank[n*m][2],is_used[n][m];  // ¹Á¸Õ¤£°µÂk0
+    int road[n][m],rank[n*m][2],is_used[n][m];  // å˜—è©¦ä¸åšæ­¸0
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<m;j++)
@@ -33,9 +33,9 @@ int main()
     while(s)
     {
         is_used[rx][ry]=1;
-        if(sx==rx||sy==ry||ry-sy==rx-sx||ry-sy==sx-rx)  // ±´´ú¿O
+        if(sx==rx||sy==ry||ry-sy==rx-sx||ry-sy==sx-rx)  // æ¢æ¸¬ç‡ˆ
         {
-            if(sy>ry&&sx==rx)  // ¦V¥k
+            if(sy>ry&&sx==rx)  // å‘å³
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -49,7 +49,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy<ry&&sx==rx)  // ¦V¥ª
+            else if(sy<ry&&sx==rx)  // å‘å·¦
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -63,7 +63,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy==ry&&sx<rx)  // ¦V¤W
+            else if(sy==ry&&sx<rx)  // å‘ä¸Š
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -77,7 +77,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy==ry&&sx>rx)  // ¦V¤U
+            else if(sy==ry&&sx>rx)  // å‘ä¸‹ 
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -91,7 +91,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy<ry&&sx>rx)  // ¦V¥ª¤U
+            else if(sy<ry&&sx>rx)  // å‘å·¦ä¸‹
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -105,7 +105,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy>ry&&sx>rx)  // ¦V¥k¤U
+            else if(sy>ry&&sx>rx)  // å‘å³ä¸‹
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -119,7 +119,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy>ry&&sx<rx)  // ¦V¥k¤W
+            else if(sy>ry&&sx<rx)  // å‘å³ä¸Š
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
@@ -133,7 +133,7 @@ int main()
                     is_used[rx][ry]=1;
                 }
             }
-            else if(sy<ry&&sx<rx)  // ¦V¥ª¤W
+            else if(sy<ry&&sx<rx)  // å‘å·¦ä¸Š
             {
                 int locx=sx,locy=sy;
                 while(rx!=locx||ry!=locy)
