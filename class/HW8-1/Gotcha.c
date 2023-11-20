@@ -150,7 +150,7 @@ int main()
         }
         else  // teleport
         {
-            int k=0,big=-1,small=-1,l,o;
+            int k=0,big=1000000000,small=-1000000000,l,o;
             for(;;k++)
             {
                 if(rank[k][0]==rx&&rank[k][1]==ry)
@@ -172,11 +172,7 @@ int main()
                     small=road[rank[o][0]][rank[o][1]]; break;
                 }
             }
-            if(big==-1)
-            {
-                rx=rank[o][0],ry=rank[o][1];
-            }
-            else if(big-road[rx][ry]<road[rx][ry]-small||small==-1)
+            if(big-road[rx][ry]<road[rx][ry]-small)
             {
                 rx=rank[l][0],ry=rank[l][1];
             }
