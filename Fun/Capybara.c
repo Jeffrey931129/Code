@@ -22,7 +22,7 @@ int main()
             if(maze[i][j]=='M')
             {
                 meat_position[rec][0]=i; meat_position[rec][1]=j;
-                rec++;  // rec=3¥Nªí 3 meat
+                rec++;  // rec=3ä»£è¡¨ 3 meat
             }
         }
     }

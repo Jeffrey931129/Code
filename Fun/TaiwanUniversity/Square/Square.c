@@ -5,22 +5,22 @@ int angle(int,int,int,int);
 
 int main()
 {
-    /*FILE *inputFile; // ©w¸q¤@­Ó«ü¦V¿é¤JÀÉ®×ªº«ü°w
-    FILE *outputFile; // ©w¸q¤@­Ó«ü¦V¿é¥XÀÉ®×ªº«ü°w
-    char inputFilename[] = "D:\\Jeffrey\\code\\class\\Fun\\TaiwanUniversity\\11-1.in"; // ¿é¤JÀÉ®×¦WºÙ
-    char outputFilename[] = "D:\\Jeffrey\\code\\class\\Fun\\TaiwanUniversity\\test.txt"; // ¿é¥XÀÉ®×¦WºÙ
+    /*FILE *inputFile; // å®šç¾©ä¸€å€‹æŒ‡å‘è¼¸å…¥æª”æ¡ˆçš„æŒ‡é‡
+    FILE *outputFile; // å®šç¾©ä¸€å€‹æŒ‡å‘è¼¸å‡ºæª”æ¡ˆçš„æŒ‡é‡
+    char inputFilename[] = "D:\\Jeffrey\\code\\class\\Fun\\TaiwanUniversity\\11-1.in"; // è¼¸å…¥æª”æ¡ˆåç¨±
+    char outputFilename[] = "D:\\Jeffrey\\code\\class\\Fun\\TaiwanUniversity\\test.txt"; // è¼¸å‡ºæª”æ¡ˆåç¨±
     inputFile = fopen(inputFilename, "r");
 
     if (inputFile == NULL) {
-        perror("µLªk¥´¶}¿é¤JÀÉ®×"); // ­YµLªk¥´¶}¿é¤JÀÉ®×¡A¿é¥X¿ù»~«H®§
-        return 1; // µ²§ôµ{¦¡
+        perror("ç„¡æ³•æ‰“é–‹è¼¸å…¥æª”æ¡ˆ"); // è‹¥ç„¡æ³•æ‰“é–‹è¼¸å…¥æª”æ¡ˆï¼Œè¼¸å‡ºéŒ¯èª¤ä¿¡æ¯
+        return 1; // çµæŸç¨‹å¼
     }
     outputFile = fopen(outputFilename, "w");
 
     if (outputFile == NULL) {
-        perror("µLªk¥´¶}¿é¥XÀÉ®×"); // ­YµLªk¥´¶}¿é¥XÀÉ®×¡A¿é¥X¿ù»~«H®§
-        fclose(inputFile); // Ãö³¬¿é¤JÀÉ®×
-        return 1; // µ²§ôµ{¦¡
+        perror("ç„¡æ³•æ‰“é–‹è¼¸å‡ºæª”æ¡ˆ"); // è‹¥ç„¡æ³•æ‰“é–‹è¼¸å‡ºæª”æ¡ˆï¼Œè¼¸å‡ºéŒ¯èª¤ä¿¡æ¯
+        fclose(inputFile); // é—œé–‰è¼¸å…¥æª”æ¡ˆ
+        return 1; // çµæŸç¨‹å¼
     }
     int n_square=0,n_diamond=0,n_rectangle=0;*/
     
@@ -32,9 +32,9 @@ int main()
         scanf("%d%d%d%d%d%d%d%d",&p1[0],&p1[1],&p2[0],&p2[1],&p3[0],&p3[1],&p4[0],&p4[1]);
         int x1=(p2[0]-p1[0])*(p2[0]-p1[0])+(p2[1]-p1[1])*(p2[1]-p1[1]),x2=(p3[0]-p1[0])*(p3[0]-p1[0])+(p3[1]-p1[1])*(p3[1]-p1[1]),x3=(p4[0]-p1[0])*(p4[0]-p1[0])+(p4[1]-p1[1])*(p4[1]-p1[1]);
         int c2=fmax(x1,fmax(x2,x3)),a2=fmin(x1,fmin(x2,x3)),b2=x1+x2+x3-fmax(x1,fmax(x2,x3))-fmin(x1,fmin(x2,x3));
-        if(c2==a2+b2)   // ¥¿¤è¡Bªø¤èor other                    ////////  ³ÌªøÃä¤£¤@©w³Q§¨¦b¤¤¶¡
+        if(c2==a2+b2)   // æ­£æ–¹ã€é•·æ–¹or other                    ////////  æœ€é•·é‚Šä¸ä¸€å®šè¢«å¤¾åœ¨ä¸­é–“
         {
-            if(a2==b2)   // ¥¿¤èor other
+            if(a2==b2)   // æ­£æ–¹or other
             {
                 if(c2==x1)
                 {
@@ -73,7 +73,7 @@ int main()
                     }
                 }
             }
-            else   // ªø¤èor other                                    
+            else   // é•·æ–¹or other                                    
             {
                 if(c2==x1)
                 {
@@ -113,7 +113,7 @@ int main()
                 }
             }
         }
-        else   // µÙ§Îor other
+        else   // è±å½¢or other
         {
             if(a2==b2&&b2==c2)
             {

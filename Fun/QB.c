@@ -19,4 +19,3 @@ int main()
         printf("QB has run %d m.\n",sum);
     }
 }
-// test

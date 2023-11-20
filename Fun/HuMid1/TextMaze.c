@@ -10,7 +10,7 @@ int main()
     {
     	for(int j=0;j<(a);j++)
         {
-        	scanf(" %c",&array[i][j]);   // ¯S®í»yªk:©¿²¤«e¤è"space"©M"enter"ª½¨ì%c¥X²{
+        	scanf(" %c",&array[i][j]);   // ç‰¹æ®Šèªžæ³•:å¿½ç•¥å‰æ–¹"space"å’Œ"enter"ç›´åˆ°%cå‡ºç¾
         }
     }
     printf("%c",array[c][d]);
