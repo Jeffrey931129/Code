@@ -21,7 +21,7 @@ int main()
     return 0;
 }
 
-void jumping(int x,int s,int t,int energy,int jump)  // °O±o¨¾¤î¸õ¹L¬É
+void jumping(int x,int s,int t,int energy,int jump)  // è¨˜å¾—é˜²æ­¢è·³éç•Œ
 {
     is_used[x]=1;
     if(x==t)

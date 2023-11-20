@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 int n,fc[81]={1,1},gc[81]={1,1};
-long long f[81],g[81];  // long long §U•h¥NπÔ§F
+long long f[81],g[81];  // long long ‰∏ãÂéªÂ∞±Â∞ç‰∫Ü
 long long fib(int);
 long long gib(int);
 int main()
