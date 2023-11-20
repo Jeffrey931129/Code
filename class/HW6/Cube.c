@@ -45,29 +45,29 @@ int cube(int n,char cube1,char cube2,char cube3,char cube4,char cube5,char cube6
         return 0;
     }
     /*if(cube(n-1,cube2,cube4,cube1,cube3,cube17,cube18,cube7,cube8,cube5,cube6,cube11,cube12,cube9,cube10,cube15,cube16,cube13,cube14,cube19,cube20,cube21,cube22,cube23,cube24))  
-    {  // ¤W­±¤@¼h©¹¥kÂà
+    {  // ä¸Šé¢ä¸€å±¤å¾€å³è½‰
         return 1;  
     }*/
     if(cube(n-1,cube3,cube1,cube4,cube2,cube9,cube10,cube7,cube8,cube13,cube14,cube11,cube12,cube17,cube18,cube15,cube16,cube5,cube6,cube19,cube20,cube21,cube22,cube23,cube24))  
-    {  // ¤W­±¤@¼h©¹¥ªÂà
+    {  // ä¸Šé¢ä¸€å±¤å¾€å·¦è½‰
         return 1;
     }
     
     /*if(cube(n-1,cube9,cube2,cube11,cube4,cube6,cube8,cube5,cube7,cube21,cube10,cube23,cube12,cube13,cube14,cube15,cube16,cube17,cube3,cube19,cube1,cube20,cube22,cube18,cube24))
-    {  // ¥ªÃä¤@¼h©¹¤W
+    {  // å·¦é‚Šä¸€å±¤å¾€ä¸Š
         return 1;
     }*/
     if(cube(n-1,cube20,cube2,cube18,cube4,cube7,cube5,cube8,cube6,cube1,cube10,cube3,cube12,cube13,cube14,cube15,cube16,cube17,cube23,cube19,cube21,cube9,cube22,cube11,cube24))
-    {  // ¥ªÃä¤@¼h©¹¤U
+    {  // å·¦é‚Šä¸€å±¤å¾€ä¸‹
         return 1;
     }
     
     /*if(cube(n-1,cube1,cube2,cube13,cube15,cube5,cube4,cube7,cube3,cube10,cube12,cube9,cube11,cube22,cube14,cube21,cube16,cube17,cube18,cube19,cube20,cube6,cube8,cube23,cube24))
-    {  // «e­±¤@¼h©¹¥ª
+    {  // å‰é¢ä¸€å±¤å¾€å·¦
         return 1;
     }*/
     if(cube(n-1,cube1,cube2,cube8,cube6,cube5,cube21,cube7,cube22,cube11,cube9,cube12,cube10,cube3,cube14,cube4,cube16,cube17,cube18,cube19,cube20,cube15,cube13,cube23,cube24))
-    {  // «e­±¤@¼h©¹¥k
+    {  // å‰é¢ä¸€å±¤å¾€å³
         return 1;
     }
     
