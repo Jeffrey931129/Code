@@ -2,6 +2,6 @@
 
 int main()
 {
-    printf("long int : %d bytes.",sizeof(long int));   // sizeof()�e�Φh�֦줸��
+    printf("long int : %d bytes.",sizeof(long int));   // sizeof()占用多少位元組
     return 0;
 }

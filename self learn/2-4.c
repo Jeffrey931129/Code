@@ -5,14 +5,14 @@ int main()
     int x,y,z;
     scanf("%d%d%d",&x,&y,&z);
     double average=(x+y+z)/3;
-    // averageªºªí¥Üªk¬°¤@­Óint   
+    // averageçš„è¡¨ç¤ºæ³•ç‚ºä¸€å€‹int   
     printf("%f\n",average);
     average=(x+y+z)/(double)3;
-    // ±NaverageÅã©ÊÂà«¬¬°double
+    // å°‡averageé¡¯æ€§è½‰å‹ç‚ºdouble
     printf("%f\n",average);
     average=(x+y+z)/3.;
-    // ±NaverageÁô©ÊÂà«¬¬°double
+    // å°‡averageéš±æ€§è½‰å‹ç‚ºdouble
     printf("%f",average);
     return 0;
 }
-// double¨Ï¥Î%lf¿é¤J¡B%f¿é¥X
+// doubleä½¿ç”¨%lfè¼¸å…¥ã€%fè¼¸å‡º

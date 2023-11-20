@@ -3,7 +3,7 @@
 int main()
 {
     int x,y,z;
-    scanf("%d%d%d",&x,&y,&z);   // ¤@¦¸¿é¤J¦h­ÓÅÜ¼Æ
+    scanf("%d%d%d",&x,&y,&z);   // ä¸€æ¬¡è¼¸å…¥å¤šå€‹è®Šæ•¸
     printf("%d%d%d",x,y,z);
     return 0;
 }

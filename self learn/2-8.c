@@ -2,9 +2,9 @@
 
 int main()
 {
-    char c='A';   // c©Ò¦sªº¸ê®Æ¬°¸Ó¦r¤¸ªºASCII½s¸¹
+    char c='A';   // cæ‰€å­˜çš„è³‡æ–™ç‚ºè©²å­—å…ƒçš„ASCIIç·¨è™Ÿ
     printf("%c\n",c);
-    c=c+1;   // §Q¥ÎASCII½s¸¹¨Ó°µ¹Bºâ
+    c=c+1;   // åˆ©ç”¨ASCIIç·¨è™Ÿä¾†åšé‹ç®—
     printf("%c",c);
     return 0;
 }
