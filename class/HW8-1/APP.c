@@ -5,6 +5,7 @@ int n,k,error,find(int step,int num,int x),check[1005][1005];
 char str[1005];
 int main()
 {
+    memset(check,-1,sizeof(check));
     scanf("%d%d",&n,&k);
     scanf("%s",str);
     if(find(0,n-1,0))
@@ -39,7 +40,7 @@ int find(int x,int y,int pick)
     {
         if(str[x]==str[temy])
         {
-            if(check[x][temy]<=temp&&check[x][temy]!=0)
+            if(check[x][temy]<=temp&&check[x][temy]!=-1)
             {
                 return 0;
             }

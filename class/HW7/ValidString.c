@@ -32,16 +32,21 @@ int solve()
     return 0;
 }
 
-int main () {
+int main() 
+{
     int T;
-    scanf("%d", &T);
-    while (T--) {
-        for (int i = 0;i < MAXN; ++i)
-            for (int j = 0;j < MAXN; ++j)
-                record[i][j] = -1;
-        scanf("%s", s);
-        int flag = solve();
-        printf(flag ? "Yes\n" : "No\n");
+    scanf("%d",&T);
+    while(T--) 
+    {
+        scanf("%s",s);
+        if(solve())
+        {
+            printf("Yes\n");
+        }
+        else
+        {
+            printf("No\n");
+        }
     }
     return 0;
 }
