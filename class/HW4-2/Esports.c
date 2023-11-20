@@ -4,7 +4,7 @@ int main()
 {
     int N,M,big=pow(10,9);
     scanf("%d%d",&N,&M);
-    int sequen[2*N];   // ÂX¦¨2*N¸Õ¸Õ¡A¤Ï¥¿³Ì«áprint¥X¨Ó´N¦n
+    int sequen[2*N];   // æ“´æˆ2*Nè©¦è©¦ï¼Œåæ­£æœ€å¾Œprintå‡ºä¾†å°±å¥½
     
     for(int i=0;i<N;i++)
     {
@@ -13,7 +13,7 @@ int main()
     for(int i=0;i<N;i++)
     {
         sequen[2*i]=sequen[2*i+1]/big;
-        sequen[2*i+1]%=big;   // ¥i¯à¬°­t
+        sequen[2*i+1]%=big;   // å¯èƒ½ç‚ºè² 
         
     }
     

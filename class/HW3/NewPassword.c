@@ -13,7 +13,7 @@ int main()
     i=0;
     scanf("%s",y);
     scanf("%s",z);
-    if(z[0]>96)   // дp╝g
+    if(z[0]>96)   // х░Пхпл
     {
         z[0]=z[0]-32;
         while(x[i]!=z[0])
@@ -31,7 +31,7 @@ int main()
         printf("%c",y[i]);
     }
     i=0;
-    if(z[1]>96)   // дp╝g
+    if(z[1]>96)   // х░Пхпл
     {
         z[1]=z[1]-32;
         while(x[i]!=z[1])
@@ -49,7 +49,7 @@ int main()
         printf("%c",y[i]);
     }
     i=0;
-    if(z[2]>96)   // дp╝g
+    if(z[2]>96)   // х░Пхпл
     {
         z[2]=z[2]-32;
         while(x[i]!=z[2])

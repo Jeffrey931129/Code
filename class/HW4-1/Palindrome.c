@@ -8,9 +8,9 @@ int main()
     {
         int answer=0;
         int n=strlen(x);
-        for(int i=n;i<=n;i--)   // ¦r¼Æ
+        for(int i=n;i<=n;i--)   // å­—æ•¸
         {
-            for(int j=0,check=1;i+j<=n;j++)   // ±q­ş¸Ì¶}©l
+            for(int j=0,check=1;i+j<=n;j++)   // å¾å“ªè£¡é–‹å§‹
             {
                 for(int k=0;k<(i/2);k++)
                 {

@@ -16,7 +16,7 @@ int main()
         scanf("%d %d",&ex1,&ex2);
         j=0;
         k=0;
-        while(seat[j]!=ex1)   // != §£µ•©Û≤≈∏π
+        while(seat[j]!=ex1)   // != ‰∏çÁ≠âÊñºÁ¨¶Ëôü
         {
             j=j+1;
         }
