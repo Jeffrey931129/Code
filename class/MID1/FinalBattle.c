@@ -24,7 +24,7 @@ int main()
     {
         for(int j=1;j<=m;j++)
         {
-            tem1[i][j]=tem[i][j]+tem[i][j-1];  // 加總
+            tem1[i][j]=tem[i][j]+tem[i][j-1];  
         }
     }
     for(int i=1;i<=n;i++)
@@ -33,7 +33,7 @@ int main()
         {
             for(int k=1;k<=i;k++)
             {
-                arr[i][j]+=tem1[k][j];  // 加總
+                arr[i][j]+=tem1[k][j];  
             }
             printf("%lld",arr[i][j]);  
             if(j==m) printf("\n");
