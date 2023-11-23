@@ -32,7 +32,7 @@ int get_min(int* a,int size)
         return 0;
     }
     int min=get_min(a+1,size-1)+1;
-    if(a[min]>a[0])
+    if(*(a+min)>*a)
     {
         return 0;
     }
