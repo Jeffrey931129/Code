@@ -27,17 +27,7 @@ void readGraph() {
 int main() {
     readGraph();
     find(1,0);
-    // Test the following code
-    /*
-    for (int i=1; i<=n; i++) {
-        int neighborCnt = neighborCount[i];
-        printf("%d connects to ", i);
-        for (int j=0; j<neighborCnt; j++) {
-            printf("%d ", neighbor[i][j]);
-        }
-        printf("\n");
-    }
-     */
+    
     int finalanswer=1;
     for(int i=1;i<=n;i++)
     {
