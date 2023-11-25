@@ -1,11 +1,11 @@
 #include <stdio.h>
-
-int s[5][5],is_used[25],fuck(int);
+#define N 5
+int s[N][N],is_used[N*N],fuck(int),num=N*(N*N+1)/2;
 int main()
 {
-    for(int i=0;i<5;i++)
+    for(int i=0;i<N;i++)
     {
-        for(int j=0;j<5;j++)
+        for(int j=0;j<N;j++)
         {
             scanf("%d",&s[i][j]);
             if(s[i][j]!=0)
@@ -20,37 +20,57 @@ int main()
 
 int fuck(int x)
 {
-    if(x%5==0&&x!=0)
+    if(x%N==0&&x!=0)
     {
-        if(s[(x-5)/5][(x-5)%5]+s[(x-4)/5][(x-4)%5]+s[(x-3)/5][(x-3)%5]+s[(x-2)/5][(x-2)%5]+s[(x-1)/5][(x-1)%5]!=65)
+        int total=0;
+        for(int i=1;i<=N;i++)
+        {
+            total+=s[(x-i)/N][(x-i)%N];
+        }
+        if(total!=num)
         {
             return 0;
         }
     }
-    if(x/5>3&&x!=20)
+    if(x/N>N-2&&x!=N*(N-1))
     {
-        if(s[(x-21)/5][(x-21)%5]+s[(x-16)/5][(x-16)%5]+s[(x-11)/5][(x-11)%5]+s[(x-6)/5][(x-6)%5]+s[(x-1)/5][(x-1)%5]!=65)
+        int total=0;
+        for(int i=0;i<N;i++)
+        {
+            total+=s[(x-1-i*N)/N][(x-1-i*N)%N];
+        }
+        if(total!=num)
         {
             return 0;
         }
     }
-    if(x==21)
+    if(x==N*(N-1)+1)
     {
-        if(s[0][4]+s[1][3]+s[2][2]+s[3][1]+s[4][0]!=65)
+        int total=0;
+        for(int i=0;i<N;i++)
+        {
+            total+=s[i][N-i-1];
+        }
+        if(total!=num)
         {
             return 0;
         }
     }
-    if(x==25)
+    if(x==N*N)
     {
-        if(s[0][0]+s[1][1]+s[2][2]+s[3][3]+s[4][4]!=65)
+        int total=0;
+        for(int i=0;i<N;i++)
+        {
+            total+=s[i][i];
+        }
+        if(total!=num)
         {
             return 0;
         }
         // 目前的s即為正解，自行調整print的東西吧
-        for(int i=0;i<5;i++)
+        for(int i=0;i<N;i++)
         {
-            for(int j=0;j<5;j++)
+            for(int j=0;j<N;j++)
             {
                 printf("%d ",s[i][j]);
             }
@@ -59,21 +79,21 @@ int fuck(int x)
         // 自行調整到此為止
         return 0;
     }
-    if(s[x/5][x%5]!=0)
+    if(s[x/N][x%N]!=0)
     {
         fuck(x+1);
         return 0;
     }
     else
     {
-        for(int i=0;i<25;i++)
+        for(int i=0;i<N*N;i++)
         {
             if(!is_used[i])
             {
-                s[x/5][x%5]=i+1;
+                s[x/N][x%N]=i+1;
                 is_used[i]=1;
                 fuck(x+1);
-                s[x/5][x%5]=0;
+                s[x/N][x%N]=0;
                 is_used[i]=0;
             }
         }
