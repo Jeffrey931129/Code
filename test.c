@@ -1,35 +1,32 @@
 #include <stdio.h>
-#define MAX 10000
+#include <string.h>
 
-typedef struct 
+int main()
 {
-    int n,from,to,temp;
-} Record;
-Record stack[MAX];
-int top=-1;
-
-void move_hanoi(int n,int from,int to,int temp) 
-{
-    stack[++top]=(Record){n,from,to,temp};
-    while(top!=-1) 
+    char s[1000001],save[100000][2];
+    scanf("%s",s);
+    int q,change[26];
+    scanf("%d",&q);
+    for(int i=0;i<26;i++)
     {
-        Record record=stack[top--];
-        if(record.n==1||record.temp==-1) 
-        {
-            printf("Move disk %d from %d to %d\n",record.n,record.from,record.to);
-            continue;
-        }
-        stack[++top]=(Record){record.n-1,record.temp,record.to,record.from};
-        stack[++top]=(Record){record.n,record.from,record.to,-1};
-        stack[++top]=(Record){record.n-1,record.from,record.temp,record.to};
+        change[i]=i;
     }
-}
+    for(int i=0;i<q;i++)
+    {
+        
+        scanf(" %c %c",&save[i][0],&save[i][1]);
 
+    }
+    for(int i=q-1;i>=0;i--)
+    {
+        change[save[i][0]-'a']=change[save[i][1]-'a'];
+    }
+    int word=strlen(s);
+    for(int i=0;i<word;i++)
+    {
+        s[i]=change[s[i]-'a']+'a';
+    }
 
-
-
-int main(void) {
-    move_hanoi(3, 1, 3, 2);
+    printf("%s\n",s);
     return 0;
 }
-
