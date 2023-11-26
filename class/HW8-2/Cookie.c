@@ -12,9 +12,9 @@ int main()
     
     while(time--)
     {
-        
+        //printf("%d\n",time);
         rec_sub=0;
-        while((ch=getchar()))
+        while((ch=getchar())!=EOF)
         {
             if(ch=='|')
             {
@@ -62,7 +62,17 @@ int main()
                 }
                 else if(strlen(s[pick[j]])==strlen(s[pick[j-1]]))
                 {
-                    int check=0;
+                    if(strcmp(s[pick[j]],s[pick[j-1]])>0)
+                    {
+                        int temp=pick[j];
+                        pick[j]=pick[j-1];
+                        pick[j-1]=temp;
+                    }
+                    else
+                    {
+                        break;
+                    }
+                    /*int check=0;
                     for(int k=0;k<strlen(s[pick[j]]);k++)
                     {
                         if(s[pick[j]][k]>s[pick[j-1]][k])
@@ -84,7 +94,7 @@ int main()
                     if(check)
                     {
                         break;
-                    }
+                    }*/
                 }
                 else
                 {
@@ -110,7 +120,17 @@ int main()
             }
             else if(strlen(s[big[j]])==strlen(s[big[j-1]]))
             {
-                int check=0;
+                if(strcmp(s[big[j]],s[big[j-1]])<0)
+                {
+                    int temp=big[j];
+                    big[j]=big[j-1];
+                    big[j-1]=temp;
+                }
+                else
+                {
+                    break;
+                }
+                /*int check=0;
                 for(int k=0;k<strlen(s[big[j]]);k++)
                 {
                     if(s[big[j]][k]<s[big[j-1]][k])
@@ -132,7 +152,7 @@ int main()
                 if(check)
                 {
                     break;
-                }
+                }*/
             }
             else
             {
