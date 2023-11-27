@@ -3,11 +3,11 @@
 #include <math.h>
 
 int n,k;
-char ch;
+char ch,s[1000][305];
 int main()
 {
     scanf("%d %d\n",&n,&k);
-    char ch,sub[15],s[n][305];
+    char ch,sub[15];
     int num_seven[n],pick[n],big[k],temp,rec_sub=0,time=n;
     
     while(time--)
