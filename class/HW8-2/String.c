@@ -25,7 +25,8 @@ int main()
         }
         rec[from-'a']=0;
     }
-    for(int i=0;i<strlen(s);i++)
+    int lenth=strlen(s);
+    for(int i=0;i<lenth;i++)
     {
         printf("%c",change[s[i]-'a']+'a');
     }

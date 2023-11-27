@@ -2,30 +2,30 @@
 #include <string.h>
 #include <math.h>
 
-int n,k;
-char ch,s[1000][305];
+int n,k,num_seven[1005];
+char ch,s[1005][305];
 int main()
 {
     scanf("%d %d\n",&n,&k);
     char ch,sub[15];
-    int num_seven[n],pick[n],big[k],temp,rec_sub=0,time=n;
+    int pick[n],big[k],temp,rec_sub=0;
     
-    while(time--)
+    for(int i=0;i<n;i++)
     {
-        //printf("%d\n",time);
+        //printf("%d\n",i);
         rec_sub=0;
         while((ch=getchar())!=EOF)
         {
             if(ch=='|')
             {
                 sub[rec_sub]='\0'; sscanf(sub,"%x",&temp); sprintf(sub,"%d",temp);
-                strcat(s[time],sub); rec_sub=0; 
+                strcat(s[i],sub); rec_sub=0; 
                 
             }
             else if(ch==10)
             {
                 sub[rec_sub]='\0'; sscanf(sub,"%x",&temp); sprintf(sub,"%d",temp);
-                strcat(s[time],sub); rec_sub=0; 
+                strcat(s[i],sub); rec_sub=0; 
                 break;
             }
             else
@@ -34,6 +34,7 @@ int main()
             }
         }
     }
+    
     for(int i=0;i<n;i++)
     {
         for(int j=0;j<strlen(s[i]);j++)
@@ -107,6 +108,7 @@ int main()
             }
         }
     }
+    
     for(int i=0;i<k;i++)
     {
         big[i]=pick[i];
