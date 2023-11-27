@@ -17,6 +17,10 @@ int main()
     {
         char from,to;
         scanf(" %c %c",&from,&to);
+        if(from==to)
+        {
+            continue;
+        }
         for(int i=0;i<rec[from-'a'];i++)
         {
             change[result[from-'a'][i]]=to-'a';
