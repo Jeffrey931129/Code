@@ -30,6 +30,7 @@ int main()
         }
     }
     sx=rank[0][0],sy=rank[0][1],rx=rank[n*m-1][0],ry=rank[n*m-1][1];
+    int k=n*m-2;
     while(s)
     {
         is_used[rx][ry]=1;
@@ -150,37 +151,9 @@ int main()
         }
         else  // teleport
         {
-            int k=0,big=1000000000,small=-1000000000,l,o;
-            for(;;k++)
-            {
-                if(rank[k][0]==rx&&rank[k][1]==ry)
-                {
-                    break;
-                }
-            }
-            for(l=k+1;l<n*m;l++)
-            {
-                if(!is_used[rank[l][0]][rank[l][1]])
-                {
-                    big=road[rank[l][0]][rank[l][1]]; break;
-                }
-            }
-            for(o=k-1;o>=0;o--)
-            {
-                if(!is_used[rank[o][0]][rank[o][1]])
-                {
-                    small=road[rank[o][0]][rank[o][1]]; break;
-                }
-            }
-            if(big-road[rx][ry]<road[rx][ry]-small)
-            {
-                rx=rank[l][0],ry=rank[l][1];
-            }
-            else
-            {
-                rx=rank[o][0],ry=rank[o][1];
-            }
-            s--;snakemove();
+            
+            rx=rank[k][0],ry=rank[k][1];
+            s--;snakemove();k--;
             //printf("%d\n",road[rx][ry]);
             if(check())
             {
