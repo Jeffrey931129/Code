@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-long long arr[1001][1001],tem[1001][1001],tem1[1001][1001];
+long long arr[1005][1005],tem[1005][1005],tem1[1005][1005];
 int main()
 {
     int n,m,k,q;
