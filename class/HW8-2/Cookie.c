@@ -142,7 +142,7 @@ int main()
                         big[j-1]=temp;
                         break;
                     }
-                    else if(s[pick[j]][k]==s[pick[j-1]][k])
+                    else if(s[big[j]][k]==s[big[j-1]][k])
                     {
                         continue;
                     }
