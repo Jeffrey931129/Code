@@ -21,4 +21,5 @@
     每執行完一個operation，系統會自動確認型式符不符合，ex.2111111111*2/1000000000，因前面int已經爆掉，故error，*總結:需考慮任一時刻的溢位問題;
     for迴圈中的判斷式會在每一次都計算一次，使用strlen可能導致TLE，*總結:不要使用for(int i=0;i<strlen(s);i++); HW8-2,String.c
     千萬記得初始化; HW8-2,Cookie.c
+    切忌定義為char的陣列不可拿來使用作為其他陣列的位置; HuMid3,Sakura.c
 }

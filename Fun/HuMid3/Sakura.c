@@ -33,7 +33,7 @@ int main()
         {
             int time,rec=4; 
             for(;command[rec]!=' ';rec++)
-            sscanf(&command[rec+1],"%d",time); s[0][0]=0;
+            sscanf(&command[rec+1],"%d",&time); s[0][0]=0;
             for(int i=0;i<time;i++)
             {
                 strncat(s[0],&command[4],rec-4);
@@ -51,7 +51,7 @@ int main()
         else if(strncmp(command,"place",5)==0)
         {
             scanf(" %[^\n]",temp);
-            strcpy(s[command[6]],temp);
+            strcpy(s[command[6]-'0'],temp);  // command是char型態
         }
         else if(strncmp(command,"swap",4)==0)
         {
@@ -61,9 +61,9 @@ int main()
             }
             else
             {
-                strcpy(temp,s[command[5]]);
-                strcpy(s[command[5]],s[command[7]]);
-                strcpy(s[command[7]],temp);
+                strcpy(temp,s[command[5]-'0']);
+                strcpy(s[command[5]-'0'],s[command[7]-'0']);
+                strcpy(s[command[7]-'0'],temp);
             }
         }
     }
