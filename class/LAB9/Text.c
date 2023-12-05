@@ -12,9 +12,9 @@ int main()
 
 {
 
-    fgets(input, MAX_SIZE, stdin);
+    scanf(" %[^\n]",input);
 
-    fgets(command, MAX_SIZE, stdin);
+    scanf(" %[^\n]",command);
 
     /* your code here */
     for(int i=0;command[i]!=0;i++)

@@ -1,9 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 
+char s[1000001],save[100000];
 int main()
 {
-    char s[1000001],save[100000][2];
-    scanf("%[^\n]",s);
-    printf("%s",s);
+    
+    scanf(" %[^\n]",s);
+    scanf(" %[^\n]",save);
+    printf("%d %d",strlen(s),strlen(save));
 }

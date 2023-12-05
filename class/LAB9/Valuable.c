@@ -35,7 +35,7 @@ int main()
                 rec[j]=0;
                 sscanf(rec,"%d",&temp_age);
                 i+=j+4;
-                
+                printf("1\n");
             }
             else if(temp[i]=='S'&&strncmp(&temp[i],"Sentence",8)==0)
             {
