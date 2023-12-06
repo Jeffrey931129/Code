@@ -22,4 +22,5 @@
     for迴圈中的判斷式會在每一次都計算一次，使用strlen可能導致TLE，*總結:不要使用for(int i=0;i<strlen(s);i++); HW8-2,String.c
     千萬記得初始化; HW8-2,Cookie.c
     切忌定義為char的陣列不可拿來使用作為其他陣列的位置; HuMid3,Sakura.c
+    qsort為<stdlib.h>的函式，compare回傳-1代表第一項要排前面;
 }

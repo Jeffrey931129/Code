@@ -17,7 +17,8 @@ int main()
         {
             if(j>0) 
             {
-                strcpy(temp,&input[j]);
+                // wrong answer :strcpy(&input[j-1],&input[j]);
+                strcpy(temp,&input[j]);  // right answer
                 strcpy(&input[j-1],temp);
                 j--;
             }
