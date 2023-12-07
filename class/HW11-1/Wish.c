@@ -46,11 +46,43 @@ int main(){
         for(int i=0; i<N; i++){
             int sp = L[i].price - L[i].discount;
             if( sp < X ){
-                printf("%s\n", L[i].name);
+                printf("%s %d %d %d\n", L[i].name,L[i].price,L[i].discount,L[i].quality);
                 X -= sp;
             }
         }
         DeleteList(L, N);
     }
     return 0;
+}
+
+Item* CreateList(int N)
+{
+    Item* arr=malloc(N*sizeof(Item));
+    return arr;
+}
+void AddItem( Item* L, int idx, char* name, int price, int discount, int quality )
+{
+    char* temp=malloc(105*sizeof(char)); strcpy(temp,name);
+    L[idx].name=temp,L[idx].price=price,L[idx].discount=discount,L[idx].quality=quality;
+    return;
+}
+void DeleteList(Item* L, int N)
+{
+    for(int i=0;i<N;i++)
+    {
+        free(L[i].name);
+    }
+    free(L); return;
+}
+int price_cmp( const void* lhs, const void* rhs )
+{
+    return (((Item*)lhs)->price-((Item*)lhs)->discount)-(((Item*)rhs)->price-((Item*)rhs)->discount);
+}
+int discount_cmp( const void* lhs, const void* rhs )
+{
+    return (*(Item*)rhs).discount-(*(Item*)lhs).discount;
+}
+int quality_cmp( const void* lhs, const void* rhs )
+{
+    return ((Item*)rhs)->quality-((Item*)lhs)->quality;
 }
