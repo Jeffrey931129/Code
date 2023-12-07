@@ -46,7 +46,7 @@ int main() {
 Table* createTable()
 {
     Table* temp_table=malloc(sizeof(Table));
-    scanf("%d",&temp_table->tableSize);
+    scanf("%d",&temp_table->tableSize); temp_table->guest=NULL; temp_table->leaveTime=0;
     return temp_table;
 }
 
@@ -63,7 +63,8 @@ Guest* checkLeave(Table **table, int tableCount, int currentTime)
     {
         if(table[i]->leaveTime==currentTime)
         {
-            table[i]->leaveTime=0; return table[i]->guest;
+            Guest* temp=table[i]->guest;
+            table[i]->leaveTime=0; table[i]->guest=NULL; return temp;
         }
     }
     return NULL;
@@ -71,5 +72,13 @@ Guest* checkLeave(Table **table, int tableCount, int currentTime)
 
 int assignTable(Table **table, int tableCount, int currentTime, Guest *guest)
 {
-
+    for(int i=0;i<tableCount;i++)
+    {
+        if(table[i]->leaveTime==0&&table[i]->tableSize>=guest->groupSize)
+        {
+            table[i]->guest=guest,table[i]->leaveTime=currentTime+guest->diningTime;
+            return 1;
+        }
+    }
+    return 0;
 }
