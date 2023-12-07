@@ -26,7 +26,7 @@ int main() {
     //for (int i=0; i<tableCount; i++) printf("%d ",table[i]->tableSize);
     scanf("%d", &guestCount);
     for (int i=0; i<guestCount; i++) guest[i] = createGuest();
-    for (int i=0; i<guestCount; i++) printf("%s %d %d %d\n",guest[i]->guestName,guest[i]->groupSize,guest[i]->arriveTime,guest[i]->diningTime);
+    //for (int i=0; i<guestCount; i++) printf("%s %d %d %d\n",guest[i]->guestName,guest[i]->groupSize,guest[i]->arriveTime,guest[i]->diningTime);
     for (int i=OPEN_TIME; i<=CLOSE_TIME; i++) {
         while (1) {
             Guest *leave = checkLeave(table, tableCount, i);
@@ -52,14 +52,21 @@ Table* createTable()
 
 Guest* createGuest()
 {
-    Guest* temp_guest=malloc(sizeof(Guest));
+    Guest* temp_guest=malloc(sizeof(Guest)); temp_guest->guestName=malloc(sizeof(char)*15);
     scanf(" %s",temp_guest->guestName); scanf("%d",&temp_guest->groupSize); scanf("%d",&temp_guest->arriveTime); scanf("%d",&temp_guest->diningTime);
     return temp_guest;
 }
 
 Guest* checkLeave(Table **table, int tableCount, int currentTime)
 {
-
+    for(int i=0;i<tableCount;i++)
+    {
+        if(table[i]->leaveTime==currentTime)
+        {
+            table[i]->leaveTime=0; return table[i]->guest;
+        }
+    }
+    return NULL;
 }
 
 int assignTable(Table **table, int tableCount, int currentTime, Guest *guest)
