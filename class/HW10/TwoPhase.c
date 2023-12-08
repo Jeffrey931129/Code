@@ -2,7 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-int n,v[30],compare(const void*,const void*);  // v[i]=0代表最優先
+int n,v[30],compare(const void*,const void*);  // v[alphabet]=0代表最優先
 char s[10],temp;  
 int main()
 {
