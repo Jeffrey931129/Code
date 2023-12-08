@@ -10,7 +10,7 @@ int main()
     int t_rec=t;
     while(t_rec--)
     {
-        //if(t_rec!=t-1) printf("\n");
+        
         memset(rec_n,0,sizeof(rec_n)); memset(rec_m,0,sizeof(rec_m)); memset(arr,0,sizeof(arr));
         scanf("%d%d",&n,&m);
         for(int i=0;i<n;i++)
@@ -62,12 +62,7 @@ int main()
                     error++; printf("No\n"); break;
                 }
             }
-            //printf("%d\n",error);
-            //printf("%d\n",memcmp(&rec_n[i][1],&rec[1],k));
-            /*if(memcmp(&rec_n[i][1],&rec[1],k))
-            {
-                error++; printf("No\n"); //break;
-            }*/
+            
             if(error) break;
         }
         if(error) continue;
@@ -99,12 +94,7 @@ int main()
                     error++; printf("No\n"); break;
                 }
             }
-            //printf("%d\n",error);
-            //printf("%d\n",memcmp(&rec_m[i][1],&rec[1],k));
-            /*if(memcmp(&rec_m[i][1],&rec[1],k))
-            {
-                error++; printf("No\n"); //break;
-            }*/
+            
             if(error) break;
         }
         if(error) continue;
