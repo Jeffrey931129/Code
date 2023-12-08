@@ -8,6 +8,8 @@ int main()
 {
     scanf("%d",&t);
     int t_rec=t;
+    int a[4]={1,1,0},b[4]={1,1,1};
+    printf("%d\n",memcmp(a,b,3));
     while(t_rec--)
     {
         //if(t_rec!=t-1) printf("\n");
@@ -55,22 +57,17 @@ int main()
                     count=0;
                 }
             }
-            for(int h=1;h<=k;h++)
-            {
-                if(rec_n[i][h]!=rec[h]) 
-                {
-                    error++; printf("No\n"); break;
-                }
-            }
-            //printf("%d\n",error);
+            
+            //
             //printf("%d\n",memcmp(&rec_n[i][1],&rec[1],k));
-            /*if(memcmp(&rec_n[i][1],&rec[1],k))
+            if(memcmp(&rec_n[i][1],&rec[1],k+1))
             {
-                error++; printf("No\n"); //break;
-            }*/
-            if(error) break;
+                error++; //printf("No\n"); break;
+            }
+            printf("%d\n",error);
+            //if(error) break;
         }
-        if(error) continue;
+        //if(error) continue;
         for(int i=0;i<m;i++)
         {
             error=0;
@@ -92,20 +89,15 @@ int main()
                     count=0;
                 }
             }
-            for(int h=1;h<=k;h++)
-            {
-                if(rec_m[i][h]!=rec[h]) 
-                {
-                    error++; printf("No\n"); break;
-                }
-            }
-            //printf("%d\n",error);
+            
+            //
             //printf("%d\n",memcmp(&rec_m[i][1],&rec[1],k));
-            /*if(memcmp(&rec_m[i][1],&rec[1],k))
+            if(memcmp(&rec_m[i][1],&rec[1],k))
             {
-                error++; printf("No\n"); //break;
-            }*/
-            if(error) break;
+                error++; //printf("No\n"); break;
+            }
+            printf("%d\n",error);
+            //if(error) break;
         }
         if(error) continue;
         printf("Yes\n");
