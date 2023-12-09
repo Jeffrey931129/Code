@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 int n,v[30],compare(const void*,const void*);  // v[alphabet]=0代表最優先
-char s[10],temp;  
+char s[100][10],temp,*rank[100];  
 int main()
 {
     scanf("%d",&n);
@@ -12,12 +12,33 @@ int main()
         scanf(" %c",&temp);
         v[temp-'a']=i;
     }
-    while(n--)
+    for(int l=0;l<n;l++)
     {
-        scanf(" %s",s);
-        qsort(s,6,sizeof(char),compare);
-        printf("%s",s);
-        if(n) printf(" ");
+        scanf(" %s",s[l]);
+        qsort(s[l],6,sizeof(char),compare);
+        rank[l]=s[l];
+    }
+    for(int i=0;i<n;i++)
+    {
+        for(int j=i;j>0;j--)
+        {
+            if(strcmp(s[j-1],s[j])>0)
+            {
+                char temp[10];
+                strcpy(temp,s[j-1]);
+                strcpy(s[j-1],s[j]);
+                strcpy(s[j],temp);
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    for(int i=0;i<n;i++)
+    {
+        printf("%s",s[i]);
+        if(i!=n-1) printf(" ");
         else printf("\n");
     }
 }
