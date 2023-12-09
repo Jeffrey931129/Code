@@ -1,3 +1,4 @@
+切勿依靠助教！！！！！
 **資料型別
 {
     一個位元組(byte)= 8個位元(bit);
@@ -23,4 +24,6 @@
     千萬記得初始化; HW8-2,Cookie.c
     切忌定義為char的陣列不可拿來使用作為其他陣列的位置; HuMid3,Sakura.c
     qsort為<stdlib.h>的函式，compare回傳-1代表第一項要排前面;
+    qsort可以排序指針陣列，只不過要注意compare仍然要定義(const void*,const void*); HW10,TwoPhase.c
+    strcpy(s[j-1],s[j])為不穩定用法; LAB9,Text.c
 }

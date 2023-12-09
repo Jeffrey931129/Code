@@ -1,106 +1,38 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-int t,n,m,count;
-int rec_n[45][50],rec_m[45][50];
-char arr[50][50];
+int n,v[30],compare(const void*,const void*),compare2(const void*,const void*);  // v[alphabet]=0代表最優先
+char s[100][10],temp,*rank[100];  
 int main()
 {
-    scanf("%d",&t);
-    int t_rec=t;
-    int a[4]={1,1,0},b[4]={1,1,1};
-    printf("%d\n",memcmp(a,b,3));
-    while(t_rec--)
+    scanf("%d",&n);
+    for(int i=0;i<26;i++)
     {
-        //if(t_rec!=t-1) printf("\n");
-        memset(rec_n,0,sizeof(rec_n)); memset(rec_m,0,sizeof(rec_m)); memset(arr,0,sizeof(arr));
-        scanf("%d%d",&n,&m);
-        for(int i=0;i<n;i++)
-        {
-            scanf("%d",&rec_n[i][0]);
-            for(int j=1;j<=rec_n[i][0];j++)
-            {
-                scanf("%d",&rec_n[i][j]);
-            }
-        }
-        for(int i=0;i<m;i++)
-        {
-            scanf("%d",&rec_m[i][0]);
-            for(int j=1;j<=rec_m[i][0];j++)
-            {
-                scanf("%d",&rec_m[i][j]);
-            }
-        }
-        for(int i=0;i<n;i++)
-        {
-            scanf(" %s",arr[i]);
-        }
-        int error=0;
-        for(int i=0;i<n;i++)
-        {
-            error=0;
-            int j=0,k=1,rec[50]={0};
-            for(;j<m;j++)
-            {
-                if(arr[i][j]=='o')
-                {
-                    count++;
-                }
-                else
-                {
-                    if(count) rec[k++]=count;
-                    count=0;
-                }
-                if(j==m-1)
-                {
-                    if(count) rec[k++]=count;
-                    count=0;
-                }
-            }
-            
-            //
-            //printf("%d\n",memcmp(&rec_n[i][1],&rec[1],k));
-            if(memcmp(&rec_n[i][1],&rec[1],k+1))
-            {
-                error++; //printf("No\n"); break;
-            }
-            printf("%d\n",error);
-            //if(error) break;
-        }
-        //if(error) continue;
-        for(int i=0;i<m;i++)
-        {
-            error=0;
-            int j=0,k=1,rec[50]={0};
-            for(;j<n;j++)
-            {
-                if(arr[j][i]=='o')
-                {
-                    count++;
-                }
-                else
-                {
-                    if(count) rec[k++]=count;
-                    count=0;
-                }
-                if(j==n-1)
-                {
-                    if(count) rec[k++]=count;
-                    count=0;
-                }
-            }
-            
-            //
-            //printf("%d\n",memcmp(&rec_m[i][1],&rec[1],k));
-            if(memcmp(&rec_m[i][1],&rec[1],k))
-            {
-                error++; //printf("No\n"); break;
-            }
-            printf("%d\n",error);
-            //if(error) break;
-        }
-        if(error) continue;
-        printf("Yes\n");
+        scanf(" %c",&temp);
+        v[temp-'a']=i;
     }
-    return 0;
+    for(int l=0;l<n;l++)
+    {
+        scanf(" %s",s[l]);
+        qsort(s[l],6,sizeof(char),compare);
+        rank[l]=s[l];
+    }
+    qsort(rank,n,sizeof(char*),compare2);
+    for(int i=0;i<n;i++)
+    {
+        printf("%s",rank[i]);
+        if(i!=n-1) printf(" ");
+        else printf("\n");
+    }
+}
+
+int compare(const void* x,const void* y)
+{
+    return v[*(const char*)x-'a']-v[*(const char*)y-'a'];
+}
+
+int compare2(const void* x,const void* y)
+{
+    return strcmp(*(const char**)x,*(const char**)y);
 }
