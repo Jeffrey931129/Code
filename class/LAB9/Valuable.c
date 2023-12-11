@@ -10,6 +10,7 @@ int main()
     scanf("%d",&n);
     scanf(" %[^\n]",key);
     int lenth=strlen(key);
+    trans(key);
     while(n--)
     {
         //memset(temp,0,100005);  // 為何要加
