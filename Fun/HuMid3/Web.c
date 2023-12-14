@@ -5,9 +5,8 @@ char s[100005],answer[100005];
 int count=0;
 int main()
 {
-    while(1)
+    while(scanf(" %[^\n]",s)!=EOF)
     {
-        fgets(s,100005,stdin);
         if(strncmp(s,"</body>",7)==0) break;
         int lenth=strlen(s);
         for(int i=0;i<lenth;i++)
