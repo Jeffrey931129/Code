@@ -28,6 +28,5 @@ int main()
             }
         }
     }
-    
     printf("%s\n%d\n",answer,count);
 }
