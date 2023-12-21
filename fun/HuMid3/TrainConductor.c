@@ -32,21 +32,32 @@ int main()
         if (!strcmp(str, "AddFront")) {
             scanf("%d", &num);
             AddFront(&head, &back, num);
+            
         }
         else if (!strcmp(str, "AddBack")) {
             scanf("%d", &num);
             AddBack(&head, &back, num);
+            
         }
         else if (!strcmp(str, "DeleteFront")) {
             DeleteFront(&head, &back);
+            
         }
         else if (!strcmp(str, "Delete")) {
             scanf("%d", &num);
             Delete(&head, &back, num);
+            
         }
         else if (!strcmp(str, "Swap")) {
             Swap(&head, &back);
+            
         }
+        Node* print = head;
+        while (print != NULL) {
+        printf("%d%c", print->idx, (print->next == NULL ? '\n' : ' '));
+        print = print->next;
+        }
+        printf("%d %d\n",head->idx,back->idx);
     }
     
     // print all the element except the dummy head and free them.
@@ -92,7 +103,8 @@ void DeleteFront(Node** head, Node** back)
     }
     else
     {
-        *head=(*head)->next;
+        Node* temp=*head;
+        *head=(*head)->next; free(temp);
     }
     return;
 }
@@ -116,7 +128,7 @@ void Delete(Node** head, Node** back, int num)
     while(1)
     {   
         if(temp->next==NULL) break;
-        else temp=temp->next;
+        
         while(temp->next->idx==num)
         {
             if(temp->next->next==NULL) 
