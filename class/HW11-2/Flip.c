@@ -34,6 +34,7 @@ int dfs(int x,int step)
 {
     if(check()&&ans>step) ans=step;
     if(x==n*m+1) return 0;
+    if(ans==step) return 0;
     for(int i=x;i<=n*m;i++)
     {
         flip(i);
