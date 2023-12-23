@@ -43,7 +43,7 @@ int dfs(int x,int step,int goal)
         if(check()) return 1;
         return 0;
     }
-    for(int i=x;i<=n*m;i++)
+    for(int i=x;i<=n*m-goal+step+1;i++)
     {
         flip(i);
         if(dfs(x+1,step+1,goal)) return 1;

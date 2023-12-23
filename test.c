@@ -1,47 +1,65 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
-int k,rec;
-char s[1000005];
-void mystrcpy(int idx);
+int n,m,t,ans;
+int chess[20][20],flip_position[5][2]={-1,0,0,-1,0,0,0,1,1,0};
+int dfs(int x,int step),check();
+void flip(int x);
 int main()
 {
-    scanf("%s",s);
-    scanf("%d",&k);
-    int lenth=strlen(s),pick=k;
-    while(k&&s[rec]!=0)
+    scanf("%d",&t);
+    while(t--)
     {
-        if(s[rec+k]==0) break;
-        int small=s[rec],idx=rec,i=rec;
-        for(;i<=rec+k&&s[i]!=0;i++)
+        memset(chess,0,sizeof(chess));
+        ans=999999;
+        scanf("%d%d",&n,&m);
+        for(int i=1;i<=n;i++)
         {
-            if(s[i]<small)
+            for(int j=1;j<=m;j++)
             {
-                small=s[i]; idx=i;
+                char ch;
+                scanf(" %c",&ch);
+                if(ch=='b') chess[i][j]=0;
+                else chess[i][j]=1;
             }
-            if(small=='0') break;
         }
-        mystrcpy(idx);
-        k-=idx-rec; rec++;
+        dfs(1,0);
+        if(ans!=999999) printf("%d\n",ans);
+        else printf("oops\n");
     }
-    int zero=0;
-    for(int i=0;i<lenth-pick;i++)
+}
+
+int dfs(int x,int step)
+{
+    if(x==n*m+1) return 0;
+    if(check()&&ans>step) ans=step;
+    for(int i=x;i<=n*m;i++)
     {
-        if(!zero&&s[i]=='0') continue;
-        zero=1;
-        printf("%c",s[i]);
+        flip(i);
+        dfs(i+1,step+1);
+        flip(i);
     }
-    if(!zero) printf("0");
-    puts("");
     return 0;
 }
 
-void mystrcpy(int idx)
+int check()
 {
-    int i=0;
-    for(;s[idx+i]!=0;i++)
+    int base=chess[1][1];
+    for(int i=1;i<=n;i++)
     {
-        s[rec+i]=s[idx+i];
+        for(int j=1;j<=m;j++)
+        {
+            if(chess[i][j]!=base) return 0;
+        }
     }
-    s[rec+i]=0; return;
+    return 1;
+}
+
+void flip(int x)
+{
+    for(int i=0;i<5;i++)
+    {
+        chess[(x-1)/m+1+flip_position[i][0]][(x-1)%m+1+flip_position[i][1]]=!chess[(x-1)/m+1+flip_position[i][0]][(x-1)%m+1+flip_position[i][1]];
+    }
 }
