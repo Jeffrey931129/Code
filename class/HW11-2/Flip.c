@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-int n,m,t;
+int n,m,t,ans;
 int chess[20][20],flip_position[5][2]={-1,0,0,-1,0,0,0,1,1,0};
-int dfs(int x,int step,int goal),check();
+int dfs(int x,int step),check();
 void flip(int x);
 int main()
 {
@@ -12,6 +12,7 @@ int main()
     while(t--)
     {
         memset(chess,0,sizeof(chess));
+        ans=999999;
         scanf("%d%d",&n,&m);
         for(int i=1;i<=n;i++)
         {
@@ -23,30 +24,20 @@ int main()
                 else chess[i][j]=1;
             }
         }
-        int success=0;
-        for(int i=0;i<=n*m;i++)
-        {
-            if(dfs(1,0,i))
-            {
-                printf("%d\n",i); success++;
-                break;
-            }
-        }
-        if(!success) printf("oops\n");
+        dfs(1,0);
+        if(ans!=999999) printf("%d\n",ans);
+        else printf("oops\n");
     }
 }
 
-int dfs(int x,int step,int goal)
+int dfs(int x,int step)
 {
-    if(step==goal)
-    {
-        if(check()) return 1;
-        return 0;
-    }
-    for(int i=x;i<=n*m-goal+step+1;i++)
+    if(check()&&ans>step) ans=step;
+    if(x==n*m+1) return 0;
+    for(int i=x;i<=n*m;i++)
     {
         flip(i);
-        if(dfs(x+1,step+1,goal)) return 1;
+        dfs(i+1,step+1);
         flip(i);
     }
     return 0;
