@@ -19,7 +19,8 @@ int main()
             else
             {
                 printf("%d\n",s[a-1]+1);
-                s[s[a-1]]=n,s[a-1]++;
+                int temp=s[s[a-1]];
+                s[s[a-1]]=n,s[a-1]=temp;
             } 
             
         }
