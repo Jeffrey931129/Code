@@ -12,7 +12,7 @@ Node *head[100005] = {};
 Node *tail[100005] = {};
  
 //reverse(list[i])'s head node
-Node *rev_head[100005] = {};      // 暫不使用
+Node *rev_head[100005] = {};      
  
 //reverse(list[i])'s tail node
 Node *rev_tail[100005] = {};
@@ -30,6 +30,8 @@ void swap(int a, int b) {
     Node *temp = head[a];
     head[a]=head[b]; head[b]=temp;
     temp=tail[a]; tail[a]=tail[b]; tail[b]=temp;
+    temp=rev_head[a]; rev_head[a]=rev_head[b]; rev_head[b]=temp;
+    temp=rev_tail[a]; rev_tail[a]=rev_tail[b]; rev_tail[b]=temp;
     /* swap(head_node)
     tmp = head[a];
     head[a] = head[b];
@@ -61,17 +63,19 @@ void append(int a, int b) {
     ...
     */
 }
-void reverse(Node** head) {
+void reverse(int a) {
     //reverse list[a]
-    if(*head == NULL||(*head)->next==NULL) return;
+    if(head[a] == NULL||head[a]->next==NULL) return;
     /*
     use rev_head and rev_tail to reverse list[a] in O(1)
     hint: swap something
     */
-    Node* temp=*head;
-    *head=(*head)->next;
-    reverse(head);
-    temp->next->next=temp;
+    // Node* temp=*head;
+    // *head=(*head)->next;
+    // reverse(head);
+    // temp->next->next=temp;
+    Node* temp=head[a]; head[a]=rev_head[a]; rev_head[a]=temp;
+    temp=tail[a]; tail[a]=rev_tail[a]; rev_tail[a]=temp;
 }
 
 int main()
@@ -83,19 +87,22 @@ int main()
         if(a)
         {
             head[i]=malloc(sizeof(Node)); Node* temp=head[i];
-            while(a--)
+            rev_head[i]=malloc(sizeof(Node)); Node* temp2=rev_head[i];
+            char string[a+1]; scanf(" %s",string);
+            for(int i=0;i<a;i++)
             {
-                scanf(" %c",&temp->val);
-                if(a)
+                temp->val=string[i],temp2->val=string[a-1-i];
+                if(i!=a-1)
                 {
                     temp->next=malloc(sizeof(Node)); temp=temp->next;
+                    temp2->next=malloc(sizeof(Node)); temp2=temp2->next;
                 }
                 else
                 {
-                    temp->next=NULL;
+                    temp->next=NULL; temp2->next=NULL;
                 }
             }
-            tail[i]=temp;
+            tail[i]=temp,rev_tail[i]=temp2;
         }
     }
 
@@ -108,6 +115,10 @@ int main()
             int b; scanf("%d",&b); a--,b--;
             if(tail[a]==NULL) continue;
             tail[a]->next=head[b]; head[b]=head[a]; head[a]=tail[a]=NULL;
+
+            if(rev_tail[b]==NULL) rev_head[b]=rev_head[a];
+            else rev_tail[b]->next=rev_head[a];
+            rev_tail[b]=rev_tail[a]; rev_head[a]=rev_tail[a]=NULL;
         }
         else if(command==2)
         {
@@ -115,6 +126,9 @@ int main()
             if(tail[b]==NULL) head[b]=head[a];
             else tail[b]->next=head[a];
             tail[b]=tail[a]; head[a]=tail[a]=NULL;
+
+            if(rev_tail[a]==NULL) continue;
+            rev_tail[a]->next=rev_head[b]; rev_head[b]=rev_head[a]; rev_head[a]=rev_tail[a]=NULL;
         }
         else if(command==3)
         {
@@ -123,10 +137,22 @@ int main()
         }
         else
         {
-            tail[a-1]=head[a-1];
-            reverse(&head[a-1]);
-            if(tail[a-1]!=NULL) tail[a-1]->next=NULL;
+            // tail[a-1]=head[a-1];
+            // reverse(&head[a-1]);
+            // if(tail[a-1]!=NULL) tail[a-1]->next=NULL;
+            reverse(a-1);
         }
+
+        // for(int i=0;i<n;i++)
+        // {
+        //     Node* temp=head[i];
+        //     while(temp!=NULL)
+        //     {
+        //         printf("%c",temp->val);
+        //         temp=temp->next;
+        //     }
+        //     puts("");
+        // }
     }
 
     for(int i=0;i<n;i++)
