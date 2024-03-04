@@ -113,7 +113,8 @@ int main()
         if(command==1)
         {
             int b; scanf("%d",&b); a--,b--;
-            if(tail[a]==NULL) continue; if(tail[b]==NULL) tail[b]=tail[a];
+            if(tail[a]==NULL) continue; 
+            if(tail[b]==NULL) tail[b]=tail[a];
             tail[a]->next=head[b]; head[b]=head[a]; head[a]=tail[a]=NULL;
 
             if(rev_tail[b]==NULL) rev_head[b]=rev_head[a];
@@ -122,12 +123,14 @@ int main()
         }
         else if(command==2)
         {
-            int b; scanf("%d",&b); a--,b--; if(tail[a]==NULL) continue;
+            int b; scanf("%d",&b); a--,b--; 
+            if(tail[a]==NULL) continue;
             if(tail[b]==NULL) head[b]=head[a];
             else tail[b]->next=head[a];
             tail[b]=tail[a]; head[a]=tail[a]=NULL;
 
-            if(rev_tail[a]==NULL) continue; if(rev_tail[b]==NULL) rev_tail[b]=rev_tail[a];
+            if(rev_tail[a]==NULL) continue; 
+            if(rev_tail[b]==NULL) rev_tail[b]=rev_tail[a];
             rev_tail[a]->next=rev_head[b]; rev_head[b]=rev_head[a]; rev_head[a]=rev_tail[a]=NULL;
         }
         else if(command==3)
