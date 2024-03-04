@@ -122,7 +122,7 @@ int main()
         }
         else if(command==2)
         {
-            int b; scanf("%d",&b); a--,b--;
+            int b; scanf("%d",&b); a--,b--; if(tail[a]==NULL) continue;
             if(tail[b]==NULL) head[b]=head[a];
             else tail[b]->next=head[a];
             tail[b]=tail[a]; head[a]=tail[a]=NULL;
