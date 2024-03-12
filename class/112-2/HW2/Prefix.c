@@ -14,16 +14,24 @@ void constructTree(Node** head);
 void printInfix(Node *root)
 {
     if(root==NULL) return;
-    if(root->left->data=='|'||root->left->data=='&') printInfix(root->left);
-    else printf("%c",root->left->data);
-    printf("%c",root->data);
-    if(root->right->data=='|'||root->right->data=='&')
+    if(root->left!=NULL)
     {
-        printf("(");
-        printInfix(root->right);
-        printf(")");
+        if(root->left->data=='|'||root->left->data=='&') printInfix(root->left);
+        else printf("%c",root->left->data);    
     }
-    else printf("%c",root->right->data);
+    
+    printf("%c",root->data);
+    if(root->right!=NULL)
+    {
+        if(root->right->data=='|'||root->right->data=='&')
+        {
+            printf("(");
+            printInfix(root->right);
+            printf(")");
+        }
+        else printf("%c",root->right->data);    
+    }
+    
 }
 void freeTree(Node *root);
 
