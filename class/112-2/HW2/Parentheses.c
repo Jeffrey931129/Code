@@ -24,6 +24,7 @@ int main()
     {
         if(s[pos]=='(')
         {
+            if(s[pos+2]==')') s[pos]=s[pos+2]=1;
             if(s[pos-1]==s[pos]||s[pos-1]==1) rec[part++]=1,s[pos]=1;
             else part++;
         }
