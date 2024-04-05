@@ -32,6 +32,7 @@ class Person {
             if(arr[now]=="ParentA")
             {
                 if(parentA==nullptr) parentA=new Person(); now++; parentA->child=this;
+                if(parentB!=nullptr) parentA->mate=parentB;
                 if(now!=len-2) parentA->describe(arr,now,len);
                 else 
                 {
@@ -91,6 +92,7 @@ class Person {
             if(arr[now]=="ParentA")
             {
                 if(parentA==nullptr) parentA=new Person(); now++; parentA->child=this;
+                if(parentB!=nullptr) parentA->mate=parentB;
                 if(now!=len) return parentA->getRelative(arr,now,len);
                 return parentA;
             } 

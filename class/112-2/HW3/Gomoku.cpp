@@ -149,7 +149,7 @@ bool GomokuGame::remove(int player, string location)
 }
 int GomokuGame::getWinner()
 {
-    int size=gomokuBoard->getSize();
+    int size=gomokuBoard->getSize(),ans=0;
     for(int i=0;i<size;i++)
     {
         for(int j=0;j<size;j++)
@@ -164,11 +164,11 @@ int GomokuGame::getWinner()
                 while(down<size-1&&gomokuBoard->get(down+1,j)==value) down++;
                 gomokuBoard->set(i,j,value);
                 //cout<<"left:"<<left<<" right:"<<right<<" up:"<<up<<" down:"<<down<<endl;
-                if(right-left==4||down-up==4) return value;
+                if(right-left>=4||down-up>=4) ans=value;
             }
         }
     }
-    return 0;
+    return ans;
 }
 
 int main() {
