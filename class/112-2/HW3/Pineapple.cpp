@@ -32,58 +32,66 @@ class Person {
             if(arr[now]=="ParentA")
             {
                 if(parentA==nullptr) parentA=new Person(); now++; parentA->child=this;
-                if(parentB!=nullptr) parentA->mate=parentB;
+                if(parentB!=nullptr) parentA->mate=parentB,parentB->mate=parentA;
                 if(now!=len-2) parentA->describe(arr,now,len);
                 else 
                 {
                     if(arr[now]=="Name") parentA->name=arr[now+1];
                     else if(arr[now]=="Age") parentA->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") parentA->gender=MALE; else parentA->gender=FEMALE;
-                    else parentA->personality=arr[now+1];
+                    else parentA->personality+=" "+arr[now+1];
                 }
             } 
             else if(arr[now]=="ParentB") 
             {
                 if(parentB==nullptr) parentB=new Person(); now++; parentB->child=this;
-                if(parentA!=nullptr) parentB->mate=parentA;
+                if(parentA!=nullptr) parentB->mate=parentA,parentA->mate=parentB;
                 if(now!=len-2) parentB->describe(arr,now,len);
                 else 
                 {
                     if(arr[now]=="Name") parentB->name=arr[now+1];
                     else if(arr[now]=="Age") parentB->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") parentB->gender=MALE; else parentB->gender=FEMALE;
-                    else parentB->personality=arr[now+1];
+                    else parentB->personality+=" "+arr[now+1];
                 }
             }
             else if(arr[now]=="Mate") 
             {
                 if(mate==nullptr) mate=new Person(); now++; mate->mate=this;
-                if(child!=nullptr) mate->child=child;
+                if(child!=nullptr) 
+                {
+                    mate->child=child;
+                    if(this==child->parentA) child->parentB=mate;
+                    else if(this==child->parentB) child->parentA=mate;
+                }
                 if(now!=len-2) mate->describe(arr,now,len);
                 else 
                 {
                     if(arr[now]=="Name") mate->name=arr[now+1];
                     else if(arr[now]=="Age") mate->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") mate->gender=MALE; else mate->gender=FEMALE;
-                    else mate->personality=arr[now+1];
+                    else mate->personality+=" "+arr[now+1];
                 }
             }
             else 
             {
                 if(child==nullptr) child=new Person(); now++;
-                if(child->parentA==nullptr) 
+                if(child->parentA==nullptr&&child->parentB==nullptr) 
                 {
                     child->parentA=this;
-                    if(mate!=nullptr) child->parentB=mate;
+                    if(mate!=nullptr) child->parentB=mate,mate->child=child;
                 }
                 else if(child->parentB==nullptr&&this!=child->parentA) child->parentB=this;
+                else if(child->parentB==nullptr&&this==child->parentA&&mate!=nullptr) child->parentB=mate,mate->child=child;
+                else if(child->parentA==nullptr&&this!=child->parentB) child->parentA=this;
+                else if(child->parentA==nullptr&&this==child->parentB&&mate!=nullptr) child->parentA=mate,mate->child=child;
                 if(now!=len-2) child->describe(arr,now,len);
                 else 
                 {
                     if(arr[now]=="Name") child->name=arr[now+1];
                     else if(arr[now]=="Age") child->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") child->gender=MALE; else child->gender=FEMALE;
-                    else child->personality=arr[now+1];
+                    else child->personality+=" "+arr[now+1];
                 }
             }
         }
@@ -92,33 +100,41 @@ class Person {
             if(arr[now]=="ParentA")
             {
                 if(parentA==nullptr) parentA=new Person(); now++; parentA->child=this;
-                if(parentB!=nullptr) parentA->mate=parentB;
+                if(parentB!=nullptr) parentA->mate=parentB,parentB->mate=parentA;
                 if(now!=len) return parentA->getRelative(arr,now,len);
                 return parentA;
             } 
             else if(arr[now]=="ParentB") 
             {
                 if(parentB==nullptr) parentB=new Person(); now++; parentB->child=this;
-                if(parentA!=nullptr) parentB->mate=parentA;
+                if(parentA!=nullptr) parentB->mate=parentA,parentA->mate=parentB;
                 if(now!=len) return parentB->getRelative(arr,now,len);
                 return parentB;
             }
             else if(arr[now]=="Mate") 
             {
                 if(mate==nullptr) mate=new Person(); now++; mate->mate=this;
-                if(child!=nullptr) mate->child=child;
+                if(child!=nullptr) 
+                {
+                    mate->child=child;
+                    if(this==child->parentA) child->parentB=mate;
+                    else if(this==child->parentB) child->parentA=mate;
+                }
                 if(now!=len) return mate->getRelative(arr,now,len);
                 return mate;
             }
             else 
             {
                 if(child==nullptr) child=new Person(); now++;
-                if(child->parentA==nullptr) 
+                if(child->parentA==nullptr&&child->parentB==nullptr) 
                 {
                     child->parentA=this;
-                    if(mate!=nullptr) child->parentB=mate;
+                    if(mate!=nullptr) child->parentB=mate,mate->child=child;
                 }
                 else if(child->parentB==nullptr&&this!=child->parentA) child->parentB=this;
+                else if(child->parentB==nullptr&&this==child->parentA&&mate!=nullptr) child->parentB=mate,mate->child=child;
+                else if(child->parentA==nullptr&&this!=child->parentB) child->parentA=this;
+                else if(child->parentA==nullptr&&this==child->parentB&&mate!=nullptr) child->parentA=mate,mate->child=child;
                 if(now!=len) return child->getRelative(arr,now,len);
                 return child;
             }

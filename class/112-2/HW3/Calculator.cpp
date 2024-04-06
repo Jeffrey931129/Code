@@ -10,6 +10,7 @@ class String_Calculator
         {
             size_t find=x.find(y);
             if(find!=string::npos) x.replace(find,y.length(),"");
+            else x="error";
             x=x+y;
             int rec=0; find=x.find(y);
             while(find!=string::npos)
