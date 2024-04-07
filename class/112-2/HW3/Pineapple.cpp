@@ -39,7 +39,11 @@ class Person {
                     if(arr[now]=="Name") parentA->name=arr[now+1];
                     else if(arr[now]=="Age") parentA->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") parentA->gender=MALE; else parentA->gender=FEMALE;
-                    else parentA->personality+=" "+arr[now+1];
+                    else
+                    {
+                        if(!parentA->personality.empty()) parentA->personality+=" ";
+                        parentA->personality+=arr[now+1];
+                    } 
                 }
             } 
             else if(arr[now]=="ParentB") 
@@ -52,7 +56,11 @@ class Person {
                     if(arr[now]=="Name") parentB->name=arr[now+1];
                     else if(arr[now]=="Age") parentB->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") parentB->gender=MALE; else parentB->gender=FEMALE;
-                    else parentB->personality+=" "+arr[now+1];
+                    else
+                    {
+                        if(!parentB->personality.empty()) parentB->personality+=" ";
+                        parentB->personality+=arr[now+1];
+                    } 
                 }
             }
             else if(arr[now]=="Mate") 
@@ -70,7 +78,11 @@ class Person {
                     if(arr[now]=="Name") mate->name=arr[now+1];
                     else if(arr[now]=="Age") mate->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") mate->gender=MALE; else mate->gender=FEMALE;
-                    else mate->personality+=" "+arr[now+1];
+                    else
+                    {
+                        if(!mate->personality.empty()) mate->personality+=" ";
+                        mate->personality+=arr[now+1];
+                    } 
                 }
             }
             else 
@@ -91,7 +103,11 @@ class Person {
                     if(arr[now]=="Name") child->name=arr[now+1];
                     else if(arr[now]=="Age") child->age=stoi(arr[now+1]);
                     else if(arr[now]=="Gender") if(arr[now+1]=="MALE") child->gender=MALE; else child->gender=FEMALE;
-                    else child->personality+=" "+arr[now+1];
+                    else
+                    {
+                        if(!child->personality.empty()) child->personality+=" ";
+                        child->personality+=arr[now+1];
+                    } 
                 }
             }
         }
