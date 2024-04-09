@@ -18,12 +18,12 @@ TokenSet getToken(void)
         lexeme[0] = c;
         c = fgetc(stdin);
         i = 1;
-        while (isdigit(c) && i < MAXLEN) {
+        while (isdigit(c) && i < MAXLEN) {      // 讀至不是數字
             lexeme[i] = c;
             ++i;
             c = fgetc(stdin);
         }
-        ungetc(c, stdin);
+        ungetc(c, stdin);       // 讓非數字符號可以在之後重新讀取
         lexeme[i] = '\0';
         return INT;
     } else if (c == '+' || c == '-') {

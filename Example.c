@@ -13,7 +13,6 @@ void shuffle(FILE* open)
         letter[j]=letter[k];
         letter[k]=temp;
     }
-    
 }
 
 int main()
