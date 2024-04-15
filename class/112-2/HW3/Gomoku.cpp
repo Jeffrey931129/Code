@@ -46,7 +46,7 @@ class Board {
         /* TODO: Get the value of board[i][j] */
         int get(int i, int j);
 };
-
+// my function
 int Board::getSize()
 {
     return size;
@@ -92,7 +92,7 @@ class GomokuGame {
                  or 0 if the game has not yet ended */
         int getWinner(); 
 };
-
+// my function
 bool GomokuGame::place(int player,string location)
 {
     if(turn==player)

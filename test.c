@@ -2,10 +2,10 @@
 
 int main()
 {
-    int a;
+    int a=0,b=0;
     //scanf("%d",&a);
-    printf("%d\n",-12%5);
-    printf("HELLO WORLD");
+    a=b+++5;
+    printf("%d %d\n",a,b);
     return 0;
 }
 

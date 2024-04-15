@@ -9,7 +9,7 @@ static char lexeme[MAXLEN];
 
 TokenSet getToken(void)
 {
-    int i = 0;
+    int i = 1;
     char c = '\0';
 
     while ((c = fgetc(stdin)) == ' ' || c == '\t');
@@ -17,7 +17,6 @@ TokenSet getToken(void)
     if (isdigit(c)) {
         lexeme[0] = c;
         c = fgetc(stdin);
-        i = 1;
         while (isdigit(c) && i < MAXLEN) {      // 讀至不是數字
             lexeme[i] = c;
             ++i;
@@ -46,9 +45,15 @@ TokenSet getToken(void)
     } else if (c == ')') {
         strcpy(lexeme, ")");
         return RPAREN;
-    } else if (isalpha(c)) {
+    } else if (isalpha(c)||c=='_') {
         lexeme[0] = c;
-        lexeme[1] = '\0';
+        while (isdigit(c)||isalpha(c)||c=='_' && i < MAXLEN) {      // 讀至不是變數名稱
+            lexeme[i] = c;
+            ++i;
+            c = fgetc(stdin);
+        }
+        ungetc(c, stdin);       // 讓符號可以在之後重新讀取
+        lexeme[i] = '\0';
         return ID;
     } else if (c == EOF) {
         return ENDFILE;
