@@ -44,7 +44,7 @@ char *getLexeme(void);
 // }
 #define error(errorNum) { \
     if (PRINTERR) \
-        fprintf(stderr, "EXIT 1\n", __FILE__, __LINE__); \
+        printf("EXIT 1\n"); \
     exit(0); \
 }
 
@@ -503,10 +503,11 @@ void statement(void) {
             // printf("Prefix traversal: ");
             // printPrefix(retp);
             // printf("\n----------------\n");
-            //printf("OK\n");
+            
             freeTree(retp);
-            for(int i=0;table[i].name[0]!=0;i++) printf("%s=%d\n",table[i].name,table[i].val);
-            //printf("OK\n");
+            // debug
+            //for(int i=0;table[i].name[0]!=0;i++) printf("%s=%d\n",table[i].name,table[i].val);
+            //printf("----------------\n");
             //printf(">> ");
             advance();
         } else {
@@ -568,10 +569,15 @@ int evaluateTree(BTNode *root) {
                 break;
             case ASSIGN:
                 if(root->left->data!=ID) error(UNDEFINED);
-                rv = evaluateTree(root->right);
+                
                 //printf("right value=%d\n",rv);
-                if(root->val) retval=getval(root->left->lexeme),setval(root->left->lexeme,rv);
-                else retval = setval(root->left->lexeme, rv);
+                if(root->val){
+                    retval=getval(root->left->lexeme);
+                    rv = evaluateTree(root->right);
+                    setval(root->left->lexeme,rv);
+                    r--;
+                }
+                else rv = evaluateTree(root->right),retval = setval(root->left->lexeme, rv);
                 break;
             case ADDSUB:
             case MULDIV:
