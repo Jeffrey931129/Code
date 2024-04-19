@@ -103,11 +103,11 @@ void err(ErrorType errorNum);
 // Evaluate the syntax tree
 int evaluateTree(BTNode *root);
 // myfunction
-int exist_ID(BTNode* root);
+int exist_ID(BTNode* root);        // 找除式有沒有變數
 // Print the syntax tree in prefix
 void printPrefix(BTNode *root);
 
-int r;
+int r;          // 紀錄下一個可以放的register位置
 /*============================================================================================
 lex implementation
 ============================================================================================*/
@@ -134,7 +134,7 @@ TokenSet getToken(void)
     } else if (c == '+' || c == '-') {  
         char prev=c;
         c=fgetc(stdin);
-        if(c=='+'||c=='-'||c=='=')    // += & ++
+        if(c=='+'||c=='-'||c=='=')    // += 和 ++... 都被我視為assign
         {
             if(c=='=')
             {
@@ -184,7 +184,6 @@ TokenSet getToken(void)
         strcpy(lexeme, ")");
         return RPAREN;
     } else if (isalpha(c)) {
-        lexeme[0] = c;
         while (isdigit(c)||isalpha(c)||c=='_' && i < MAXLEN) {      // 讀至不是變數名稱
             lexeme[i] = c;
             ++i;
@@ -230,7 +229,7 @@ void initTable(void) {
     sbcount = 3;
 }
 
-int getval(char *str) {
+int getval(char *str) {       // 在此MOV
     int i = 0;
 
     for (i = 0; i < sbcount; i++)
@@ -239,7 +238,7 @@ int getval(char *str) {
             printf("MOV r%d [%d]\n",r,i*4); r++;
             return table[i].val;
         }  
-    error(RUNOUT);
+    error(RUNOUT);        // 找不到
     if (sbcount >= TBLSIZE)
         error(RUNOUT);
 
@@ -250,7 +249,7 @@ int getval(char *str) {
     return 0;
 }
 
-int setval(char *str, int val) {
+int setval(char *str, int val) {    // 在此MOV
     int i = 0;
 
     for (i = 0; i < sbcount; i++) {
@@ -266,7 +265,7 @@ int setval(char *str, int val) {
 
     strcpy(table[sbcount].name, str);
     table[sbcount].val = val;
-    printf("MOV [%d] r0\n",sbcount*4);
+    printf("MOV [%d] r%d\n",sbcount*4,r-1);
     sbcount++;
     return val;
 }
@@ -356,8 +355,7 @@ BTNode *factor(void) {
         retp = assign_expr();
         if (match(RPAREN))
             advance();
-        else
-            error(MISPAREN);
+        else error(MISPAREN);
     } else {
         error(NOTNUMID);
     }
@@ -495,20 +493,11 @@ void statement(void) {
     } else {
         retp = assign_expr();
         if (match(END)) {
-            // printPrefix(retp); puts("");
-            //printf("origin z=%d\n",table[2].val);
             evaluateTree(retp);
-            //printf("after z=%d\n",table[2].val);
-            // printf("----------------\n%d\n", evaluateTree(retp));
-            // printf("Prefix traversal: ");
-            // printPrefix(retp);
-            // printf("\n----------------\n");
-            
             freeTree(retp);
             // debug
             //for(int i=0;table[i].name[0]!=0;i++) printf("%s=%d\n",table[i].name,table[i].val);
             //printf("----------------\n");
-            //printf(">> ");
             advance();
         } else {
             error(SYNTAXERR);
@@ -568,7 +557,7 @@ int evaluateTree(BTNode *root) {
                 printf("MOV r%d %d\n",r,retval); r++;
                 break;
             case ASSIGN:
-                if(root->left->data!=ID) error(UNDEFINED);
+                if(root->left->data!=ID) error(UNDEFINED);     // 左邊不是一個變數就error
                 
                 //printf("right value=%d\n",rv);
                 if(root->val){

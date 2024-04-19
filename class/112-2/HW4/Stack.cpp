@@ -48,3 +48,42 @@ int main(){
     }
     return 0;
 }
+
+List_stack::List_stack():head(NULL),tail(NULL){}
+List_stack::~List_stack(){
+    while(head!=NULL){
+        ListNode* temp=head;
+        head->nextPtr;
+        delete temp;
+    }
+}
+void List_stack::push(const int& n){
+    ListNode* node=new ListNode(n);
+    node->nextPtr=head;
+    if(head!=NULL) head->prevPtr=node;
+    head=node;
+    if(tail==NULL) tail=node;
+}
+void List_stack::pop(){
+    if(head!=NULL){
+        if(head==tail){
+            delete head;
+            head=tail=NULL;
+        }
+        else{
+            ListNode* a=head;
+            head->nextPtr->prevPtr=NULL;
+            head=head->nextPtr;
+            delete a;
+        }
+    }
+}
+void List_stack::print(){
+    ListNode* rec=head;
+    int space=0;
+    while(rec!=NULL){
+        if(space++) cout<<" ";
+        cout<<rec->data;
+        rec=rec->nextPtr;
+    }
+}
