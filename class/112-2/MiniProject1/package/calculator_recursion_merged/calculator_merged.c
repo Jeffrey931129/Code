@@ -183,7 +183,7 @@ TokenSet getToken(void)
     } else if (c == ')') {
         strcpy(lexeme, ")");
         return RPAREN;
-    } else if (isalpha(c)) {
+    } else if (isalpha(c)||c=='_') {
         while (isdigit(c)||isalpha(c)||c=='_' && i < MAXLEN) {      // 讀至不是變數名稱
             lexeme[i] = c;
             ++i;

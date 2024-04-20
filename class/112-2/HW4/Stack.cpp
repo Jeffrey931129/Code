@@ -53,7 +53,7 @@ List_stack::List_stack():head(NULL),tail(NULL){}
 List_stack::~List_stack(){
     while(head!=NULL){
         ListNode* temp=head;
-        head->nextPtr;
+        head=head->nextPtr;
         delete temp;
     }
 }
