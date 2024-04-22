@@ -10,6 +10,8 @@
         "span": "cpp",
         "stacktrace": "cpp",
         "regex": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "new": "cpp",
+        "iosfwd": "cpp"
     }
 }
