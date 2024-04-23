@@ -12,6 +12,7 @@
         "regex": "cpp",
         "ostream": "cpp",
         "new": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "iostream": "cpp"
     }
 }

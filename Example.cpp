@@ -18,7 +18,7 @@ int main()
     int range=pow(2,var_num);
     int store[range],rec=0;
     for(int i=0;i<range;i++){
-        int rate=rand()%3;
+        int rate=rand()%5;
         if(!rate) store[rec++]=i;
     }
     //ifstream in();

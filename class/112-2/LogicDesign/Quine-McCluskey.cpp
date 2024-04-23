@@ -149,8 +149,10 @@ public:
             if(check) non_cover_minterm[i]=-1;
         }
         //cout<<prime_num<<endl;
+        cout<<"essential:"<<endl;
         for(int i=0;i<prime_num;i++) cout<<essential[i]<<" ";
         puts("");
+        cout<<"non_cover:"<<endl;
         for(int i=0;i<term_num;i++) cout<<non_cover_minterm[i]<<" ";
         puts("");
         //cout<<"2"<<endl;
@@ -168,10 +170,10 @@ public:
     }
 
     void search(int term_pos){
-        for(int i=0;i<out_prime_temp.size();i++) cout<<out_prime_temp[i]<<endl;
-        for(int i=0;i<term_num;i++) cout<<non_cover_minterm[i]<<" ";
-        puts("");
-        cout<<"--------------"<<endl;
+        //for(int i=0;i<out_prime_temp.size();i++) cout<<out_prime_temp[i]<<endl;
+        //for(int i=0;i<term_num;i++) cout<<non_cover_minterm[i]<<" ";
+        //puts("");
+        //cout<<"--------------"<<endl;
         int yes=1;
         for(int i=0;i<term_num;i++){
             if(!non_cover_minterm[i]){
