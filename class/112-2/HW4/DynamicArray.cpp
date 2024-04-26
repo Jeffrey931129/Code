@@ -21,7 +21,8 @@ class Darray {
         int capacity;
         int size;
 };
-Darray::~Darray(){
+
+Darray::~Darray(){          // my function
     delete[] data;
 }
 int& Darray::operator[](int x){
@@ -47,6 +48,7 @@ void Darray::resize(void){
     delete[] data;
     data=temp;
 }
+
 class randGen {
     private:
         unsigned int z1, z2, z3, z4;

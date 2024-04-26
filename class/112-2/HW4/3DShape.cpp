@@ -11,11 +11,11 @@ namespace oj
 	public:
 		double getVolume();
 	
-	protected:
+	protected:      // 只有子class能拜訪
 		void setVolume(double volume);
 	};
 
-	class Sphere : public Shape3D
+	class Sphere : public Shape3D       // Shape3D的子class
 	{
 		double radius;
 		double pi;
@@ -62,7 +62,8 @@ namespace oj
         return volume;
     }
 }
-namespace oj
+
+namespace oj    // my function
 {
     Sphere::Sphere(double r, double pi){
         if(r<0||pi<0) r=0;
@@ -84,6 +85,17 @@ namespace oj
         setVolume(x*x*x);
     }
 }
+// 在 C++ 中，當派生類別的構造函數被呼叫時，它會自動調用其基類別的預設構造函數。
+// 但是如果基類別沒有預設構造函數，或者需要呼叫不同的基類別構造函數，就必須在派生
+// 類別的構造函數初始化列表中指定要調用的基類別構造函數。
+
+// 在這段程式碼中，Cube 類別繼承自 Cuboid 類別，而 Cuboid 類別並沒有預設的無參數
+// 構造函數，它的構造函數需要三個參數 x、y 和 z。因此，在 Cube 類別的構造函數中，
+// 需要使用初始化列表來呼叫 Cuboid 類別的構造函數並提供適當的參數。
+
+// 這就是為什麼在 Cube 類別的構造函數初始化列表中需要指定 Cuboid(x, x, x)，而其他
+// 類別則不需要。因為其他類別要麼有預設的無參數構造函數（例如 Sphere、Cone、Cuboid），
+// 要麼不需要呼叫不同的基類別構造函數（例如 Shape3D）。
 
 
 int main(void)
