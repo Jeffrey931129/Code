@@ -195,7 +195,7 @@ int main() {
 }
 
 Darray::~Darray(){
-    delete data;
+    delete[] data;
 }
 int& Darray::operator[](int i){
     return data[i];
@@ -224,6 +224,6 @@ void Darray::resize(void){
     for(int i=0;i<size;i++){
         temp[i]=data[i];
     }
-    delete data;
+    delete[] data;
     data=temp;
 }
