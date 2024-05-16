@@ -9,81 +9,85 @@ typedef struct _Node{
 }node;
 
 int connect(node* temp_a,node* temp_b);
-void print(node* arr,int num);
+void print(node* head,int num);
 
 int main(){
     int n,m;
     scanf("%d%d",&n,&m);
-    node** arr=malloc(sizeof(node*)*n);
+    node** head=malloc(sizeof(node*)*n);
+    node** tail=malloc(sizeof(node*)*n);
     for(int i=0;i<n;i++){
-        arr[i]=malloc(sizeof(node));
-        arr[i]->x=-1,arr[i]->next=NULL,arr[i]->prev=NULL;
+        head[i]=malloc(sizeof(node));
+        head[i]->x=-1,head[i]->next=NULL,head[i]->prev=NULL;
+        tail[i]=head[i];
     }
     for(int i=0;i<m;i++){
         int type; scanf("%d",&type);
         if(type==1){
             int stack,num; scanf("%d%d",&stack,&num);
-            if(arr[stack-1]->x==-1) arr[stack-1]->x=num;
-            else if(arr[stack-1]->next==NULL){
-                arr[stack-1]->next=malloc(sizeof(node));
-                arr[stack-1]->next->x=num;
-                arr[stack-1]->next->next=NULL;
-                arr[stack-1]->next->prev=arr[stack-1];
-            }
+            stack--;
+            if(head[stack]->x==-1) head[stack]->x=num;
             else{
-                node* temp=arr[stack-1]->next;
-                while(temp->next!=NULL) temp=temp->next;
-                temp->next=malloc(sizeof(node));
-                temp->next->x=num,temp->next->next=NULL;
-                temp->next->prev=temp;
+                tail[stack]->next=malloc(sizeof(node));
+                tail[stack]->next->x=num,tail[stack]->next->next=NULL;
+                tail[stack]->next->prev=tail[stack];
+                tail[stack]=tail[stack]->next;
             }
         }
         else if(type==2){
             int stack; scanf("%d",&stack);
-            if(arr[stack-1]->next==NULL) arr[stack-1]->x=-1;
+            stack--;
+            if(head[stack]->next==NULL) head[stack]->x=-1;
             else{
-                node* temp=arr[stack-1];
-                while(temp->next->next!=NULL) temp=temp->next;
-                free(temp->next);
-                temp->next=NULL;
+                tail[stack]=tail[stack]->prev;
+                free(tail[stack]->next);
+                tail[stack]->next=NULL;
             }
         }
         else if(type==3){
             int a,b; scanf("%d%d",&a,&b);
-            if(arr[a-1]->x==-1) continue;
-            if(arr[b-1]->x==-1){
-                arr[b-1]->x=arr[a-1]->x,arr[b-1]->next=arr[a-1]->next;
+            a--,b--;
+            if(head[a]->x==-1) continue;
+            if(head[b]->x==-1){
+                free(head[b]);
+                head[b]=head[a],tail[b]=tail[a];
             }
             else{
-                node* temp=arr[b-1]->next;
-                while(temp->next!=NULL) temp=temp->next;
-                temp->next=malloc(sizeof(node));
-                temp->next->x=arr[a-1]->x,temp->next->next=arr[a-1]->next;
-                temp->next->prev=temp; arr[a-1]->next->prev=temp->next;
+                tail[b]->next=head[a]; head[a]->prev=tail[b];
+                tail[b]=tail[a];
             }
-            arr[a-1]->x=-1,arr[a-1]->next=NULL;
+            head[a]=malloc(sizeof(node));
+            head[a]->x=-1,head[a]->next=NULL,head[a]->prev=NULL;
+            tail[a]=head[a];
         }
         else{
             int a,b; scanf("%d%d",&a,&b);
-            if(arr[a-1]->x==-1) continue;
-            if(arr[b-1]->x==-1){
-                arr[b-1]->x=arr[a-1]->x,arr[b-1]->next=arr[a-1]->next;
-                arr[a-1]->x=-1,arr[a-1]->next=NULL; continue;
+            a--,b--;
+            if(head[a]->x==-1) continue;
+            if(head[b]->x==-1){
+                free(head[b]);
+                head[b]=head[a],tail[b]=tail[a]; 
+                head[a]=malloc(sizeof(node));
+                head[a]->x=-1,head[a]->next=NULL,tail[a]->prev=NULL;
+                tail[a]=head[a];
+                continue;
             }
-            node *temp_a=arr[a-1],*temp_b=arr[b-1];
-            if(arr[a-1]->next!=NULL){
-                while(temp_a->next->next!=NULL) temp_a=temp_a->next;
-                while(temp_b->next!=NULL) temp_b=temp_b->next;
-                if(connect(temp_a,temp_b)){
-                    arr[b-1]=arr[a-1];
+            if(head[a]->next!=NULL){
+                if(connect(tail[a]->prev,tail[b])){
+                    head[b]=head[a];
                 }
             }
-            arr[a-1]=malloc(sizeof(node));
-            arr[a-1]->x=-1,arr[a-1]->next=NULL;
+            else{
+                tail[b]->next=head[a];
+                tail[b]=head[a];
+            }
+            head[a]=malloc(sizeof(node));
+            head[a]->x=-1,head[a]->next=NULL,head[a]->prev=NULL;
+            tail[b]=tail[a]; tail[a]=head[a];
         }
     }
     for(int i=0;i<n;i++){
-        print(arr[i],1);
+        print(head[i],1);
         puts("");
     }
 }
@@ -95,22 +99,23 @@ int connect(node* temp_a,node* temp_b){
         return connect(temp_a->prev,temp_b->prev);
         temp_b->prev=temp_a;
     }
+    else if(temp_b->prev==NULL){
+        temp_b->prev=temp_a;
+        return 1;
+    }
     else if(temp_a->prev==NULL){
         temp_b->prev->next=temp_a; 
         temp_a->prev=temp_b->prev; temp_b->prev=temp_a;
         return 0;
     }
-    else if(temp_b->prev==NULL){
-        temp_b->prev=temp_a;
-        return 1;
-    }
+    return 0;
 }
 
-void print(node* arr,int num){
-    if(arr->x==-1){
+void print(node* head,int num){
+    if(head->x==-1){
         printf("0 "); return;
     }
-    if(arr->next==NULL) printf("%d ",num);
-    else print(arr->next,num+1);
-    printf("%d ",arr->x);
+    if(head->next==NULL) printf("%d ",num);
+    else print(head->next,num+1);
+    printf("%d ",head->x);
 }
