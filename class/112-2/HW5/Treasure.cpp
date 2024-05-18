@@ -4,13 +4,6 @@
 #include <algorithm>
 using namespace std;
 
-// G[i] is the neighbor towns of town i
-vector<int> diamondTowns;
-vector<int> G[100005];
-queue<node> Q;
-int Dist[100005];
-bool bfs(int,int,int);
-
 struct node {
     int id;
     int dist;
@@ -19,6 +12,16 @@ struct node {
         this->dist = l;
     }
 };
+
+
+vector<int> diamondTowns;
+vector<int> G[100005]; // G[i] is the neighbor towns of town i
+queue<node> Q;
+int Dist[100005];
+bool rec[100005];
+void bfs(vector<int>);
+void put_distance(int i,int distance);
+void pick(int i);
 
 int main() {
     int N, M, K;
@@ -34,13 +37,10 @@ int main() {
         cin >> x;
         diamondTowns.push_back(x);
     }
-    fill(Dist, Dist+100005, -1);
+    fill(Dist, Dist+100005, 2147483647);
 
     // [TODO] complete the task!
-    for(int i=0;i<N;i++){
-        while(!Q.empty()) Q.pop();
-        bfs(i+1);
-    }
+    bfs(diamondTowns);
     // Output
     for (int i = 1; i <= N; i++) {
         cout << Dist[i] << '\n';
@@ -48,12 +48,33 @@ int main() {
     return 0;
 }
 
-bool bfs(int now,int distance,int start){
-    node temp(now,distance);
-    for(auto i:diamondTowns){
-        if(i==now) return true;
+void bfs(vector<int> diamon){
+    int size=diamon.size();
+    for(int i=0;i<size;i++){
+        Q.push(node(diamon[i],0));
+        put_distance(diamon[i],0);
+        pick(diamon[i]);
     }
-    for(auto i:G[now]){
-        if(bfs(i,distance+1,start)) return true;
+    while(!Q.empty()){
+        node now=Q.front();
+        for(auto i:G[now.id]){
+            if(!rec[i]){
+                int new_distance=now.dist+1;
+                put_distance(i,new_distance);
+                pick(i);
+                Q.push(node(i,new_distance));
+            }
+        }
+        Q.pop();
     }
+}
+
+void put_distance(int i,int distance){
+    if(distance<Dist[i]){
+        Dist[i]=distance;
+    }
+}
+
+void pick(int i){
+    rec[i]=true;
 }
