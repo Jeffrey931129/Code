@@ -5,6 +5,7 @@
 using namespace std;
 
 long long calc(vector<int> x);
+
 struct cmp{
     bool operator()(vector<int> x,vector<int> y)const{
         return calc(x)<calc(y);
