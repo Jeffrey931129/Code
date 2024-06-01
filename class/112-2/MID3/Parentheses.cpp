@@ -3,64 +3,62 @@
 using namespace std;
 
 int n,num;
+char r;
 string s;
 int check(),cal();
 
 int main(){
-    cin>>n;
+    cin>>n; getline(cin,s);
     for(int i=0;i<n;i++){
-        num=0;
-        cin>>s;
-        cout<<"Case "<<i+1<<" ";
-        if(s.empty()||check()){
+        num=0; 
+        getline(cin,s);
+        cout<<"Case "<<i+1<<": ";
+        if(s.empty()||cal()){
             cout<<"Yes"<<endl;
         }
         else cout<<"No"<<endl;
     }
 }
 
-int check(){
+int cal(){
     while(s[num]!=0){
-        if(s[num]==s[++num]){
-            num++; continue;
-        }
-        switch(s[num]){
-            case '{':
-                if(!cal()) return false;
-                break;
-            case '[':
-                if(!cal()) return false;
-                break;
-            case '(':
-                if(!cal()) return false;
-                break;
-            case '<':
-                if(!cal()) return false;
-                break;
-            default: return false;
-        }
+        if(!check()) return false;
+        num++;
     }
     return true;
 }
 
-int cal(){
+int check(){
     char c=s[num];
     while(s[num]!=0){
-        if(c==s[++num]){
-            num++; return true;
+        // cout<<c<<" ";
+        // cout<<s[num+1]<<endl;
+        switch(c){
+            case '{':
+                if(s[++num]=='}') return true;
+                break;
+            case '[':
+                if(s[++num]==']') return true;
+                break;
+            case '(':
+                if(s[++num]==')') return true;
+                break;
+            case '<':
+                if(s[++num]=='>') return true;
+                break;
         }
         switch(s[num]){
             case '{':
-                if(!cal()) return false;
+                if(!check()) return false;
                 break;
             case '[':
-                if(!cal()) return false;
+                if(!check()) return false;
                 break;
             case '(':
-                if(!cal()) return false;
+                if(!check()) return false;
                 break;
             case '<':
-                if(!cal()) return false;
+                if(!check()) return false;
                 break;
             default: return false;
         }
