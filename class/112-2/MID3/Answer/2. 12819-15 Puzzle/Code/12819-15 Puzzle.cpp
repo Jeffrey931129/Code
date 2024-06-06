@@ -62,7 +62,7 @@ class State {
                     }
                 }
             }
-        this->heuristic = h;
+            this->heuristic = h;
         }
         void update(int i, int newx, int newy) {
             prevMove = i;
