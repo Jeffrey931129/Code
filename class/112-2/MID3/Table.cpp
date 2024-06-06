@@ -63,31 +63,29 @@ int main(){
     for(int i=0;i<n;i++){
         cin>>arrival>>size>>time;
         guest.push_back(Guest(arrival,size,time,i));
-        s.insert(Clock(arrival,ARRIVE));
     }
     for(int i=0;i<m;i++){
         cin>>size>>time;
         table[size]=time;
     }
+    int gid=0;      // 別 erase guest
+    s.insert(Clock(guest[0].arrival,ARRIVE));
     while(!s.empty()){
         time=s.begin()->time;
         switch(s.begin()->type){
             case ARRIVE:
-                if(time==guest[0].arrival){
-                    waiting_arrival.insert(guest[0]),waiting_large.insert(guest[0]);
-                    guest.erase(guest.begin());
+                if(time==guest[gid].arrival){
+                    waiting_arrival.insert(guest[gid]),waiting_large.insert(guest[gid]);
                     s.insert(Clock(time,ASSIGN));
+                    if(gid<n-1) s.insert(Clock(guest[++gid].arrival,ARRIVE));
                     //cout<<time<<":push a guest"<<endl;
                 }
                 break;
             case RELEASE:
-                while(used_table.size()){
-                    if(time==used_table.begin()->dinning){
-                        table[used_table.begin()->size]++;
-                        used_table.erase(used_table.begin());
-                        //cout<<time<<":clean a table"<<endl;
-                    }
-                    else break;
+                while(used_table.size()&&time==used_table.begin()->dinning){
+                    table[used_table.begin()->size]++;
+                    used_table.erase(used_table.begin());
+                    //cout<<time<<":clean a table"<<endl;
                 }
                 s.insert(Clock(time,ASSIGN));
                 break;
