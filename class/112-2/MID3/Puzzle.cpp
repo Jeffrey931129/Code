@@ -17,7 +17,7 @@ struct State{
             for(int j=0;j<4;j++) v[i][j]=rec[i][j];
         }
     }
-    bool operator<(const State& x)const{        // liner ?
+    bool operator<(const State& x)const{        
         return sum>x.sum;
     }
 };
