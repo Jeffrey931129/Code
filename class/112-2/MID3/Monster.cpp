@@ -24,8 +24,7 @@ int main(){
     }
     value=-1;
     bfs(1,maxhp,m_hp,0);
-    if(value==-1) cout<<"-1\n";
-    else cout<<value<<endl;
+    cout<<value<<endl;
 }
 
 void bfs(int level,int hp,int monster_hp,int round){
