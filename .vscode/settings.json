@@ -109,5 +109,6 @@
         "xtr1common": "cpp",
         "xtree": "cpp",
         "xutility": "cpp"
-    }
+    },
+    "cmake.sourceDirectory": "C:/Code/class/112-2/ArenaLegends"
 }
