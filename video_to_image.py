@@ -1,7 +1,7 @@
 import os
 import cv2
 
-def cutVideos2Pictures(video_path='C:\\Users\\USER\\Downloads\\turtle\\turtle.mp4', saveDir='C:\\Users\\USER\\Downloads\\turtle'):
+def cutVideos2Pictures(video_path, saveDir):
     '''
     將視頻流數據切割成圖片數據並保存
     '''
@@ -13,8 +13,8 @@ def cutVideos2Pictures(video_path='C:\\Users\\USER\\Downloads\\turtle\\turtle.mp
     
     if vc.isOpened():
         rval, frame = vc.read()
-        print("fps : ")
-        print(vc.get(cv2.CAP_PROP_FPS))
+        fps = vc.get(cv2.CAP_PROP_FPS)
+        print(f"fps : {fps}")
     else:
         rval = False
         print(f"Error: Unable to open video file {video_path}")
@@ -30,4 +30,4 @@ def cutVideos2Pictures(video_path='C:\\Users\\USER\\Downloads\\turtle\\turtle.mp
     vc.release()
 
 if __name__ == '__main__':
-    cutVideos2Pictures(video_path='C:\\Users\\USER\\Downloads\\turtle\\turtle3.mp4', saveDir='C:\\Users\\USER\\Downloads\\turtle')
+    cutVideos2Pictures(video_path='C:/Users/USER/Downloads/test.webm', saveDir='C:/Users/USER/Downloads/image')
