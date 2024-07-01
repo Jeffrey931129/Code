@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 import os
 
-path = 'C:/Users/USER/Downloads/image'
+path = 'C:/Users/USER/Downloads/image2'
 img = cv2.imread(os.path.join(path,'001.jpg'))
 # 获取图片尺寸
 imgInfo = img.shape
