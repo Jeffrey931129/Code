@@ -108,7 +108,12 @@
         "xstring": "cpp",
         "xtr1common": "cpp",
         "xtree": "cpp",
-        "xutility": "cpp"
+        "xutility": "cpp",
+        "*.ipp": "cpp",
+        "strstream": "cpp",
+        "rope": "cpp",
+        "slist": "cpp"
     },
-    "cmake.sourceDirectory": "C:/Code/class/112-2/ArenaLegends"
+    "cmake.sourceDirectory": "C:/Code/class/112-2/ArenaLegends",
+    "C_Cpp.errorSquiggles": "disabled"
 }
