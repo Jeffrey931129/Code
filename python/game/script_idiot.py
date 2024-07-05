@@ -151,6 +151,7 @@ while round < 50 and time.time() - start_time <= 3600 :
     Press('esc')
     time.sleep(0.3)
     Click(1240, 690)
+    round += 1
     print(f"目前為第 {round} 輪次，獲得 {reward} 個聲骸")
     while True :
         time.sleep(1)
@@ -168,6 +169,5 @@ while round < 50 and time.time() - start_time <= 3600 :
     time.sleep(0.3)
     pyautogui.rightClick()
     time.sleep(1)
-    round += 1
 
 print(f"總共進行了 {round} 輪次，獲得 {reward} 個聲骸")
