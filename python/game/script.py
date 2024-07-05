@@ -1,5 +1,6 @@
 import pyautogui
 import time
+import os
 
 # 等待2秒，讓你有時間切換到你希望輸入的窗口
 time.sleep(2)
@@ -21,25 +22,29 @@ def Move(c, duration) :
     pyautogui.keyUp(c)  # 釋放鍵
 
 def Check_Drop() :
-    screenshot = pyautogui.screenshot()
-    drop = screenshot.getpixel((1250, 580))
-    if drop[0] == 255 and drop[1] == 255 and drop[2] == 255 :
-        Press('E')
-        print("獲得聲骸")
-        time.sleep(1)
-        return True
-    count = 0 
-    for i in range(1600) :
-        drop = screenshot.getpixel((i + 160, 440))
-        if 250 <= drop[0] and 230 <= drop[1] and 170 <= drop[2] <= 180 :
-            print(f"聲骸掉落 ({i + 160}, 440)")
-            count += 1
-        if count >= 10 :
-            return True
+    for i in range(9) :
+        screenshot = pyautogui.screenshot()
+        # drop = screenshot.getpixel((1250, 580))
+        # if drop[0] == 255 and drop[1] == 255 and drop[2] == 255 :
+        #     Press('E')
+        #     print("獲得聲骸")
+        #     time.sleep(1)
+        #     return True
+        count = 0 
+        for j in range(1600) :
+            drop = screenshot.getpixel((j + 160, 440))
+            if 80 <= drop[0] <= 90 and 45 <= drop[1] <= 65 and 50 <= drop[2] <= 70 :
+                print(f"聲骸掉落 ({j + 160}, 440)")
+                count += 1
+            if count >= 10 :
+                return True
+        time.sleep(0.1)
+        print("--------------------------------------------")
     print("沒有聲骸掉落")
     return False
 
 def Go_To_Drop() :
+    print("前往撿取聲骸")
     while True :
         screenshot = pyautogui.screenshot()
         drop = screenshot.getpixel((1250, 580))
@@ -60,13 +65,18 @@ def Go_To_Drop() :
 
 # while True :
 #     screenshot = pyautogui.screenshot()
-#     dragon_blood = screenshot.getpixel((1668, 942))
-#     print(f"顏色 ({dragon_blood})")
-#     time.sleep(0.1)
+#     file = open("C:/Code/python/game/color2.txt", "w")
+#     for i in range(1600) :
+#         drop = screenshot.getpixel((i + 160, 440)) 
+#         file.write(f"({i + 160}, 440) : {drop}\n")
+#     file.close()
+#     Check_Drop()
+#     print("Debug已完成")
+#     time.sleep(25)
 
 # 正式開始
 Press('E')
-time.sleep(1)
+time.sleep(1.3)
 Click(430, 310)
 Click(1460, 950)
 Click(1180, 690)
@@ -85,15 +95,21 @@ while True :
         break
 
 # 戰鬥
-Move('W', 3)
+Move('W', 2.5)
 Move('A', 0.1)
 Press('H')
 Press('H')
+jinshi_Q_state = 1
 while True :
     screenshot = pyautogui.screenshot()
     dragon_blood = screenshot.getpixel((967, 102))
     jinshi_Q = screenshot.getpixel((1492, 1007))
     jinshi_F = screenshot.getpixel((1668, 942))
+    if jinshi_Q_state == 1 :
+        Press('Q')
+        jinshi_Q_state = 2
+    elif jinshi_Q_state == 3 :
+        Press('Q')
     if time.time() - battle_time >= 4 :
         Click(960, 570)
     if dragon_blood[0] != 255 and dragon_blood[1] != 255 and dragon_blood[2] != 255 and \
@@ -107,8 +123,12 @@ while True :
             Press('F')
             time.sleep(3)
         Press('Q')
-        print("自動施放強化戰技")
-        dragon_blood_time = time.time() - 2
+        print("施放強化戰技")
+        if jinshi_Q_state == 2 :
+            jinshi_Q_state = 3
+        elif jinshi_Q_state == 3 :
+            jinshi_Q_state = 1
+            dragon_blood_time = time.time() - 2
     time.sleep(0.05)
 
 # 聲骸
@@ -120,7 +140,7 @@ while step :
     if Check_Drop() :
         Go_To_Drop()
         break
-    Move('D', 0.5)
+    Move('D', 0.1)
     step -= 1
 
 # # 離開
