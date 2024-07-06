@@ -6,6 +6,7 @@ time.sleep(2)
 X, Y = pyautogui.size()
 start_time = time.time()
 round = 0
+run_time = 0
 reward = 0
 
 def Click(x = 960, y = 570, duration = 0.3) :
@@ -75,10 +76,10 @@ def Pick_Drop() :
 
 # while True :
 #     screenshot = pyautogui.screenshot()
-#     test = screenshot.getpixel((190, 310))
+#     test = screenshot.getpixel((803, 1007))
 #     print(f"顏色 {test}")
 
-while round < 1 and time.time() - start_time <= 3600 :
+while round < 1 and run_time <= 3600 :
     # 正式開始
     Press('E')
     time.sleep(1.5)
@@ -101,11 +102,14 @@ while round < 1 and time.time() - start_time <= 3600 :
 
     # 戰鬥
     jinshi_Q_state = 1
+    stop = 0
     time.sleep(1)
-    Press('R', 0.1)
+    Press('R', 0.3)
+    Move('W', 1)
     Press('Q', 0.3)
     Press('space')
     Click()
+    time.sleep(2)
     Press('2')
     while True :
         screenshot = pyautogui.screenshot()
@@ -113,23 +117,27 @@ while round < 1 and time.time() - start_time <= 3600 :
         dragon_blood2 = screenshot.getpixel((190, 310))
         jinshi_Q = screenshot.getpixel((1492, 1007))
         jinshi_F = screenshot.getpixel((1668, 942))
+        wifi = screenshot.getpixel((1663, 150))
         
-        if time.time() - battle_time >= 5.5 :
-            if jinshi_Q_state == 1 :
-                Press('Q')
-                jinshi_Q_state = 2
-            elif jinshi_Q_state == 3 :
-                time.sleep(1)
-                Press('Q')
-                jinshi_Q_state = 4
-            else : Click()
-        # 有隱患 可能需要詳細計算今汐動畫時間
+        if jinshi_Q_state == 1 :
+            Press('Q')
+            jinshi_Q_state = 2
+        elif jinshi_Q_state == 3 :
+            time.sleep(1)
+            Press('Q')
+            jinshi_Q_state = 4
+        else : Click()
+        # 有隱患 可能需要詳細計算今汐動畫時間  綠色勾勾持續僅 0.5 秒  或許可以使用網路圖示
         if not dragon_blood1 == (255, 255, 255) and not dragon_blood2 == (255, 255, 255) \
             and time.time() - dragon_blood_time >= 6 :
-            print("角 已死亡")
-            time.sleep(2)
-            break
-        
+            print("Right Here")
+            if stop :
+                print("角 已死亡")
+                time.sleep(2)
+                break
+            else : stop = 1
+        else : stop = 0
+
         if jinshi_Q == (255, 255, 214) :
             Press('R')
             if 240 <= jinshi_F[0] <= 242 and 223 <= jinshi_F[1] <= 225 and 120 <= jinshi_F[2] <= 122 :
@@ -143,7 +151,7 @@ while round < 1 and time.time() - start_time <= 3600 :
                     jinshi_Q_state = 3
                 elif jinshi_Q_state == 4 :
                     jinshi_Q_state = 1
-                    dragon_blood_time = time.time() - 2
+                    time.sleep(3.5)         
         
         time.sleep(0.05)
 
@@ -156,17 +164,18 @@ while round < 1 and time.time() - start_time <= 3600 :
     time.sleep(0.3)
     Click(1240, 690)
     round += 1
-    print(f"目前為第 {round} 輪次，獲得 {reward} 個聲骸")
+    run_time = time.time() - start_time
+    print(f"目前為第 {round} 輪次，運行{run_time : .0f} 秒，獲得 {reward} 個聲骸")
     while True :
-        time.sleep(1)
+        time.sleep(0.1)
         screenshot = pyautogui.screenshot()
         lobby1 = screenshot.getpixel((1610, 110))
         lobby2 = screenshot.getpixel((180, 245))
         if lobby1 == (255, 255, 255) and lobby2 == (255, 255, 255) :
             print("返回主頁")
             break
-    time.sleep(0.5)
+    time.sleep(1.5)
     pyautogui.rightClick()
     time.sleep(1)
 
-print(f"總共進行了 {round} 輪次，獲得 {reward} 個聲骸")
+print(f"總共進行 {round} 輪次，運行{run_time : .0f} 秒，獲得 {reward} 個聲骸")
