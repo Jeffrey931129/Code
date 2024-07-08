@@ -2,8 +2,8 @@ import cv2
 import numpy as np
 import os
 
-path = 'C:/Users/USER/Downloads/image2'
-img = cv2.imread(os.path.join(path,'001.jpg'))
+path = 'C:/Users/USER/Downloads/jinshi_clip'
+img = cv2.imread(os.path.join(path,'0001.jpg'))
 # 获取图片尺寸
 imgInfo = img.shape
 size = (imgInfo[1],imgInfo[0])
@@ -12,7 +12,7 @@ filelist = os.listdir(path)
 filelist.sort()
 fps = 60  # 视频每秒组成的原始帧数
 fourcc = cv2.VideoWriter_fourcc(*'X264')				# 设置视频编码格式
-video = cv2.VideoWriter('C:/Users/USER/Downloads/video.mp4', fourcc, fps, size)
+video = cv2.VideoWriter('C:/Users/USER/Downloads/jinshi.mp4', fourcc, fps, size)
 print('loading...')
 # 视频保存在当前目录下
 for item in filelist:

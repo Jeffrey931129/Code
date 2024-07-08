@@ -1,5 +1,6 @@
 import cv2
 import os
+import time
 
 def video2imgs(videoPath, imgPath):
     if not os.path.exists(imgPath):
@@ -29,4 +30,4 @@ def video2imgs(videoPath, imgPath):
         frames += 1
     cap.release()
     print("共有 %d 张图片"%(count-1))
-video2imgs('C:/Users/USER/Downloads/test.webm','C:/Users/USER/Downloads/image/')
+video2imgs("C:/Users/USER/Videos/tt.mkv",'C:/Users/USER/Downloads/jinshi2/')
