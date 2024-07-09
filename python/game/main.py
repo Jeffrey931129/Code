@@ -1,5 +1,6 @@
 import pyautogui
 import time
+from function import *
 
 # 等待2秒，讓你有時間切換到你希望輸入的窗口
 time.sleep(2)
@@ -7,80 +8,6 @@ X, Y = pyautogui.size()
 start_time = time.time()
 round = 0
 run_time = 0
-reward = 0
-
-def Click(x = 960, y = 570, duration = 0.3) :
-    pyautogui.moveTo(x, y, duration)
-    pyautogui.click()
-    print(f"點擊 ({x}, {y})")
-
-def RightClick() :
-    pyautogui.rightClick()
-    print("點擊右鍵")
-
-def Press(c, delay = 0) :
-    pyautogui.press(c)
-    print(f"按下 {c}")
-    if delay :
-        time.sleep(delay)
-
-def Move(c, duration) :
-    pyautogui.keyDown(c)  # 按下鍵
-    print(f"按住 {c}")
-    time.sleep(duration)  # 等待指定時間
-    pyautogui.keyUp(c)  # 釋放鍵
-
-def Turn_Left() :
-    Move('A', 0.05)
-    Press('H')
-    Press('H')
-    time.sleep(1)
-
-def Turn_Right() :
-    Move('D', 0.05)
-    Press('H')
-    Press('H')
-    time.sleep(1)
-
-def Turn_Around() :
-    Turn_Right()
-    Turn_Right()
-
-def Check_Drop() :
-    global reward
-    screenshot = pyautogui.screenshot()
-    drop = screenshot.getpixel((1250, 580))
-    if drop[0] == 255 and drop[1] == 255 and drop[2] == 255 :
-        Press('E')
-        time.sleep(1)
-        screenshot = pyautogui.screenshot()
-        wrong1 = screenshot.getpixel((1315, 700))
-        wrong2 = screenshot.getpixel((1315, 750))
-        if wrong1 == (0, 0, 0) or wrong2 == (0, 0, 0):
-            Press('esc')
-            time.sleep(0.1)
-        else : 
-            print("----------------------------獲得聲骸----------------------------")
-            reward += 1
-            time.sleep(1)
-            return True
-    return False
-
-def Go_To_Drop(distance) :
-    for i in range(distance) :
-        Move('W', 0.5)
-        time.sleep(0.1)
-        if Check_Drop() :
-            return True
-    return False
-
-def Pick_Drop() :
-    if Check_Drop() : return
-    if Go_To_Drop(4) : return
-    Turn_Left()
-    if Go_To_Drop(4) : return
-    Turn_Around()
-    if Go_To_Drop(9) : return
 
 # Turn_Around()
 # print("complete")
