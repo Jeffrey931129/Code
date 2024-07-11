@@ -1,13 +1,13 @@
 import os
 
-path = 'C:/Users/USER/Downloads/jinshi2'
+path = 'C:/Users/USER/Downloads/jinshi'
 
 # 要改名的範圍：從 'start_index.jpg' 到 'end_index.jpg'
-start_index = 1366
-end_index = 1780
+start_index = 709
+end_index = 1123
 
 # 移動的張數
-move_count = -1365
+move_count = -708
 
 # 遍歷每個要改名的檔案，進行改名操作
 for i in range(start_index, end_index + 1):

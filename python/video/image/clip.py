@@ -2,7 +2,7 @@ from PIL import Image
 import os
 
 # 定義來源和目的資料夾
-source_folder = "C:/Users/USER/Downloads/jinshi2"
+source_folder = "C:/Users/USER/Downloads/jinshi"
 destination_folder = "C:/Users/USER/Downloads/jinshi_clip"
 
 # 確保目的資料夾存在，若不存在則創建
@@ -14,8 +14,8 @@ start_index = 1
 end_index = 415  # 根據你的圖片數量調整
 
 # 目標裁剪尺寸
-crop_width = 1920
-crop_height = 1040 - 160
+crop_width = 3840
+crop_height = 1960 - 200
 
 # 處理每張圖片
 for i in range(start_index, end_index + 1):
@@ -30,7 +30,7 @@ for i in range(start_index, end_index + 1):
         # 設定裁剪區域（left, upper, right, lower）
         left = 0
         right = left + crop_width
-        upper = 160
+        upper = 200
         lower = upper + crop_height
         crop_area = (left, upper, right, lower)
 
@@ -41,7 +41,8 @@ for i in range(start_index, end_index + 1):
         cropped_file_name = f"{file_name}"
         destination_path = os.path.join(destination_folder, cropped_file_name)
         cropped_image.save(destination_path)
-        print(f"{i}.jpg")
+        imgname = str(i).rjust(4,'0') + ".jpg"
+        print(f"{imgname}")
 
     except Exception as e:
         print(f"Error processing {file_name}: {e}")

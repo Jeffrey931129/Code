@@ -9,8 +9,11 @@ start_time = time.time()
 round = 0
 run_time = 0
 
-# Turn_Around()
-# print("complete")
+# while True :
+#     screenshot = pyautogui.screenshot()
+#     if Image_Detect('result.png', screenshot) :
+#         print("Success")
+#     else : print("Error")
 # time.sleep(50)
 
 # while True :
