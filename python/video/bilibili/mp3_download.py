@@ -14,6 +14,6 @@ ydl_opts = {
 }
 
 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    ydl.download(['https://www.youtube.com/watch?v=mLW35YMzELE'])
+    ydl.download(['https://www.bilibili.com/video/BV1Y64y1n7Tt/?spm_id_from=333.337.search-card.all.click&vd_source=6fa279cde64157932f7bb9ff3aaac83b'])  # 將此URL替換為Bilibili視頻的URL
 
 print("音訊下載完成！")
