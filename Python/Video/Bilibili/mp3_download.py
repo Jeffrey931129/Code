@@ -1,4 +1,5 @@
 import yt_dlp
+import os
 
 ydl_opts = {
     'format': 'bestaudio[ext=m4a]/bestaudio',  # 選擇最好的音訊格式
@@ -13,7 +14,20 @@ ydl_opts = {
     }],
 }
 
-with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-    ydl.download(['https://www.bilibili.com/video/BV1Y64y1n7Tt/?spm_id_from=333.337.search-card.all.click&vd_source=6fa279cde64157932f7bb9ff3aaac83b'])  # 將此URL替換為Bilibili視頻的URL
+url = input("Youtube 網站連結 : ")
+
+info = yt_dlp.YoutubeDL(ydl_opts).extract_info(url, download=False)
+title = info['title']
+target_file = f"C:/Users/USER/Downloads/{title}.mp3"
+
+# 檢查目標檔案是否存在
+if os.path.exists(target_file) :
+    choice = input(f"檔案 '{title}.mp3' 已存在，是否覆蓋？ (y/n): ")
+    if choice.lower() != 'y' :
+        print("取消下載")
+        exit()
+
+with yt_dlp.YoutubeDL(ydl_opts) as ydl :
+    ydl.download([url])
 
 print("音訊下載完成！")
