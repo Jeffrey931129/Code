@@ -3,8 +3,8 @@ import subprocess
 # 構建 PyInstaller 命令
 command = [
     'pyinstaller',
-    '--icon=C:/Code/project/music.ico',
-    'music.py',
+    '--icon=C:/Code/Project/music.ico',
+    'C:/Code/Project/music.py',
     '--onefile',
     '--windowed',
     '--add-binary',

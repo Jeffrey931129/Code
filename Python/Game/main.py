@@ -1,6 +1,7 @@
 import pyautogui
 import time
 from function import *
+import function
 
 # 等待2秒，讓你有時間切換到你希望輸入的窗口
 time.sleep(2)
@@ -100,7 +101,7 @@ while round < 50 and run_time <= 3600 :
     Click(1240, 690)
     round += 1
     run_time = time.time() - start_time
-    print(f"目前為第 {round} 輪次，運行{run_time : .0f} 秒，獲得 {reward} 個聲骸")
+    print(f"目前為第 {round} 輪次，運行{run_time : .0f} 秒，獲得 {function.reward} 個聲骸")
     time.sleep(5)
     while True :
         screenshot = pyautogui.screenshot()
@@ -114,4 +115,4 @@ while round < 50 and run_time <= 3600 :
     RightClick()
     time.sleep(1)
 
-print(f"總共進行 {round} 輪次，運行{run_time : .0f} 秒，獲得 {reward} 個聲骸")
+print(f"總共進行 {round} 輪次，運行{run_time : .0f} 秒，獲得 {function.reward} 個聲骸")
