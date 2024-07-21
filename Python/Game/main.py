@@ -22,12 +22,12 @@ run_time = 0
 #     test = screenshot.getpixel((1514, 955))
 #     print(f"顏色 {test}")
 
-while round < 50 and run_time <= 3600 :
+while round < 1 and run_time <= 3600 :
     # 正式開始
     Press('E')
     time.sleep(1.5)
     Click(430, 370)         # Lv.60
-    Click(1460, 950)        # 單人挑戰
+    Click(1220, 940)        # 單人挑戰
     Click(1180, 690)        # 體力不足
     time.sleep(0.5)
     Click(1540, 1000)       # 進入戰鬥
@@ -42,7 +42,8 @@ while round < 50 and run_time <= 3600 :
 
     # 戰鬥
     jinshi_Q_state = 3
-    time.sleep(5)
+    time.sleep(2)
+    Move('W', 3)
     Press('R', 0.3)
     Press('Q')
     time.sleep(0.5)
@@ -78,17 +79,14 @@ while round < 50 and run_time <= 3600 :
             break
 
         if jinshi_Q == (255, 255, 214) :
-            if 240 <= jinshi_F[0] <= 242 and 223 <= jinshi_F[1] <= 225 and 120 <= jinshi_F[2] <= 122 :
-                Press('F')
-                print("施放大招")
-            else :
-                Press('Q')
-                if jinshi_Q_state == 2 :
-                    jinshi_Q_state = 3
-                    print("施放 Q2")
-                elif jinshi_Q_state == 4 :
-                    jinshi_Q_state = 1 
-                    print("施放 Q4")
+            Press('Q')
+            if jinshi_Q_state == 2 :
+                jinshi_Q_state = 3
+                print("施放 Q2")
+            elif jinshi_Q_state == 4 :
+                jinshi_Q_state = 1 
+                print("施放 Q4")
+                break
 
     # 聲骸                                     
     Pick_Drop()
