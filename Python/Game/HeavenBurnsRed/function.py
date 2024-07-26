@@ -52,30 +52,25 @@ def Turn_Around() :
 
 def Image_detect(image_path, screenshot, rate = 0.8) :
     # 將 PIL 圖像轉換為 OpenCV 格式
-    screenshot_cv = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+    screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
 
     # 讀取待比對的圖片
-    template = cv2.imread(image_path)
-    if template is None :
-        print("ERROR")
+    template = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
     
-    # 將圖片和螢幕圖像轉為灰階
-    screenshot_gray = cv2.cvtColor(screenshot_cv, cv2.COLOR_BGR2GRAY)
-    template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-
-    # 使用模板匹配方法進行比對
-    result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
-
-    # 設定匹配閾值
-    threshold = rate
-    loc = np.where(result >= threshold)
-
-    # 檢查是否有相對的匹配
-    if len(loc[0]) > 0 :
-        return True
-    else:
-        return False
-
+    for x_start in range(0, screenshot.shape[1] - template.shape[1] + 1) :
+        for y_start in range(0, screenshot.shape[0] - template.shape[0] + 1) :
+            threshold, sum = 0, 0
+            for x in range(0, template.shape[1]) :
+                for y in range(0, template.shape[0]) :
+                    if template[y, x, 3] == 0 :
+                        continue
+                    if (template[y, x] == screenshot[y + y_start, x + x_start]).all() :
+                        threshold += 1
+                    sum += 1
+            if threshold / sum >= rate :
+                return True
+    return False
+    
 def Check_Drop() :
     global reward
     screenshot = pyautogui.screenshot()

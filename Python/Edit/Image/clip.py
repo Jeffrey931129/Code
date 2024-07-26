@@ -54,10 +54,10 @@ def Clip() :
         image = Image.open("C:/Users/USER/Downloads/image.png")
 
         # 設定裁剪區域（left, upper, right, lower）
-        left = 1676
-        upper = 144
-        right = 1718
-        lower = 182
+        left = 1570
+        upper = 180
+        right = 1772
+        lower = 226
         crop_area = (left, upper, right, lower)
 
         # 裁剪圖片
