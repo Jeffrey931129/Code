@@ -7,7 +7,6 @@ def video2imgs(videoPath, imgPath):
         os.makedirs(imgPath)             # 目標資料夾不存在，則創建
     cap = cv2.VideoCapture(videoPath)    # 獲取視頻
     judge = cap.isOpened()               # 判斷是否能打開成功
-    print(judge)
     fps = cap.get(cv2.CAP_PROP_FPS)      # 幀率，影片每秒展示多少張圖片
 
     frames = 1                           # 用於統計所有幀數
@@ -30,4 +29,5 @@ def video2imgs(videoPath, imgPath):
     cap.release()
     print('fps:',fps)
     print("共有 %d 張圖片"%(count-1))
-video2imgs("C:/Users/USER/Downloads/clip_video.mp4",'C:/Users/USER/Downloads/jinshi')
+
+video2imgs("C:/Users/USER/Downloads/video.mp4",'C:/Users/USER/Downloads/image')

@@ -2,12 +2,13 @@ import win32gui
 import win32ui
 import win32con
 import win32api
-import pygetwindow as gw
 from PIL import Image, ImageChops
 from ctypes import windll
 import numpy as np
 import cv2
+import os
 import time
+import pyautogui
 
 def Capture_window_to_image(window_title) :
     # 根據視窗標題找到視窗句柄
@@ -63,12 +64,14 @@ def Capture_window_to_image(window_title) :
 
     return im_cropped  # 返回擷取到的圖像
 
-def Image_detect(image_path, screenshot) :
+def Image_detect(image_path, screenshot, rate = 0.8) :
     # 將 PIL 圖像轉換為 OpenCV 格式
     screenshot_cv = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
 
     # 讀取待比對的圖片
     template = cv2.imread(image_path)
+    if template.shape[2] == 4:  # PNG 圖片通常有 4 個通道 (RGBA)
+        template = template[:, :, :3]  # 去除透明通道，只保留 RGB
 
     # 將圖片和螢幕圖像轉為灰階
     screenshot_gray = cv2.cvtColor(screenshot_cv, cv2.COLOR_BGR2GRAY)
@@ -78,7 +81,7 @@ def Image_detect(image_path, screenshot) :
     result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
 
     # 設定匹配閾值
-    threshold = 0.8
+    threshold = rate
     loc = np.where(result >= threshold)
 
     # 檢查是否有相對的匹配
@@ -86,32 +89,37 @@ def Image_detect(image_path, screenshot) :
         return True
     else:
         return False
+    
+def Click(x, y) :
+    x, y = int(x / 1.25), int(y / 1.25)    # 放大率
+    position = win32api.MAKELONG(x, y)
+    win32gui.PostMessage(hwnd, win32con.WM_LBUTTONDOWN, win32con.MK_LBUTTON, position)
+    time.sleep(0.2)
+    win32gui.PostMessage(hwnd, win32con.WM_LBUTTONUP, win32con.MK_LBUTTON, position)
 
 if __name__ == "__main__" :
     # 獲取視窗句柄
-    window_title = "HeavenBurnsRed"
+    window_title = "崩壞：星穹鐵道"
     hwnd = win32gui.FindWindow(None, window_title)  # 替換成你的視窗標題
     if hwnd == 0:
         print("找不到視窗！")
-        windows = gw.getWindowsWithTitle('')
-        with open("record.txt", 'w') as file :
-            for window in windows :
-                if window.title :
-                    file.write(window.title)
-                    file.write('\n')
     else:
         print("成功抓取視窗")
+        time.sleep(50)
 
         rec_time = time.time()
-        image = Capture_window_to_image(window_title)
-        if image is not None:
-            image = Image.fromarray(image)  # 將 numpy 陣列轉換為 PIL 圖像
-            # image.save("capture.png")  # 保存圖像
-            # 載入現有圖片
-
-            # 比較捕捉到的圖像和現有圖像
-            if Image_detect("capture.png", image) :
-                print("圖像相同")
-            else:
-                print("圖像不同")
-        print(f"{time.time() - rec_time:.2f}")
+        while True :
+            image = Capture_window_to_image(window_title)
+            if image is not None :
+                image = Image.fromarray(image)  # 將 numpy 陣列轉換為 PIL 圖像
+                image.save("capture.png")
+                # 比較捕捉到的圖像和現有圖像
+                if Image_detect("Resource/energy_40.png", image, 1) :
+                    Click(1205, 1068)
+                    print("體力足夠，繼續下一輪")
+                    time.sleep(5)
+                elif Image_detect("Resource/energy_not_40.png", image, 1) :
+                    Click(712, 1069)
+                    print("體力不足")
+                    break
+        print(f"用時 : {time.time() - rec_time:.2f} s")
