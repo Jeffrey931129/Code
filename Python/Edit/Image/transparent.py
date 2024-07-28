@@ -2,17 +2,17 @@ import cv2
 import numpy as np
 
 # 載入原始圖片
-image = cv2.imread("C:/Users/USER/Downloads/image_clip.png")
+image = cv2.imread("C:/Users/USER/Downloads/red.png")
 
 # 將圖片轉換為 RGBA 格式（添加透明通道）
-rgba_image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2BGRA)
 
 h = image.shape[0]     # 取得圖片高度
 w = image.shape[1]     # 取得圖片寬度
 
 # 範圍設定
-min_range = (50, 50, 50, 255)
-max_range = (254, 254, 254, 255)
+min_range = (0, 0, 0, 0)
+max_range = (100, 100, 100, 255)
 
 def is_pixel_in_range(pixel):
     # pixel 是一個 (R, G, B, A) 元組
@@ -30,11 +30,16 @@ def is_pixel_in_range(pixel):
     return is_in_range
 
 # 依序取出圖片中每個像素
-for y in range(h):
-    for x in range(w):
-        pixel = tuple(rgba_image[y, x])
-        if is_pixel_in_range(pixel) :
-            rgba_image[y, x, 3] = 0
+for y in range(image.shape[0]) :
+    for x in range(image.shape[1]) :
+        pixel = tuple(image[y, x])
+        print(pixel)
+        if image[y, x, 0] >= 200 and image[y, x, 1] >= 200 and image[y, x, 2] >= 200 :
+            image[y, x] = (255, 255, 255, 255)
+        elif image[y, x, 0] < 50 and image[y, x, 1] < 50 and image[y, x, 2] < 50 :
+            image[y, x] = (0, 0, 0, 255)
+        else :
+            image[y, x] = (0, 0, 255, 255)
 
-cv2.imwrite("C:/Users/USER/Downloads/goldhopper.png", rgba_image)    # 存檔儲存為 png
+cv2.imwrite("C:/Users/USER/Downloads/red_40.png", image)    # 存檔儲存為 png
 print("完成")

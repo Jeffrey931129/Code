@@ -4,14 +4,15 @@ import pyautogui
 import cv2
 import numpy as np
 
-stop = False
 state = 0
 reward = 0
 
-def Stop():
-    global stop
-    print("腳本將在下一輪結束...")
-    stop = True
+def Stop() :
+    print("強制結束！！！")
+    exit()
+
+def Delay(t) :
+    time.sleep(t)
 
 def Click(x = 960, y = 570, duration = 0.3) :
     pyautogui.moveTo(x, y, duration)
@@ -50,27 +51,17 @@ def Turn_Around() :
     Turn_Right()
     Turn_Right()
 
-def Image_detect(image_path, screenshot, rate = 0.8) :
-    # 將 PIL 圖像轉換為 OpenCV 格式
-    screenshot_cv = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-
+def Image_Detect(image_path, screenshot, rate = 0.8) :
     # 讀取待比對的圖片
-    template = cv2.imread(image_path)
-    if template is None :
-        print("ERROR")
-    
-    # 將圖片和螢幕圖像轉為灰階
-    screenshot_gray = cv2.cvtColor(screenshot_cv, cv2.COLOR_BGR2GRAY)
-    template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+    template = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
     # 使用模板匹配方法進行比對
+    screenshot_gray = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
+    template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
     result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
-
-    # 設定匹配閾值
-    threshold = rate
-    loc = np.where(result >= threshold)
-
+    
     # 檢查是否有相對的匹配
+    loc = np.where(result >= rate)
     if len(loc[0]) > 0 :
         return True
     else:

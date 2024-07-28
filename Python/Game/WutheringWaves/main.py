@@ -1,11 +1,12 @@
 import pyautogui
 import time
+import keyboard
+import threading
 from function import *
 import function
 
-# 等待2秒，讓你有時間切換到你希望輸入的窗口
 time.sleep(2)
-X, Y = pyautogui.size()
+keyboard.add_hotkey('ctrl+p', Stop)
 start_time = time.time()
 round = 0
 run_time = 0
@@ -22,7 +23,7 @@ run_time = 0
 #     test = screenshot.getpixel((1514, 955))
 #     print(f"顏色 {test}")
 
-while round < 1 and run_time <= 3600 :
+while round < 9999 and run_time <= 86400 :
     # 正式開始
     Press('E')
     time.sleep(1.5)
@@ -41,7 +42,7 @@ while round < 1 and run_time <= 3600 :
             break
 
     # 戰鬥
-    jinshi_Q_state = 3
+    function.state = 3
     time.sleep(2)
     Move('W', 3)
     Press('R', 0.3)
@@ -54,42 +55,21 @@ while round < 1 and run_time <= 3600 :
     Press('R')
     Press('Q', 0.1)
     while True :
-        screenshot = pyautogui.screenshot()
-        dragon_blood1 = screenshot.getpixel((967, 102))
-        dragon_blood2 = screenshot.getpixel((190, 310))
-        jinshi_Q = screenshot.getpixel((1492, 1007))
-        jinshi_F = screenshot.getpixel((1668, 942))
-        wifi = screenshot.getpixel((1663, 150))
-        
-        if jinshi_Q_state == 1 :
-            Press('Q')
-            print("施放 Q1")
-            jinshi_Q_state = 2
-        elif jinshi_Q_state == 3 :
-            time.sleep(1)
-            Press('Q')
-            print("施放 Q3")
-            jinshi_Q_state = 4
-        else : Click()
-        # 有隱患 可能需要詳細計算今汐動畫時間  綠色勾勾持續僅 0.5 秒  或許可以使用網路圖示
-        if not dragon_blood1 == (255, 255, 255) and not dragon_blood2 == (255, 255, 255) \
-            and wifi == (70, 244, 41) :
-            print("角 已死亡")
-            time.sleep(2)
+        threading_1 = threading.Thread(target=Jinshi_Q3)   
+        threading_2 = threading.Thread(target=Jinshi_Q4)
+        threading_1.start()
+        threading_2.start()
+        threading_1.join()
+        threading_2.join()
+        if function.state == 5 : 
+            time.sleep(4)
             break
-
-        if jinshi_Q == (255, 255, 214) :
-            Press('Q')
-            if jinshi_Q_state == 2 :
-                jinshi_Q_state = 3
-                print("施放 Q2")
-            elif jinshi_Q_state == 4 :
-                jinshi_Q_state = 1 
-                print("施放 Q4")
-                break
+    print("角已死亡")
 
     # 聲骸                                     
     Pick_Drop()
+    with open("record.txt", 'a') as file :
+        file.write('\n')
 
     # 離開
     time.sleep(1)
@@ -113,4 +93,5 @@ while round < 1 and run_time <= 3600 :
     RightClick()
     time.sleep(1)
 
-print(f"總共進行 {round} 輪次，運行{run_time : .0f} 秒，獲得 {function.reward} 個聲骸")
+print(f"總共進行 {round} 輪次，運行{run_time : .0f} 秒，\
+      獲得 {function.reward} 個聲骸，成功率為{function.reward / round : .1f} %")
