@@ -9,7 +9,7 @@ time.sleep(2)
 keyboard.add_hotkey('ctrl+p', Stop)
 start_time = time.time()
 
-# Go_To_End()
+Go_To_End()
 while True :
     Update()
     threads.append(threading.Thread(target=Skip))

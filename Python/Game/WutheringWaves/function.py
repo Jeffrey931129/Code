@@ -63,6 +63,7 @@ def Image_Detect(image_path, screenshot, rate = 0.8) :
     # 檢查是否有相對的匹配
     loc = np.where(result >= rate)
     if len(loc[0]) > 0 :
+        # print(list(zip(*loc[::-1])))
         return True
     else:
         return False
