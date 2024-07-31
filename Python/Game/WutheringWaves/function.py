@@ -8,6 +8,18 @@ stop = False
 dir_path = "Python/Game/WutheringWaves/"
 state = 0
 reward = 0
+attributes = ['attack', 'dark', 'electric', 'energy', 'fire', 'heal', 'ice', 'light', 'wind']
+tunes = {
+    'attack'    : ['all'], 
+    'dark'      : ['atk', 'critic_damage', 'critic_rate', 'dark'], 
+    'electric'  : ['atk', 'critic_damage', 'critic_rate', 'electric'], 
+    'energy'    : ['all'], 
+    'fire'      : ['atk', 'critic_damage', 'critic_rate', 'fire'], 
+    'heal'      : ['all'], 
+    'ice'       : ['atk', 'critic_damage', 'critic_rate', 'ice'], 
+    'light'     : ['atk', 'critic_damage', 'critic_rate', 'light'], 
+    'wind'      : ['atk', 'critic_damage', 'critic_rate', 'wind']
+}
 
 def Stop() :
     global stop
@@ -64,11 +76,14 @@ def Image_Detect(image_path, screenshot, rate = 0.8) :
     template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
     result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
     
+    # debug
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+    # print(f"max rate : {max_val}")
+
     # 檢查是否有相對的匹配
     loc = np.where(result >= rate)
     if len(loc[0]) > 0 :
-        print(f"Success for detecting : {image_path}.")
-        # print(list(zip(*loc[::-1])))
+        print(f"Success for detecting : \"{image_path}\" at {list(zip(*loc[::-1]))}.")
         return True
     else:
         return False

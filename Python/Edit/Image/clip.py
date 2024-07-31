@@ -1,5 +1,9 @@
 from PIL import Image
 import os
+import time
+import pyautogui
+import cv2
+import numpy as np
 
 def Batch_Clip() :
     # 定義來源和目的資料夾
@@ -51,13 +55,13 @@ def Batch_Clip() :
 def Clip() :
     try:
         # 讀取圖片
-        image = Image.open("C:/Users/USER/Downloads/image.png")
+        image = Image.open("tem.png")
 
         # 設定裁剪區域（left, upper, right, lower）
-        left = 320
-        upper = 890
-        right = 350
-        lower = 910
+        left = 1709
+        upper = 274
+        right = 1709+105
+        lower = 274+20
         print(f"({left}, {upper}, {right - left}, {lower - upper})")
         crop_area = (left, upper, right, lower)
 
@@ -65,10 +69,14 @@ def Clip() :
         cropped_image = image.crop(crop_area)
 
         # 儲存裁剪後的圖片
-        cropped_image.save("C:/Users/USER/Downloads/image_clip.png")
+        cropped_image.save("Python/Game/WutheringWaves/Resource/cost_4.png")
         print("完成")
 
     except Exception as e:
         print(f"Error processing : {e}")
 
+time.sleep(2)
+screenshot = pyautogui.screenshot()
+screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+cv2.imwrite("tem.png", screenshot)
 Clip()
