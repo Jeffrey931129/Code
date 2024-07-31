@@ -4,10 +4,14 @@ import pyautogui
 import cv2
 import numpy as np
 
+stop = False
+dir_path = "Python/Game/WutheringWaves/"
 state = 0
 reward = 0
 
 def Stop() :
+    global stop
+    stop = True
     print("強制結束！！！")
     exit()
 
@@ -53,7 +57,7 @@ def Turn_Around() :
 
 def Image_Detect(image_path, screenshot, rate = 0.8) :
     # 讀取待比對的圖片
-    template = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+    template = cv2.imread(dir_path + image_path, cv2.IMREAD_UNCHANGED)
 
     # 使用模板匹配方法進行比對
     screenshot_gray = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
@@ -63,6 +67,7 @@ def Image_Detect(image_path, screenshot, rate = 0.8) :
     # 檢查是否有相對的匹配
     loc = np.where(result >= rate)
     if len(loc[0]) > 0 :
+        print(f"Success for detecting : {image_path}.")
         # print(list(zip(*loc[::-1])))
         return True
     else:

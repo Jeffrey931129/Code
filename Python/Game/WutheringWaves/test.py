@@ -8,51 +8,82 @@ import function
 
 Delay(2)
 keyboard.add_hotkey('ctrl+p', Stop)
-dir_path = "Python/Game/WutheringWaves/"
 start_time = time.time()
 
-# pyautogui.scroll(-950)
+# pyautogui.scroll(-900)
+# Delay(0.3)
 # exit()
 
 while True :
-    id = 1
-    start_row = 0
+    id = 0
     round = 6
     Press('B')
     Delay(1)
     Click(80, 330)
     Click(640, 1100)
     Delay(0.3)
-    while id :
-        id = 0
-        for i in range(start_row, 5) :
-            for j in range(6) :
-                Click(280 + 166*j, 150 + 204*i)
-                Delay(0.5)
-                screenshot = pyautogui.screenshot(region=(1300, 236, 550, 292))
-                screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-                if Image_Detect(dir_path + "Resource/cost_1.png", screenshot, 0.9) :
-                    if Image_Detect(dir_path + "Resource/Attribute/heal.png", screenshot, 0.9) or\
-                    Image_Detect(dir_path + "Resource/Attribute/energy.png", screenshot, 0.9) :
-                        if Image_Detect(dir_path + "Resource/unlock.png", screenshot, 0.9) :
-                            Click(1806, 392)
-                            id += 1
-                    elif Image_Detect(dir_path + "Resource/Tune/atk.png", screenshot, 0.9) :
-                        if Image_Detect(dir_path + "Resource/unlock.png", screenshot, 0.9) :
-                            Click(1806, 392)
-                            id += 1
-                    else :
-                        if Image_Detect(dir_path + "Resource/lock.png", screenshot, 0.9) :
-                            Click(1806, 392)
+    pyautogui.moveTo(960, 570)
+    Delay(0.3)
+    pyautogui.scroll(-20)
+    Delay(0.3)
+    for i in range(4) :
+        for j in range(6) :
+            if function.stop : exit()
+            Click(280 + 166*j, 150 + 204*i)
+            Delay(0.5)
+            screenshot = pyautogui.screenshot(region=(1300, 236, 550, 292))
+            screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+            if Image_Detect("Resource/cost_1.png", screenshot, 0.9) :
+                if Image_Detect("Resource/Attribute/heal.png", screenshot, 0.9) or\
+                Image_Detect("Resource/Attribute/energy.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/unlock.png", screenshot, 0.9) :
+                        Click(1806, 392)
+                        id += 1
+                elif Image_Detect("Resource/Tune/atk.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/unlock.png", screenshot, 0.9) :
+                        Click(1806, 392)
+                        id += 1
                 else :
-                    exit()
-        if id :
-            Click(640, 1100)
+                    if Image_Detect("Resource/lock.png", screenshot, 0.9) :
+                        Click(1806, 392)
+            else :
+                exit()
+    while True :
+        if function.stop : exit()
+        pyautogui.moveTo(960, 570)
+        Delay(0.3)
+        pyautogui.scroll(-900)
+        Delay(0.3)
+        while True :
+            if function.stop : exit()
+            screenshot = pyautogui.screenshot(region=(310, 880, 50, 40))
+            screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+            if Image_Detect("Resource/level_0.png", screenshot, 0.9) :
+                break
+            pyautogui.scroll(-20)
             Delay(0.3)
-            Click(640, 1100)
-            Delay(0.3)
-            start_row = int((30 - id) / 6)
+        for j in range(6) :
+            Click(280 + 166*j, 150 + 204*4)
+            Delay(0.5)
+            screenshot = pyautogui.screenshot(region=(1300, 236, 550, 292))
+            screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+            if Image_Detect("Resource/cost_1.png", screenshot, 0.9) :
+                if Image_Detect("Resource/Attribute/heal.png", screenshot, 0.9) or\
+                Image_Detect("Resource/Attribute/energy.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/unlock.png", screenshot, 0.9) :
+                        Click(1806, 392)
+                        id += 1
+                elif Image_Detect("Resource/Tune/atk.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/unlock.png", screenshot, 0.9) :
+                        Click(1806, 392)
+                        id += 1
+                else :
+                    if Image_Detect("Resource/lock.png", screenshot, 0.9) :
+                        Click(1806, 392)
+            else :
+                exit()
 
+    exit()
     Press('esc', 0.5)
     Press('esc', 0.5)
     Click(1435, 500)
@@ -65,25 +96,25 @@ while True :
         Delay(1)
         screenshot = pyautogui.screenshot(region=(420, 380, 1060, 430))
         screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-        if Image_Detect(dir_path + "Resource/tip.png", screenshot, 0.90) :
+        if Image_Detect("Resource/tip.png", screenshot, 0.90) :
             Click(850, 660)
             Click(1290, 740)
-        while not Image_Detect(dir_path + "Resource/combine_success.png", screenshot, 0.9) :
+        while not Image_Detect("Resource/combine_success.png", screenshot, 0.9) :
             screenshot = pyautogui.screenshot(region=(900, 440, 120, 30))
             screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
         Delay(2)
         screenshot = pyautogui.screenshot(region=(1083, 679, 84, 22))
         screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-        if Image_Detect(dir_path + "Resource/combine_addtion.png", screenshot, 0.9) :
+        if Image_Detect("Resource/combine_addtion.png", screenshot, 0.9) :
             Click(900, 600)
             Delay(1)
             screenshot = pyautogui.screenshot(region=(700, 244, 550, 292))
             screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-            if Image_Detect(dir_path + "Resource/cost_1.png", screenshot, 0.9) :
-                    if Image_Detect(dir_path + "Resource/Attribute/heal.png", screenshot, 0.9) or\
-                    Image_Detect(dir_path + "Resource/Attribute/energy.png", screenshot, 0.9) :
+            if Image_Detect("Resource/cost_1.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/Attribute/heal.png", screenshot, 0.9) or\
+                    Image_Detect("Resource/Attribute/energy.png", screenshot, 0.9) :
                         Click(1200, 400)
-                    elif Image_Detect(dir_path + "Resource/Tune/atk.png", screenshot, 0.9) :
+                    elif Image_Detect("Resource/Tune/atk.png", screenshot, 0.9) :
                         Click(1200, 400)
             Click(1300, 600)
 
@@ -91,11 +122,11 @@ while True :
             Delay(1)
             screenshot = pyautogui.screenshot(region=(700, 244, 550, 292))
             screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-            if Image_Detect(dir_path + "Resource/cost_1.png", screenshot, 0.9) :
-                    if Image_Detect(dir_path + "Resource/Attribute/heal.png", screenshot, 0.9) or\
-                    Image_Detect(dir_path + "Resource/Attribute/energy.png", screenshot, 0.9) :
+            if Image_Detect("Resource/cost_1.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/Attribute/heal.png", screenshot, 0.9) or\
+                    Image_Detect("Resource/Attribute/energy.png", screenshot, 0.9) :
                         Click(1200, 400)
-                    elif Image_Detect(dir_path + "Resource/Tune/atk.png", screenshot, 0.9) :
+                    elif Image_Detect("Resource/Tune/atk.png", screenshot, 0.9) :
                         Click(1200, 400)
             Click(1300, 600)
 
@@ -105,11 +136,11 @@ while True :
             Delay(1)
             screenshot = pyautogui.screenshot(region=(700, 244, 550, 292))
             screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-            if Image_Detect(dir_path + "Resource/cost_1.png", screenshot, 0.9) :
-                    if Image_Detect(dir_path + "Resource/Attribute/heal.png", screenshot, 0.9) or\
-                    Image_Detect(dir_path + "Resource/Attribute/energy.png", screenshot, 0.9) :
+            if Image_Detect("Resource/cost_1.png", screenshot, 0.9) :
+                    if Image_Detect("Resource/Attribute/heal.png", screenshot, 0.9) or\
+                    Image_Detect("Resource/Attribute/energy.png", screenshot, 0.9) :
                         Click(1200, 400)
-                    elif Image_Detect(dir_path + "Resource/Tune/atk.png", screenshot, 0.9) :
+                    elif Image_Detect("Resource/Tune/atk.png", screenshot, 0.9) :
                         Click(1200, 400)
             Click(1300, 600)
 
