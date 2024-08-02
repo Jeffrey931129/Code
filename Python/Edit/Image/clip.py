@@ -55,21 +55,22 @@ def Batch_Clip() :
 def Clip() :
     try:
         # 讀取圖片
-        image = Image.open("tem.png")
+        image = Image.open("C:/Users/USER/Downloads/image.png")
 
         # 設定裁剪區域（left, upper, right, lower）
-        left = 1442
-        upper = 380
-        right = left+21
-        lower = upper+16
+        left = 1790
+        upper = 313
+        right = 1827
+        lower = 337
         print(f"({left}, {upper}, {right - left}, {lower - upper})")
         crop_area = (left, upper, right, lower)
 
         # 裁剪圖片
         cropped_image = image.crop(crop_area)
+        cropped_image = cropped_image.convert("RGB")
 
         # 儲存裁剪後的圖片
-        cropped_image.save("Python/Game/WutheringWaves/Resource/temp.png")
+        cropped_image.save("Python/Game/WutheringWaves/Resource/Attribute/level_0.jpg")
         print("完成")
 
     except Exception as e:
@@ -77,6 +78,6 @@ def Clip() :
 
 time.sleep(2)
 screenshot = pyautogui.screenshot()
-screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-cv2.imwrite("tem.png", screenshot)
+screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+cv2.imwrite("tem.jpg", screenshot)
 Clip()

@@ -25,7 +25,6 @@ def Stop() :
     global stop
     stop = True
     print("強制結束！！！")
-    exit()
 
 def Delay(t) :
     time.sleep(t)
@@ -38,6 +37,9 @@ def Click(x = 960, y = 570, duration = 0.3) :
 def RightClick() :
     pyautogui.rightClick()
     print("點擊右鍵")
+
+def Scroll(value) :
+    pyautogui.scroll(value)
 
 def Press(c, delay = 0) :
     pyautogui.press(c)
@@ -81,15 +83,8 @@ def Image_Detect(image_path, screenshot, rate = 0.8) :
     
     # debug
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    print(f"max rate : {max_val}")
-
-    # 檢查是否有相對的匹配
-    loc = np.where(result >= rate)
-    if len(loc[0]) > 0 :
-        print(f"Success for detecting : \"{image_path}\" at {list(zip(*loc[::-1]))}.")
-        return True
-    else:
-        return False
+    print(f"Detecting \"{image_path}\" at {max_loc}. (rate : {max_val})")
+    return max_val
 
 def Check_Drop() :
     global reward
@@ -148,3 +143,91 @@ def Jinshi_Q4() :
         Press('Q')
         print("施放 Q4")
         state = 5
+
+def Scroll_Echo_Page() :
+    pyautogui.moveTo(1110, 966)
+    Delay(0.3)
+    Scroll(-900)
+    Delay(0.3)
+    while True :
+        screenshot = pyautogui.screenshot(region=(310, 880, 50, 40))
+        screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+        if Image_Detect("Resource/addtion.jpg", screenshot) >= 0.9 :
+            break
+        Scroll(-20)
+        Delay(0.3)
+
+def Lock_Method() :
+    """
+    截圖聲骸資訊並選擇是否上鎖
+    """
+    global stop
+    screenshot = pyautogui.screenshot(region=(1300, 236, 550, 292))
+    screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+    if not Image_Detect("Resource/level_0.jpg", screenshot) >= 0.9 :
+        stop = True
+        return
+    if Image_Detect("Resource/cost_1.jpg", screenshot) >= 0.9 :
+        if Image_Detect("Resource/Attribute/heal.jpg", screenshot) >= 0.9 or\
+            Image_Detect("Resource/Attribute/energy.jpg", screenshot) >= 0.9 :
+            if Image_Detect("Resource/unlock.jpg", screenshot) >= 0.9 :
+                Click(1806, 392)
+        elif Image_Detect("Resource/Tune/atk.jpg", screenshot) >= 0.9 :
+            if Image_Detect("Resource/unlock.jpg", screenshot) >= 0.9 :
+                Click(1806, 392)
+        else :
+            if Image_Detect("Resource/lock.jpg", screenshot) >= 0.9 :
+                Click(1806, 392)
+    elif Image_Detect("Resource/cost_3.jpg", screenshot) >= 0.95 :
+        if Image_Detect("Resource/Tune/atk.jpg", screenshot) >= 0.9 :
+            if Image_Detect("Resource/unlock.jpg", screenshot) >= 0.9 :
+                Click(1806, 392)
+        elif Image_Detect("Resource/Attribute/heal.jpg", screenshot) >= 0.9 or\
+            Image_Detect("Resource/Attribute/energy.jpg", screenshot) >= 0.9 :
+            if Image_Detect("Resource/unlock.jpg", screenshot) >= 0.9 :
+                Click(1806, 392)
+        elif Image_Detect("Resource/Attribute/attack.jpg", screenshot) >= 0.9 and\
+            not Image_Detect("Resource/Tune/hp.jpg", screenshot) >= 0.9 and\
+            not Image_Detect("Resource/Tune/def.jpg", screenshot) >= 0.9 :
+            if Image_Detect("Resource/unlock.jpg", screenshot) >= 0.9 :
+                Click(1806, 392)
+        else :
+            for attribute in attributes :
+                if Image_Detect(f"Resource/Attribute/{attribute}.jpg", screenshot) >= 0.9 :
+                    if Image_Detect(f"Resource/Tune/{attribute}.jpg", screenshot) >= 0.9 :
+                        if Image_Detect("Resource/unlock.jpg", screenshot) >= 0.9 :
+                            Click(1806, 392)
+                    break
+    else :
+        stop = True
+
+def Combine_Method() :
+    """
+    截圖聲骸資訊並選擇是否上鎖
+    """
+    screenshot = pyautogui.screenshot(region=(700, 244, 550, 292))
+    screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
+    if Image_Detect("Resource/cost_1.jpg", screenshot) >= 0.9 :
+        if Image_Detect("Resource/Attribute/heal.jpg", screenshot) >= 0.9 or\
+            Image_Detect("Resource/Attribute/energy.jpg", screenshot) >= 0.9 :
+            Click(1200, 400)
+        elif Image_Detect("Resource/Tune/atk.jpg", screenshot) >= 0.9 :
+            Click(1200, 400)
+    elif Image_Detect("Resource/cost_3.jpg", screenshot) >= 0.95 :
+        if Image_Detect("Resource/Tune/atk.jpg", screenshot) >= 0.9 :
+            Click(1200, 400)
+        elif Image_Detect("Resource/Attribute/heal.jpg", screenshot) >= 0.9 or\
+            Image_Detect("Resource/Attribute/energy.jpg", screenshot) >= 0.9 :
+            Click(1200, 400)
+        elif Image_Detect("Resource/Attribute/attack.jpg", screenshot) >= 0.9 and\
+            not Image_Detect("Resource/Tune/hp.jpg", screenshot) >= 0.9 and\
+            not Image_Detect("Resource/Tune/def.jpg", screenshot) >= 0.9 :
+            Click(1200, 400)
+        else :
+            attribute_selected, max_rate = 'None', 0
+            for attribute in attributes :
+                rate = Image_Detect(f"Resource/Attribute/{attribute}.jpg", screenshot)
+                if rate > max_rate :
+                    attribute_selected, max_rate = attribute, rate
+            if Image_Detect(f"Resource/Tune/{attribute_selected}.jpg", screenshot) >= 0.9 :
+                Click(1200, 400)
