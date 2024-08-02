@@ -10,8 +10,9 @@ state = 'None'
 threading_lock = threading.Lock()
 
 def Stop() :
+    global stop
     print("強制結束！！！")
-    exit()
+    stop = True
 
 def Click(x = 960, y = 570, duration = 0.3) :
     pyautogui.moveTo(x, y, duration)

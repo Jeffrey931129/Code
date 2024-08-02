@@ -72,13 +72,16 @@ def Image_Detect(image_path, screenshot, rate = 0.8) :
     template = cv2.imread(dir_path + image_path, cv2.IMREAD_UNCHANGED)
 
     # 使用模板匹配方法進行比對
-    screenshot_gray = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
-    template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-    result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
+    screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
+    template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+    # cv2.imwrite("template.jpg", template)
+    # cv2.imwrite("screenshot.jpg", screenshot)
+
+    result = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
     
     # debug
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-    # print(f"max rate : {max_val}")
+    print(f"max rate : {max_val}")
 
     # 檢查是否有相對的匹配
     loc = np.where(result >= rate)

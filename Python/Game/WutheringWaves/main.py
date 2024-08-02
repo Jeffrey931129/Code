@@ -23,7 +23,7 @@ run_time = 0
 #     test = screenshot.getpixel((1514, 955))
 #     print(f"顏色 {test}")
 
-while round < 9999 and run_time <= 86400 :
+while round < 9999 and run_time <= 86400 and not function.stop :
     # 正式開始
     Press('E')
     time.sleep(1.5)

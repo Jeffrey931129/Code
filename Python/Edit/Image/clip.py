@@ -58,10 +58,10 @@ def Clip() :
         image = Image.open("tem.png")
 
         # 設定裁剪區域（left, upper, right, lower）
-        left = 1709
-        upper = 274
-        right = 1709+105
-        lower = 274+20
+        left = 1442
+        upper = 380
+        right = left+21
+        lower = upper+16
         print(f"({left}, {upper}, {right - left}, {lower - upper})")
         crop_area = (left, upper, right, lower)
 
@@ -69,7 +69,7 @@ def Clip() :
         cropped_image = image.crop(crop_area)
 
         # 儲存裁剪後的圖片
-        cropped_image.save("Python/Game/WutheringWaves/Resource/cost_4.png")
+        cropped_image.save("Python/Game/WutheringWaves/Resource/temp.png")
         print("完成")
 
     except Exception as e:
