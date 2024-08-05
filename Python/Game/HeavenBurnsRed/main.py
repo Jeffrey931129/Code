@@ -5,12 +5,12 @@ import threading
 from function import *
 import function
 
-time.sleep(2)
+time.sleep(1)
 keyboard.add_hotkey('ctrl+p', Stop)
 start_time = time.time()
 
 Go_To_End()
-while True :
+while not function.stop :
     Update()
     threads.append(threading.Thread(target=Skip))
     if function.state == 'Battle' :

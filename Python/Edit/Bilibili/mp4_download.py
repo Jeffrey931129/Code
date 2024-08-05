@@ -14,7 +14,7 @@ ydl_opts = {
     }],
 }
 
-url = input("Youtube 網站連結 : ")
+url = input("Bilibili 網站連結 : ")
 
 info = yt_dlp.YoutubeDL(ydl_opts).extract_info(url, download=False)
 title = info['title']

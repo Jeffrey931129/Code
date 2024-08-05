@@ -5,13 +5,15 @@ import cv2
 import numpy as np
 import threading
 
+stop = False
 state = 'None'
 threads = []
 threading_lock = threading.Lock()
 
 def Stop() :
+    global stop
     print("強制結束！！！")
-    exit()
+    stop = True
 
 def Click(x = 960, y = 570, duration = 0.3) :
     pyautogui.moveTo(x, y, duration)

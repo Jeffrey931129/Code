@@ -14,6 +14,9 @@ def Stop() :
     print("強制結束！！！")
     stop = True
 
+def Delay(t) :
+    time.sleep(t)
+
 def Click(x = 960, y = 570, duration = 0.3) :
     pyautogui.moveTo(x, y, duration)
     pyautogui.click()
