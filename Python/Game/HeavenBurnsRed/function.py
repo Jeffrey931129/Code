@@ -107,23 +107,11 @@ def Start_Action() :
 def Battle() :
     print("Battle Start")
     time.sleep(1)
-    if Auto_On() :
-        Click(400, 60)
-    time.sleep(2.5)
-    if GoldHopper() :
-        Click(1780, 90)
-        while state == 'Battle' :
-            threading_1 = threading.Thread(target=Check_Battle_End)
-            threading_2 = threading.Thread(target=Start_Action)
-            threading_1.start()
-            threading_2.start()
-            threading_1.join()
-            threading_2.join()
-    else :
+    if Auto_Off() :
         Click(400, 60)
         Click(570, 60)
-        while state == 'Battle' :
-            Check_Battle_End()
+    while state == 'Battle' :
+        Check_Battle_End()
     print("Battle End")
 
 def Go_To_End() :

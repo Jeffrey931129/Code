@@ -7,8 +7,8 @@ window.attributes('-transparentcolor', 'white')
 window.config(bg='white')#颜色
 window.title("字屏")#设置标题
  
-window.geometry("300x50")
-#window.overrideredirect(True)  # 去除窗口边框
+window.geometry(f"300x50+{int(960/1.25)-150}+10")
+# window.overrideredirect(True)  # 去除窗口边框
 window.attributes('-alpha', 0.5)  # 设置窗口透明度为50%
 window.attributes('-topmost', True)  # 将窗口置顶
  

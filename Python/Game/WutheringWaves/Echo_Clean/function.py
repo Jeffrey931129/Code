@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 
 stop = False
-dir_path = "Python/Game/WutheringWaves/"
+dir_path = "Python/Game/WutheringWaves/Echo_Clean/"
 state = 0
 reward = 0
 attributes = ['attack', 'dark', 'electric', 'energy', 'fire', 'heal', 'ice', 'light', 'wind']

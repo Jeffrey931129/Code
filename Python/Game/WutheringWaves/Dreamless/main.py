@@ -10,7 +10,10 @@ keyboard.add_hotkey('ctrl+p', Stop)
 start_time = time.time()
 round = 0
 run_time = 0
-
+Window_Check()
+function.window.mainloop()
+print("gg")
+exit()
 # while True :
 #     screenshot = pyautogui.screenshot()
 #     if Image_Detect('result.png', screenshot) :

@@ -15,7 +15,7 @@ start_time = time.time()
 #     Go_To_End()
 # exit()
 
-# Go_To_End()
+Click(1654, 352)
 while not function.stop :
     Update()
     threads.append(threading.Thread(target=Skip))
