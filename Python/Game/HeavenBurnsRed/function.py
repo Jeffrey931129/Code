@@ -6,6 +6,7 @@ import numpy as np
 import threading
 
 stop = False
+dir_path = "Python/Game/HeavenBurnsRed/"
 state = 'None'
 threads = []
 threading_lock = threading.Lock()
@@ -30,21 +31,19 @@ def Press(c, delay = 0) :
     if delay :
         time.sleep(delay)
 
-def Image_Detect(image_path, screenshot, rate = 0.8) :
-    # 讀取待比對的圖片
-    template = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
+def Image_Detect(image_path, screenshot) :
+    template = cv2.imread(dir_path + image_path, cv2.IMREAD_UNCHANGED)
 
-    # 使用模板匹配方法進行比對
-    screenshot_gray = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
-    template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-    result = cv2.matchTemplate(screenshot_gray, template_gray, cv2.TM_CCOEFF_NORMED)
+    screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
+    template = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
+    # cv2.imwrite("template.jpg", template)
+    # cv2.imwrite("screenshot.jpg", screenshot)
+
+    result = cv2.matchTemplate(screenshot, template, cv2.TM_CCOEFF_NORMED)
     
-    # 檢查是否有相對的匹配
-    loc = np.where(result >= rate)
-    if len(loc[0]) > 0 :
-        return True
-    else:
-        return False
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+    # print(f"Detecting \"{image_path}\" at {max_loc}. (rate : {max_val})")
+    return max_val
 
 def Auto_On() :
     screenshot = pyautogui.screenshot(region=(310, 52, 130, 20))
@@ -53,7 +52,7 @@ def Auto_On() :
         for x in range(screenshot.shape[1]) :
             if not np.all(screenshot[y, x] == np.array([255, 255, 255, 255])) :
                 screenshot[y, x] = (0, 0, 0, 255)
-    return Image_Detect("Python/Game/HeavenBurnsRed/Resource/auto_on.png", screenshot, 0.9)
+    return Image_Detect("Resource/auto_on.jpg", screenshot) >= 0.9
 
 def Auto_Off() :
     screenshot = pyautogui.screenshot(region=(310, 52, 130, 20))
@@ -62,7 +61,7 @@ def Auto_Off() :
         for x in range(screenshot.shape[1]) :
             if not np.all(screenshot[y, x] == np.array([255, 255, 255, 255])) :
                 screenshot[y, x] = (0, 0, 0, 255)
-    return Image_Detect("Python/Game/HeavenBurnsRed/Resource/auto_off.png", screenshot, 0.9)
+    return Image_Detect("Resource/auto_off.jpg", screenshot) >= 0.9
 
 def Skip() :
     screenshot = pyautogui.screenshot(region=(1670, 136, 56, 52))
@@ -72,7 +71,7 @@ def Skip() :
         for x in range(screenshot.shape[1]) :
             if not np.all(screenshot[y, x] == np.array([255, 255, 255, 255])) :
                 screenshot[y, x] = (0, 0, 0, 255)
-    if Image_Detect("Python/Game/HeavenBurnsRed/Resource/skip.png", screenshot, 0.9) :
+    if Image_Detect("Resource/skip.jpg", screenshot) >= 0.9 :
         Click(1700, 165)
         pyautogui.moveTo(1700, 500, 0.3)
         time.sleep(3)
@@ -90,19 +89,19 @@ def GoldHopper() :
         for x in range(screenshot.shape[1]) :
             if not np.all(screenshot[y, x] == np.array([255, 255, 255, 255])) :
                 screenshot[y, x] = (0, 0, 0, 255)
-    return Image_Detect("Python/Game/HeavenBurnsRed/Resource/goldhopper.png", screenshot, 0.9)
+    return Image_Detect("Resource/goldhopper.jpg", screenshot) >= 0.9
 
 def Check_Battle_End() :
     global state
     screenshot = pyautogui.screenshot(region=(1260, 110, 125, 35))
     screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-    if Image_Detect("Python/Game/HeavenBurnsRed/Resource/point.png", screenshot, 1) :
+    if Image_Detect("Resource/point.jpg", screenshot) >= 0.95 :
         state = 'None'
 
 def Start_Action() :
     screenshot = pyautogui.screenshot(region=(1670, 980, 180, 60))
     screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-    if Image_Detect("Python/Game/HeavenBurnsRed/Resource/start_action.png", screenshot, 0.9) :
+    if Image_Detect("Resource/start_action.jpg", screenshot) >= 0.9 :
         Click(1800, 1000)
 
 def Battle() :
@@ -129,23 +128,21 @@ def Battle() :
 
 def Go_To_End() :
     Click(1600, 150)
-    Click(200, 400)
-    Click(1050, 425)
+    Click(1563, 674)
     Click(1200, 900)
 
 def Go_To_Start() :
     Click(1600, 150)
-    Click(200, 280)
-    Click(750, 720)
+    Click(753, 562)
     Click(1200, 900)
 
 def Move() :
     screenshot = pyautogui.screenshot(region=(1438, 46, 1862-1438, 232-46))
     # 將 PIL 圖像轉換為 OpenCV 格式
     screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
-    if Image_Detect("Python/Game/HeavenBurnsRed/Resource/start.png", screenshot, 0.9) :
+    if Image_Detect("Resource/start.jpg", screenshot) >= 0.9 :
         Go_To_End()
         time.sleep(3)
-    elif Image_Detect("Python/Game/HeavenBurnsRed/Resource/end.png", screenshot, 0.9) :
+    elif Image_Detect("Resource/end.jpg", screenshot) >= 0.9 :
         Go_To_Start()
         time.sleep(3)

@@ -2,7 +2,7 @@ from PIL import Image
 import os
 
 # 設定要處理的文件夾路徑
-folder_path = 'Python/Game/WutheringWaves/Resource/Attribute'
+folder_path = 'Python/Game/HeavenBurnsRed/Resource'
 
 # 遍歷文件夾中的所有檔案
 for filename in os.listdir(folder_path):

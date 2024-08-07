@@ -69,7 +69,7 @@ def Turn_Around() :
     Turn_Right()
     Turn_Right()
 
-def Image_Detect(image_path, screenshot, rate = 0.8) :
+def Image_Detect(image_path, screenshot) :
     template = cv2.imread(dir_path + image_path, cv2.IMREAD_UNCHANGED)
 
     screenshot = cv2.cvtColor(screenshot, cv2.COLOR_BGR2GRAY)
@@ -82,6 +82,15 @@ def Image_Detect(image_path, screenshot, rate = 0.8) :
     min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
     # print(f"Detecting \"{image_path}\" at {max_loc}. (rate : {max_val})")
     return max_val
+
+def Check_Wifi() :
+    """ 直到綠色 wifi 條出現才會繼續執行主程序 """
+    screenshot = pyautogui.screenshot(region=(1801, 85, 4, 16))
+    screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+    while Image_Detect("Resource/wifi.jpg", screenshot) <= 0.9 :
+        time.sleep(0.1)
+        screenshot = pyautogui.screenshot(region=(1801, 85, 4, 16))
+        screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
 
 def Check_Drop() :
     global reward
@@ -155,9 +164,7 @@ def Scroll_Echo_Page() :
         Delay(0.3)
 
 def Lock_Method() :
-    """
-    截圖聲骸資訊並選擇是否上鎖
-    """
+    """ 截圖聲骸資訊並選擇是否上鎖 """
     global stop
     screenshot = pyautogui.screenshot(region=(1300, 236, 550, 292))
     screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
@@ -179,9 +186,7 @@ def Lock_Method() :
             return
 
 def Combine_Method() :
-    """
-    截圖聲骸資訊並選擇是否上鎖
-    """
+    """ 截圖聲骸資訊並選擇是否上鎖 """
     screenshot = pyautogui.screenshot(region=(700, 244, 550, 292))
     screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGRA)
     attribute_selected, max_rate = 'None', 0

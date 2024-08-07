@@ -58,10 +58,10 @@ def Clip() :
         image = Image.open("C:/Users/USER/Downloads/image.png")
 
         # 設定裁剪區域（left, upper, right, lower）
-        left = 1790
-        upper = 313
-        right = 1827
-        lower = 337
+        left = 1438
+        upper = 46
+        right = left+424
+        lower = upper+186
         print(f"({left}, {upper}, {right - left}, {lower - upper})")
         crop_area = (left, upper, right, lower)
 
@@ -70,14 +70,14 @@ def Clip() :
         cropped_image = cropped_image.convert("RGB")
 
         # 儲存裁剪後的圖片
-        cropped_image.save("Python/Game/WutheringWaves/Resource/Attribute/level_0.jpg")
+        cropped_image.save("C:/Users/USER/Downloads/image_clip.jpg")
         print("完成")
 
     except Exception as e:
         print(f"Error processing : {e}")
 
-time.sleep(2)
-screenshot = pyautogui.screenshot()
-screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
-cv2.imwrite("tem.jpg", screenshot)
+# time.sleep(1)
+# screenshot = pyautogui.screenshot()
+# screenshot = cv2.cvtColor(np.array(screenshot), cv2.COLOR_RGB2BGR)
+# cv2.imwrite("tem.jpg", screenshot)
 Clip()
